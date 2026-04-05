@@ -18,8 +18,14 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// 1. Instanced Leaf System with Radial Force
-const LEAF_COUNT = 550;
+// 1. Instanced Leaf System with Nature Variety
+const LEAF_COUNT = 600;
+const GREEN_SHADES = [
+  new THREE.Color("#A3E635"), // Light Green
+  new THREE.Color("#4F7942"), // Medium Green
+  new THREE.Color("#8FB08F"), // Sage Green
+  new THREE.Color("#D9E8D1"), // Pale Lime
+];
 
 function FloatingLeaves() {
   const meshRef = useRef<THREE.InstancedMesh>(null!);
@@ -73,10 +79,15 @@ function FloatingLeaves() {
       dummy.rotation.set(s * 5, s * 5, s * 5);
       dummy.scale.setScalar(0.05 + Math.abs(Math.sin(t)) * 0.05);
       dummy.updateMatrix();
-      
       meshRef.current.setMatrixAt(i, dummy.matrix);
+      
+      // Assign random color once
+      if (state.clock.elapsedTime < 0.1) {
+        meshRef.current.setColorAt(i, GREEN_SHADES[i % GREEN_SHADES.length]);
+      }
     });
     meshRef.current.instanceMatrix.needsUpdate = true;
+    if (meshRef.current.instanceColor) meshRef.current.instanceColor.needsUpdate = true;
   });
 
   const shape = useMemo(() => {
@@ -90,7 +101,13 @@ function FloatingLeaves() {
   return (
     <instancedMesh ref={meshRef} args={[undefined, undefined, LEAF_COUNT]}>
       <extrudeGeometry args={[shape, { depth: 0.05, bevelEnabled: true, bevelSegments: 1, steps: 1, bevelSize: 0.02, bevelThickness: 0.02 }]} />
-      <meshPhysicalMaterial color="#4F7942" metalness={0.1} roughness={0.5} clearcoat={0.5} emissive="#8FB08F" emissiveIntensity={0.2} />
+      <meshPhysicalMaterial 
+        metalness={0.1} 
+        roughness={0.5} 
+        clearcoat={0.5} 
+        emissive="#ffffff" 
+        emissiveIntensity={0.05} 
+      />
     </instancedMesh>
   );
 }
