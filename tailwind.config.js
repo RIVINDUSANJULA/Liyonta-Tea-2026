@@ -19,6 +19,8 @@ module.exports = {
         sage: "#4F7942",
         forest: "#1B3022",
         gold: "#D4AF37",
+        emerald: "#064E3B",
+        charcoal: "#121212",
       },
     },
   },
