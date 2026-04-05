@@ -4,8 +4,7 @@ import React, { useRef, useMemo, Suspense, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { 
   Float, 
-  MeshDistortMaterial, 
-  MeshPhysicalMaterial,
+  MeshDistortMaterial,
   Text, 
   Environment, 
   ContactShadows, 
@@ -88,7 +87,7 @@ function LiquidLeaf() {
         onPointerOut={() => setHovered(false)}
       >
         <latheGeometry args={[points, 32]} />
-        <MeshPhysicalMaterial
+        <meshPhysicalMaterial
           color="#D4AF37"
           transmission={1}
           thickness={2.5}
@@ -111,7 +110,7 @@ function ProductTin({ position, color, texture, title }: any) {
     <group position={position}>
       <mesh castShadow>
         <cylinderGeometry args={[1, 1, 3, 32]} />
-        <MeshPhysicalMaterial 
+        <meshPhysicalMaterial 
           color={color} 
           metalness={0.8} 
           roughness={0.2} 

@@ -185,13 +185,13 @@ export default function HomeContent() {
             </div>
           </div>
         </div>
-      </section>
+      </footer>
 
       {/* Animation Styles */}
-      <style jsx global>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         body { background: #080A08; }
         ::selection { background: #D4AF37; color: #080A08; }
-      `}</style>
+      ` }} />
     </div>
   );
 }
