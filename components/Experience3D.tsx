@@ -1,206 +1,227 @@
 "use client";
 
-import React, { useRef, useMemo, Suspense, useState, useEffect } from 'react';
+import React, { useRef, useMemo, Suspense, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { 
   Float, 
-  MeshDistortMaterial,
-  Text, 
+  MeshDistortMaterial, 
+  MeshTransmissionMaterial,
   Environment, 
   ContactShadows, 
-  PerspectiveCamera,
   Preload,
-  ScrollControls,
-  useScroll,
-  Points,
-  PointMaterial,
   AdaptiveDpr,
-  SpotLight,
-  Float as DreiFloat
+  AdaptiveEvents,
 } from '@react-three/drei';
 import * as THREE from 'three';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-// 1. "Southern Mist" Particle System
-function SouthernMist({ count = 3000 }) {
-  const points = useMemo(() => {
-    const p = new Float32Array(count * 3);
-    for (let i = 0; i < count; i++) {
-      p[i * 3] = (Math.random() - 0.5) * 15;
-      p[i * 3 + 1] = (Math.random() - 0.5) * 15;
-      p[i * 3 + 2] = (Math.random() - 0.5) * 15;
+gsap.registerPlugin(ScrollTrigger);
+
+// 1. Instanced Leaf System with Radial Force
+const LEAF_COUNT = 550;
+
+function FloatingLeaves() {
+  const meshRef = useRef<THREE.InstancedMesh>(null!);
+  const dummy = useMemo(() => new THREE.Object3D(), []);
+  const { mouse, viewport } = useThree();
+
+  const particles = useMemo(() => {
+    const temp = [];
+    for (let i = 0; i < LEAF_COUNT; i++) {
+      const t = Math.random() * 100;
+      const factor = 20 + Math.random() * 100;
+      const speed = 0.01 + Math.random() / 200;
+      const xFactor = -10 + Math.random() * 20;
+      const yFactor = -10 + Math.random() * 20;
+      const zFactor = -10 + Math.random() * 20;
+      temp.push({ t, factor, speed, xFactor, yFactor, zFactor, mx: 0, my: 0 });
     }
-    return p;
-  }, [count]);
-
-  const ref = useRef<THREE.Points>(null!);
-  const scroll = useScroll();
-
-  useFrame((state) => {
-    const t = state.clock.getElapsedTime() * 0.05;
-    const offset = scroll.offset;
-    ref.current.rotation.y = t + offset * 0.5;
-    ref.current.position.y = Math.sin(t) * 0.5;
-  });
-
-  return (
-    <Points ref={ref} positions={points} stride={3} frustumCulled={false}>
-      <PointMaterial
-        transparent
-        color="#F1F5F1"
-        size={0.015}
-        sizeAttenuation={true}
-        depthWrite={false}
-        opacity={0.2}
-        blending={THREE.AdditiveBlending}
-      />
-    </Points>
-  );
-}
-
-// 2. High-Detail "Liquid Leaf" (Amber Glass Shaders)
-function LiquidLeaf() {
-  const mesh = useRef<THREE.Mesh>(null!);
-  const [hovered, setHovered] = useState(false);
-
-  // Organic distorted shape using Lathe
-  const points = useMemo(() => {
-    const pts = [];
-    for (let i = 0; i < 10; i++) {
-      pts.push(new THREE.Vector2(Math.sin(i * 0.2) * 2 + 0.1, (i - 5) * 0.5));
-    }
-    return pts;
+    return temp;
   }, []);
 
-  useFrame((state) => {
-    if (mesh.current) {
-      const t = state.clock.getElapsedTime();
-      mesh.current.rotation.x = Math.sin(t * 0.5) * 0.2;
-      mesh.current.rotation.y += 0.01;
-    }
+  useFrame((state, delta) => {
+    // Mouse radial force
+    const mouseX = (mouse.x * viewport.width) / 2;
+    const mouseY = (mouse.y * viewport.height) / 2;
+
+    particles.forEach((particle, i) => {
+      let { t, factor, speed, xFactor, yFactor, zFactor } = particle;
+      // Antigravity drift
+      t = particle.t += speed / 2;
+      const a = Math.cos(t) + Math.sin(t * 1) / 10;
+      const b = Math.sin(t) + Math.cos(t * 2) / 10;
+      const s = Math.cos(t);
+
+      // Base position
+      let x = (particle.mx / 10) * a + xFactor + Math.cos((t / 10) * factor) + (Math.sin(t * 1) * factor) / 10;
+      let y = (particle.my / 10) * b + yFactor + Math.sin((t / 10) * factor) + (Math.cos(t * 2) * factor) / 10;
+      let z = (particle.mx / 10) * s + zFactor + Math.cos((t / 10) * factor) + (Math.sin(t * 3) * factor) / 10;
+
+      // Radial force displacement
+      const dx = x - mouseX;
+      const dy = y - mouseY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const forceDropoff = 3;
+      if (dist < forceDropoff) {
+        const force = (forceDropoff - dist) / forceDropoff;
+        x += dx * force * 2; // Dramatic explosive push
+        y += dy * force * 2;
+      }
+
+      dummy.position.set(x, y, z);
+      dummy.rotation.set(s * 5, s * 5, s * 5);
+      dummy.scale.setScalar(0.05 + Math.abs(Math.sin(t)) * 0.05);
+      dummy.updateMatrix();
+      
+      meshRef.current.setMatrixAt(i, dummy.matrix);
+    });
+    meshRef.current.instanceMatrix.needsUpdate = true;
   });
 
+  const shape = useMemo(() => {
+    const s = new THREE.Shape();
+    s.moveTo(0, 0);
+    s.quadraticCurveTo(1, 1, 0, 2);
+    s.quadraticCurveTo(-1, 1, 0, 0);
+    return s;
+  }, []);
+
   return (
-    <DreiFloat speed={4} rotationIntensity={1.5} floatIntensity={2}>
-      <mesh 
-        ref={mesh} 
-        onPointerOver={() => setHovered(true)} 
-        onPointerOut={() => setHovered(false)}
-      >
-        <latheGeometry args={[points, 32]} />
-        <meshPhysicalMaterial
-          color="#D4AF37"
-          transmission={1}
-          thickness={2.5}
-          roughness={0.15}
-          metalness={0.1}
-          ior={1.5}
-          clearcoat={1}
-          clearcoatRoughness={0.1}
-          attenuationColor="#D4AF37"
-          attenuationDistance={1}
-        />
-      </mesh>
-    </DreiFloat>
+    <instancedMesh ref={meshRef} args={[undefined, undefined, LEAF_COUNT]}>
+      <extrudeGeometry args={[shape, { depth: 0.05, bevelEnabled: true, bevelSegments: 1, steps: 1, bevelSize: 0.02, bevelThickness: 0.02 }]} />
+      <meshPhysicalMaterial color="#064E3B" metalness={0.2} roughness={0.4} clearcoat={0.8} emissive="#D4AF37" emissiveIntensity={0.05} />
+    </instancedMesh>
   );
 }
 
-// 3. "3D Product Tins" for Carousel
-function ProductTin({ position, color, texture, title }: any) {
+// 2. The Weightless Tea Tin
+function TeaTin() {
+  const groupRef = useRef<THREE.Group>(null!);
+  const lidRef = useRef<THREE.Mesh>(null!);
+  const bodyRef = useRef<THREE.Mesh>(null!);
+
+  useEffect(() => {
+    if (!groupRef.current) return;
+    
+    // GSAP ScrollTrigger for blowing up the tin
+    const ctx = gsap.context(() => {
+      ScrollTrigger.create({
+        trigger: "#alchemy-trigger",
+        start: "top bottom",
+        end: "top top",
+        scrub: 1,
+        onUpdate: (self) => {
+          const p = self.progress;
+          // Explode apart
+          if (lidRef.current && bodyRef.current && groupRef.current) {
+            lidRef.current.position.y = 1.5 + p * 4;
+            lidRef.current.rotation.x = p * 2;
+            lidRef.current.rotation.z = p * 1;
+            
+            bodyRef.current.position.y = -p * 2;
+            bodyRef.current.rotation.x = -p * 1;
+            
+            groupRef.current.rotation.y = p * Math.PI * 2;
+          }
+        }
+      });
+    });
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <group position={position}>
-      <mesh castShadow>
-        <cylinderGeometry args={[1, 1, 3, 32]} />
-        <meshPhysicalMaterial 
-          color={color} 
-          metalness={0.8} 
-          roughness={0.2} 
-          clearcoat={1} 
-        />
-      </mesh>
-      <Text
-        position={[0, -2, 0]}
-        fontSize={0.3}
-        color={color}
-        font="/fonts/PlayfairDisplay-Bold.ttf" // Note: Fallback to default sans if fonts not public
-        anchorX="center"
-        anchorY="middle"
-      >
-        {title}
-      </Text>
+    <group ref={groupRef} position={[0, -0.5, 0]}>
+      <Float speed={2} rotationIntensity={1.5} floatIntensity={2}>
+        {/* Lid */}
+        <mesh ref={lidRef} position={[0, 1.6, 0]} castShadow>
+          <cylinderGeometry args={[1.05, 1.05, 0.4, 32]} />
+          <meshStandardMaterial color="#020402" metalness={0.9} roughness={0.1} />
+        </mesh>
+        
+        {/* Body */}
+        <mesh ref={bodyRef} position={[0, 0, 0]} castShadow>
+          <cylinderGeometry args={[1, 1, 3, 32]} />
+          <meshStandardMaterial color="#020402" metalness={0.8} roughness={0.2} />
+          {/* Gold Accent */}
+          <mesh position={[0, 0, 0]}>
+            <cylinderGeometry args={[1.01, 1.01, 0.2, 32]} />
+             <meshStandardMaterial color="#EAB308" metalness={0.9} roughness={0.1} />
+          </mesh>
+        </mesh>
+      </Float>
     </group>
   );
 }
 
-// 4. Scene Controller with Dynamic Lighting and Camera Fly-through
-function Scene() {
-  const scroll = useScroll();
-  const { viewport, mouse } = useThree();
-  const lightRef = useRef<THREE.SpotLight>(null!);
-
+// 3. The Liquid Orb
+function LiquidOrb() {
+  const orbRef = useRef<THREE.Mesh>(null!);
+  
   useFrame((state) => {
-    const offset = scroll.offset;
-    
-    // Camera Fly-through path
-    state.camera.position.z = THREE.MathUtils.lerp(10, 2, offset);
-    state.camera.position.y = THREE.MathUtils.lerp(0, -2, offset);
-    state.camera.lookAt(0, 0, 0);
-
-    // Dynamic Spotlight following cursor
-    const x = (mouse.x * viewport.width) / 2;
-    const y = (mouse.y * viewport.height) / 2;
-    if (lightRef.current) {
-      lightRef.current.position.set(x, y, 5);
-      lightRef.current.target.position.set(0, 0, 0);
+    if (orbRef.current) {
+      orbRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.5;
+      orbRef.current.rotation.x = state.clock.elapsedTime * 0.2;
+      orbRef.current.rotation.y = state.clock.elapsedTime * 0.3;
     }
   });
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      ScrollTrigger.create({
+        trigger: "#alchemy-trigger",
+        start: "top center",
+        end: "bottom center",
+        scrub: 1,
+        onUpdate: (self) => {
+            if (orbRef.current) {
+               orbRef.current.scale.setScalar(1 + self.progress * 1.5);
+               orbRef.current.position.x = self.progress * 4;
+            }
+        }
+      });
+    });
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <>
-      <SpotLight
-        ref={lightRef}
-        intensity={2}
-        distance={20}
-        angle={0.15}
-        penumbra={1}
-        color="#D4AF37"
-        castShadow
+    <mesh ref={orbRef} position={[-3, 2, -2]}>
+      <sphereGeometry args={[1, 64, 64]} />
+      <MeshTransmissionMaterial 
+        backside
+        samples={4}
+        thickness={2}
+        chromaticAberration={0.05}
+        anisotropy={0.1}
+        distortion={0.5}
+        distortionScale={0.5}
+        temporalDistortion={0.1}
+        color="#EAB308"
+        attenuationDistance={2}
+        attenuationColor="#EAB308"
       />
-      
-      {/* Hero Liquid Leaf */}
-      <group position={[0, 0, 0]}>
-        <LiquidLeaf />
-      </group>
-
-      {/* Product Tins Carousel (Positioned further down in 3D space) */}
-      <group position={[0, -10, -5]}>
-        <ProductTin position={[-4, 0, 0]} color="#121212" title="Signature Black" />
-        <ProductTin position={[0, 0, 0]} color="#064E3B" title="Botanical Green" />
-        <ProductTin position={[4, 0, 0]} color="#D4AF37" title="Premium Selection" />
-      </group>
-
-      <ContactShadows 
-        position={[0, -4, 0]} 
-        opacity={0.4} 
-        scale={20} 
-        blur={2} 
-        far={4.5} 
-        color="#080A08" 
-      />
-      <Environment preset="night" />
-    </>
+    </mesh>
   );
 }
 
 export default function Experience3D() {
   return (
     <div className="fixed inset-0 pointer-events-none z-0">
-      <Canvas shadows dpr={[1, 2]} gl={{ antialias: true, alpha: true }}>
+      <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0, 8], fov: 45 }}>
         <Suspense fallback={null}>
-          <ScrollControls pages={3} damping={0.2}>
-            <Scene />
-            <AdaptiveDpr pixelated />
-            <Preload all />
-          </ScrollControls>
+          <ambientLight intensity={0.4} />
+          <spotLight position={[10, 10, 10]} intensity={2} color="#EAB308" />
+          <directionalLight position={[-5, 5, 5]} intensity={0.5} color="#F8FAF8" />
+          
+          <FloatingLeaves />
+          <TeaTin />
+          <LiquidOrb />
+          
+          <ContactShadows position={[0, -5, 0]} opacity={0.5} scale={20} blur={2.5} far={10} color="#020402" />
+          <Environment preset="night" />
+          <AdaptiveDpr pixelated />
+          <AdaptiveEvents />
+          <Preload all />
         </Suspense>
       </Canvas>
     </div>

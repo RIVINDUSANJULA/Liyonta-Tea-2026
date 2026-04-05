@@ -1,197 +1,130 @@
 "use client";
 
-import React, { useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Experience3D from './Experience3D';
 
-const alphabet = "LIYONTA".split("");
+gsap.registerPlugin(ScrollTrigger);
 
 export default function HomeContent() {
-  const [isHovered, setIsHovered] = useState(false);
-  const { scrollYProgress } = useScroll();
+  const heroTextRef = useRef<HTMLDivElement>(null);
   
-  // Spatial Typography Z-depth mapping
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
-  const titleScale = useTransform(scrollYProgress, [0, 0.15], [1, 0.8]);
+  useEffect(() => {
+    // Kinetic Typography Parallax
+    if (heroTextRef.current) {
+      const letters = heroTextRef.current.children;
+      gsap.fromTo(letters, 
+        { y: 100, opacity: 0, z: -200 },
+        { 
+          y: 0, 
+          opacity: 1, 
+          z: 0,
+          stagger: 0.1, 
+          duration: 1.5, 
+          ease: "power4.out" 
+        }
+      );
+
+      gsap.to(letters, {
+        scrollTrigger: {
+          trigger: "#hero",
+          start: "top top",
+          end: "bottom top",
+          scrub: 1
+        },
+        y: (i) => -100 * (i % 2 === 0 ? 1 : 1.5),
+        z: (i) => 200 * (i % 2 === 0 ? 1 : -1),
+        opacity: 0,
+        stagger: 0.05
+      });
+    }
+  }, []);
 
   return (
-    <div className="relative w-full bg-obsidian selection:bg-gold selection:text-obsidian">
-      {/* 3D Visual Experience Layer */}
+    <div className="relative w-full bg-[#050805] text-[#F8FAF8] selection:bg-gold selection:text-obsidian overflow-x-hidden font-sans">
+      {/* 3D Core Layer */}
       <Experience3D />
 
-      {/* A. The "Immersive Arrival" (Hero) */}
-      <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden pointer-events-none">
-        <div className="container mx-auto px-6 text-center select-none z-10">
-          <motion.div 
-            style={{ opacity: titleOpacity, scale: titleScale }}
-            className="flex justify-center flex-wrap gap-2 md:gap-4"
-          >
-            {alphabet.map((letter, idx) => (
-              <motion.span
+      {/* A. Weightless Arrival */}
+      <section id="hero" className="relative h-screen flex flex-col items-center justify-center pointer-events-none perspective-[1000px]">
+        <div className="container mx-auto px-6 text-center z-10">
+          <div ref={heroTextRef} className="flex justify-center transform-style-3d">
+            {"LIYONTA".split("").map((letter, idx) => (
+              <span
                 key={idx}
-                initial={{ opacity: 0, z: -100, y: 50 }}
-                animate={{ opacity: 1, z: 0, y: 0 }}
-                transition={{ 
-                  duration: 2, 
-                  delay: idx * 0.1, 
-                  ease: [0.16, 1, 0.3, 1] 
-                }}
-                className="text-8xl md:text-[16rem] font-serif uppercase leading-none tracking-[-0.05em] text-[#F1F5F1] mix-blend-difference"
-                style={{ 
-                  transform: `translateZ(${idx * 20}px)`,
-                  textShadow: `0 0 40px rgba(212, 175, 55, 0.2)`
-                }}
+                className="text-[12vw] md:text-[15rem] font-serif uppercase leading-none text-transparent transform origin-center font-outline-2 drop-shadow-2xl"
+                style={{ WebkitTextStroke: '2px #F8FAF8' }}
               >
                 {letter}
-              </motion.span>
-            ))}
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.5, duration: 1 }}
-            className="mt-8 space-y-4"
-          >
-            <p className="text-sm md:text-lg font-bold tracking-[0.5em] uppercase text-gold">
-              Award-Winning Tea from the Southern Province
-            </p>
-            <div className="w-12 h-[1px] bg-gold/40 mx-auto" />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 2.5 }}
-            className="mt-16 pointer-events-auto"
-          >
-            <button 
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-              className="group relative px-12 py-4 overflow-hidden border border-gold/30"
-            >
-              <span className="relative z-10 text-[10px] font-bold uppercase tracking-[0.4em] text-white group-hover:text-obsidian transition-colors duration-500">
-                Explore The Estate
               </span>
-              <div className="absolute inset-x-0 bottom-0 h-0 group-hover:h-full bg-gold transition-all duration-500 ease-out" />
-            </button>
-          </motion.div>
-        </div>
-
-        {/* Scroll Indicator (Refined) */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-40">
-          <div className="w-[1px] h-20 bg-gradient-to-b from-transparent via-gold to-transparent" />
-        </div>
-      </section>
-
-      {/* B. The "3D Product Carousel" (Feature Portal) */}
-      <section className="relative h-[200vh] bg-transparent">
-        <div className="sticky top-0 h-screen flex items-center justify-center pointer-events-none">
-          <div className="container mx-auto px-6 flex flex-col items-center text-center max-w-4xl space-y-12">
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ margin: "-10%" }}
-              className="space-y-4"
-            >
-              <p className="text-gold text-[10px] font-bold tracking-[0.4em] uppercase">Visual Harvest</p>
-              <h2 className="text-4xl md:text-6xl font-serif text-[#F1F5F1]">The Glass Collection</h2>
-            </motion.div>
-            
-            <p className="text-sm md:text-base text-[#F1F5F1]/40 leading-loose max-w-xl">
-              Experience the liquid amber of Liyonta through our spatial product exhibition. Fly through the Obsidian Black, Emerald Green, and Golden Harvest collections.
+            ))}
+          </div>
+          
+          <div className="mt-8 space-y-4 max-w-2xl mx-auto opacity-80 backdrop-blur-md bg-white/5 p-6 rounded-full border border-white/5 transform translate-y-12">
+            <p className="text-xs md:text-sm font-bold tracking-[0.4em] uppercase text-gold">
+              Zero-G Heritage • Southern Province
             </p>
           </div>
         </div>
-      </section>
 
-      {/* C. The "Factory Pulse" (Story Section) */}
-      <section className="relative py-48 overflow-hidden">
-        {/* Background "Liquid Mesh" simulation anchor */}
-        <div className="absolute inset-0 z-0 bg-emerald/10 opacity-30 blur-3xl pointer-events-none" />
-        
-        <div className="container mx-auto px-6 max-w-5xl text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            className="space-y-16"
-          >
-            <div className="flex justify-center items-center gap-8 text-gold/30">
-              <div className="w-24 h-[1px] bg-current" />
-              <div className="italic font-serif">Provenance</div>
-              <div className="w-24 h-[1px] bg-current" />
-            </div>
-
-            <h2 className="text-5xl md:text-7xl font-serif text-[#F1F5F1] leading-tight">
-              A Pulse from the Southern Province
-            </h2>
-            
-            <p className="text-lg md:text-xl text-[#F1F5F1]/60 leading-relaxed font-light max-w-3xl mx-auto">
-              Our factory operates not just with clockwork, but with a pulse. Every harvest is an award-winning performance, refined through generations of Sri Lankan craftsmanship.
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pt-12">
-              {[
-                { label: "elevation", value: "850M" },
-                { label: "artisan count", value: "120+" },
-                { label: "grade output", value: "Q-01" }
-              ].map((stat, i) => (
-                <div key={i} className="space-y-2 border-l border-gold/10 pl-6 text-left">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-gold/50">{stat.label}</p>
-                  <p className="text-3xl font-serif text-white">{stat.value}</p>
-                </div>
-              ))}
-            </div>
-          </motion.div>
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-50">
+          <span className="text-[10px] tracking-[0.3em] uppercase">Descend</span>
+          <div className="w-[1px] h-16 bg-gradient-to-b from-gold to-transparent" />
         </div>
       </section>
 
-      {/* Footer Exhibition Wrapper */}
-      <footer className="relative py-32 bg-[#080A08] border-t border-white/5 overflow-hidden">
-        <div className="container mx-auto px-6 max-w-7xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16">
-            <div className="space-y-8">
-              <div className="text-3xl font-serif tracking-widest text-[#F1F5F1]">LIYONTA</div>
-              <p className="text-sm text-[#F1F5F1]/30 leading-relaxed uppercase tracking-[0.1em]">
-                Liquid Gold Estate<br />
-                Southern Hills Corridor<br />
-                Sri Lanka
-              </p>
-            </div>
-            {/* Navigation Lists */}
+      {/* B. Alchemy of the Southern Province */}
+      <section id="alchemy-trigger" className="relative min-h-[150vh] flex items-center justify-center pointer-events-none">
+        <div className="container mx-auto px-6 z-10 w-full pointer-events-auto">
+          <div className="max-w-4xl max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { title: "Legacy", links: ["Our Story", "Environment", "Heritage"] },
-              { title: "Museum", links: ["Visual Harvest", "Liquid 3D", "The Pour"] },
-              { title: "The Circle", links: ["Wholesale", "Inquiries", "Press"] }
-            ].map((col, i) => (
-              <div key={i} className="space-y-8">
-                <h5 className="text-[10px] font-bold text-gold uppercase tracking-[0.5em]">{col.title}</h5>
-                <ul className="space-y-4 text-xs text-[#F1F5F1]/50 uppercase tracking-[0.2em]">
-                  {col.links.map(l => <li key={l} className="hover:text-gold transition-colors cursor-pointer">{l}</li>)}
-                </ul>
+              { id: "01", name: "OBSIDIAN BLACK", desc: "Weightless dark notes forged in high altitude." },
+              { id: "02", name: "LIQUID GREEN", desc: "Verdant zero-gravity leaves steeped in mist." },
+              { id: "03", name: "GOLDEN BAGS", desc: "Suspended perfection in every silken pyramid." }
+            ].map((prod) => (
+              <div 
+                key={prod.id}
+                className="relative group p-10 h-80 flex flex-col justify-between backdrop-blur-xl bg-white/5 border border-white/10 overflow-hidden transform transition-all duration-700 hover:-translate-y-4 hover:bg-white/10"
+              >
+                {/* Glassmorphism Inner Shine */}
+                <div className="absolute -inset-1 bg-gradient-to-b from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 blur-xl" />
+                
+                <span className="text-[10px] font-bold tracking-[0.5em] text-gold">{prod.id} // ALCHEMY</span>
+                
+                <div>
+                  <h3 className="text-2xl font-serif text-[#F8FAF8] mb-2">{prod.name}</h3>
+                  <p className="text-xs text-[#F8FAF8]/50 tracking-widest uppercase leading-loose">{prod.desc}</p>
+                </div>
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* C. The Dissolve to Gold (Story) */}
+      <section className="relative min-h-screen py-48 pointer-events-none flex items-center">
+        <div className="relative z-10 container mx-auto px-6 text-center max-w-4xl pointer-events-auto">
+          <h2 className="text-5xl md:text-7xl font-serif leading-tight mb-8 drop-shadow-2xl">
+            Where gravity ends, <span className="italic text-gold">alchemy begins.</span>
+          </h2>
+          <p className="text-lg md:text-xl text-[#F8FAF8]/60 leading-relaxed font-light mx-auto">
+            Experience Liyonta Tea not just as a beverage, but as a physical phenomenon. Our award-winning factory in the Southern Province uses generational technique to distill the essence of the leaf into liquid gold.
+          </p>
           
-          <div className="mt-24 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
-            <div className="text-[9px] uppercase tracking-[0.6em] text-white/20 italic">
-              Experience Crafted in Sri Lanka // 2026
-            </div>
-            <div className="flex gap-12 text-[9px] uppercase tracking-[0.3em] text-gold/40 font-bold">
-              <a href="#">Instagram</a>
-              <a href="#">LinkedIn</a>
-              <a href="#">Journal</a>
-            </div>
+          <div className="mt-20 inline-block p-[1px] bg-gradient-to-r from-transparent via-gold to-transparent">
+             <button className="px-12 py-5 bg-[#020402] text-[10px] uppercase tracking-[0.4em] font-bold hover:bg-gold hover:text-obsidian transition-colors duration-500">
+               Enter The Portal
+             </button>
           </div>
         </div>
-      </footer>
+      </section>
 
-      {/* Animation Styles */}
-      <style dangerouslySetInnerHTML={{ __html: `
-        body { background: #080A08; }
-        ::selection { background: #D4AF37; color: #080A08; }
-      ` }} />
+      <footer className="relative z-10 bg-[#020402] border-t border-white/10 py-12">
+        <div className="container mx-auto px-6 text-center">
+           <div className="text-[10px] uppercase tracking-[0.5em] text-[#F8FAF8]/30">Liyonta Phygital Experience • 2026</div>
+        </div>
+      </footer>
     </div>
   );
 }
