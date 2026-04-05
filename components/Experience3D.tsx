@@ -90,7 +90,7 @@ function FloatingLeaves() {
   return (
     <instancedMesh ref={meshRef} args={[undefined, undefined, LEAF_COUNT]}>
       <extrudeGeometry args={[shape, { depth: 0.05, bevelEnabled: true, bevelSegments: 1, steps: 1, bevelSize: 0.02, bevelThickness: 0.02 }]} />
-      <meshPhysicalMaterial color="#064E3B" metalness={0.2} roughness={0.4} clearcoat={0.8} emissive="#D4AF37" emissiveIntensity={0.05} />
+      <meshPhysicalMaterial color="#4ADE80" metalness={0.1} roughness={0.1} clearcoat={1} emissive="#A3E635" emissiveIntensity={0.8} />
     </instancedMesh>
   );
 }
@@ -209,9 +209,10 @@ export default function Experience3D() {
     <div className="fixed inset-0 pointer-events-none z-0">
       <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0, 8], fov: 45 }}>
         <Suspense fallback={null}>
-          <ambientLight intensity={0.4} />
-          <spotLight position={[10, 10, 10]} intensity={2} color="#EAB308" />
-          <directionalLight position={[-5, 5, 5]} intensity={0.5} color="#F8FAF8" />
+          <ambientLight intensity={0.6} />
+          <spotLight position={[10, 10, 10]} intensity={3} color="#EAB308" />
+          <spotLight position={[-10, -10, 10]} intensity={5} color="#A3E635" />
+          <directionalLight position={[-5, 5, 5]} intensity={1} color="#F8FAF8" />
           
           <FloatingLeaves />
           <TeaTin />
