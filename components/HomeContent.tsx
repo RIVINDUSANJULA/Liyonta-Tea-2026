@@ -1,170 +1,196 @@
 "use client";
 
-import React, { Suspense } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import Experience3D from './Experience3D';
 
+const alphabet = "LIYONTA".split("");
+
 export default function HomeContent() {
+  const [isHovered, setIsHovered] = useState(false);
+  const { scrollYProgress } = useScroll();
+  
+  // Spatial Typography Z-depth mapping
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+  const titleScale = useTransform(scrollYProgress, [0, 0.15], [1, 0.8]);
+
   return (
-    <div className="relative w-full">
-      {/* 3D Core Interaction Layer */}
+    <div className="relative w-full bg-obsidian selection:bg-gold selection:text-obsidian">
+      {/* 3D Visual Experience Layer */}
       <Experience3D />
 
-      {/* A. Immersive Hero Section */}
-      <section className="relative h-screen flex flex-col items-center justify-center pointer-events-none">
-        <div className="container mx-auto px-6 text-center select-none">
-          <motion.h1
-            initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.5, ease: "easeOut" }}
-            className="text-8xl md:text-[14rem] font-serif uppercase leading-none tracking-tighter text-cream mix-blend-difference"
+      {/* A. The "Immersive Arrival" (Hero) */}
+      <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden pointer-events-none">
+        <div className="container mx-auto px-6 text-center select-none z-10">
+          <motion.div 
+            style={{ opacity: titleOpacity, scale: titleScale }}
+            className="flex justify-center flex-wrap gap-2 md:gap-4"
           >
-            Liyonta
-          </motion.h1>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 1 }}
-            className="mt-4 space-y-4"
-          >
-            <p className="text-xl md:text-2xl font-light tracking-[0.3em] uppercase text-gold">
-              Liquid Gold & Leaf
-            </p>
-            <p className="max-w-xl mx-auto text-sm md:text-base text-cream/60 leading-relaxed font-sans">
-              Award-Winning Craftsmanship from the Southern Province. Experience the ritual of premium Ceylon tea in 3D.
-            </p>
+            {alphabet.map((letter, idx) => (
+              <motion.span
+                key={idx}
+                initial={{ opacity: 0, z: -100, y: 50 }}
+                animate={{ opacity: 1, z: 0, y: 0 }}
+                transition={{ 
+                  duration: 2, 
+                  delay: idx * 0.1, 
+                  ease: [0.16, 1, 0.3, 1] 
+                }}
+                className="text-8xl md:text-[16rem] font-serif uppercase leading-none tracking-[-0.05em] text-[#F1F5F1] mix-blend-difference"
+                style={{ 
+                  transform: `translateZ(${idx * 20}px)`,
+                  textShadow: `0 0 40px rgba(212, 175, 55, 0.2)`
+                }}
+              >
+                {letter}
+              </motion.span>
+            ))}
           </motion.div>
           
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.5 }}
-            className="mt-12 pointer-events-auto"
+            transition={{ delay: 1.5, duration: 1 }}
+            className="mt-8 space-y-4"
           >
-            <button className="px-12 py-4 border border-gold/40 hover:border-gold text-gold text-[10px] font-bold uppercase tracking-[0.4em] transition-all bg-charcoal/40 backdrop-blur-sm">
-              Explore Harvest
+            <p className="text-sm md:text-lg font-bold tracking-[0.5em] uppercase text-gold">
+              Award-Winning Tea from the Southern Province
+            </p>
+            <div className="w-12 h-[1px] bg-gold/40 mx-auto" />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 2.5 }}
+            className="mt-16 pointer-events-auto"
+          >
+            <button 
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              className="group relative px-12 py-4 overflow-hidden border border-gold/30"
+            >
+              <span className="relative z-10 text-[10px] font-bold uppercase tracking-[0.4em] text-white group-hover:text-obsidian transition-colors duration-500">
+                Explore The Estate
+              </span>
+              <div className="absolute inset-x-0 bottom-0 h-0 group-hover:h-full bg-gold transition-all duration-500 ease-out" />
             </button>
           </motion.div>
         </div>
-        
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center space-y-2 opacity-40">
-          <span className="text-[9px] uppercase tracking-widest">Scroll</span>
-          <div className="w-[1px] h-12 bg-gradient-to-b from-gold to-transparent" />
+
+        {/* Scroll Indicator (Refined) */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-40">
+          <div className="w-[1px] h-20 bg-gradient-to-b from-transparent via-gold to-transparent" />
         </div>
       </section>
 
-      {/* B. The "Three Pillars" 3D Hover Section */}
-      <section className="relative py-32 bg-charcoal">
-        <div className="container mx-auto px-6 max-w-7xl">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {[
-              { title: "Signature Black", desc: "Bold, amber excellence from high-elevation estates.", tag: "ORIGIN-01" },
-              { title: "Botanical Green", desc: "Pure, mountain-fresh leaves with subtle floral notes.", tag: "WELLNESS-02" },
-              { title: "Estate Reserve", desc: "Our hand-selected limited batches for connoisseurs.", tag: "PREMIUM-03" }
-            ].map((pillar, idx) => (
-              <motion.div
-                key={pillar.title}
-                whileHover={{ y: -10 }}
-                className="relative p-12 border border-white/5 bg-white/[0.02] backdrop-blur-3xl group overflow-hidden"
-              >
-                <div className="absolute top-0 left-0 w-24 h-[1px] bg-gold/50" />
-                <div className="absolute top-0 left-0 w-[1px] h-24 bg-gold/50" />
-                
-                <span className="text-[9px] font-bold tracking-[0.4em] text-gold/60">{pillar.tag}</span>
-                <h3 className="text-3xl font-serif text-cream mt-6 mb-4">{pillar.title}</h3>
-                <p className="text-sm text-cream/40 leading-relaxed">{pillar.desc}</p>
-                
-                <div className="mt-8 pt-8 border-t border-white/5 italic text-[10px] text-cream/30 uppercase tracking-widest">
-                  View Detail
-                </div>
-                
-                {/* 3D Depth Card Overlay Effect */}
-                <div className="absolute inset-0 bg-gold/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-              </motion.div>
-            ))}
+      {/* B. The "3D Product Carousel" (Feature Portal) */}
+      <section className="relative h-[200vh] bg-transparent">
+        <div className="sticky top-0 h-screen flex items-center justify-center pointer-events-none">
+          <div className="container mx-auto px-6 flex flex-col items-center text-center max-w-4xl space-y-12">
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ margin: "-10%" }}
+              className="space-y-4"
+            >
+              <p className="text-gold text-[10px] font-bold tracking-[0.4em] uppercase">Visual Harvest</p>
+              <h2 className="text-4xl md:text-6xl font-serif text-[#F1F5F1]">The Glass Collection</h2>
+            </motion.div>
+            
+            <p className="text-sm md:text-base text-[#F1F5F1]/40 leading-loose max-w-xl">
+              Experience the liquid amber of Liyonta through our spatial product exhibition. Fly through the Obsidian Black, Emerald Green, and Golden Harvest collections.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* C. Liquid Flow Story Section (With 3D Atmosphere) */}
-      <section className="relative py-48 bg-[#064E3B]">
+      {/* C. The "Factory Pulse" (Story Section) */}
+      <section className="relative py-48 overflow-hidden">
+        {/* Background "Liquid Mesh" simulation anchor */}
+        <div className="absolute inset-0 z-0 bg-emerald/10 opacity-30 blur-3xl pointer-events-none" />
+        
         <div className="container mx-auto px-6 max-w-5xl text-center relative z-10">
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            className="space-y-12"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="space-y-16"
           >
-            <h2 className="text-4xl md:text-6xl font-serif text-cream leading-tight">
-              &ldquo;The leaf is just the beginning. The craft is the soul.&rdquo;
+            <div className="flex justify-center items-center gap-8 text-gold/30">
+              <div className="w-24 h-[1px] bg-current" />
+              <div className="italic font-serif">Provenance</div>
+              <div className="w-24 h-[1px] bg-current" />
+            </div>
+
+            <h2 className="text-5xl md:text-7xl font-serif text-[#F1F5F1] leading-tight">
+              A Pulse from the Southern Province
             </h2>
-            <div className="w-16 h-[1px] bg-gold mx-auto" />
-            <p className="text-lg text-cream/60 leading-loose max-w-2xl mx-auto">
-              Our factory in Deniyaya operates at the intersection of generational heritage and modern refinement. We treat every harvest as Liquid Gold.
+            
+            <p className="text-lg md:text-xl text-[#F1F5F1]/60 leading-relaxed font-light max-w-3xl mx-auto">
+              Our factory operates not just with clockwork, but with a pulse. Every harvest is an award-winning performance, refined through generations of Sri Lankan craftsmanship.
             </p>
-          </motion.div>
-        </div>
-        
-        {/* Animated Refractive Layer Placeholder (Real distortion is in 3D Canvas) */}
-        <div className="absolute inset-0 bg-black/20 pointer-events-none" />
-      </section>
 
-      {/* D. Award Ribbon 3D Scroll */}
-      <section className="relative py-24 bg-charcoal border-y border-white/5 overflow-hidden">
-        <div className="flex whitespace-nowrap space-x-12 animate-scroll-text">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="flex space-x-12 items-center text-[10px] font-bold uppercase tracking-[0.8em] text-gold/30">
-              <span>AWARD WINNING FACTORY 2024</span>
-              <span>•</span>
-              <span>100% SINGLE ORIGIN</span>
-              <span>•</span>
-              <span>CERTIFIED GRADE 1 EXCELLENCE</span>
-              <span>•</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Footer Branding Wrapper */}
-      <footer className="relative py-24 bg-[#121212] border-t border-white/5">
-        <div className="container mx-auto px-6 max-w-7xl text-center md:text-left">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-16">
-            <div className="space-y-6">
-              <h4 className="font-serif text-2xl text-cream tracking-widest uppercase">Liyonta</h4>
-              <p className="text-xs text-cream/40 uppercase tracking-[0.2em] leading-relaxed">
-                Southern Province<br />
-                Sri Lanka
-              </p>
-            </div>
-            <div className="md:col-span-3 flex flex-col md:flex-row justify-end space-y-8 md:space-y-0 md:space-x-24">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pt-12">
               {[
-                { title: "Legacy", links: ["Our Story", "The Estate", "Environment"] },
-                { title: "Service", links: ["Shipping", "Wholesale", "Inquiries"] },
-                { title: "Journal", links: ["Harvest Notes", "Tea Rituals", "Art of Taste"] }
-              ].map((footer) => (
-                <div key={footer.title} className="space-y-6">
-                  <h5 className="text-[10px] font-bold text-gold uppercase tracking-[0.3em]">{footer.title}</h5>
-                  <ul className="space-y-3 text-[9px] text-cream/50 uppercase tracking-[0.2em]">
-                    {footer.links.map(l => <li key={l} className="hover:text-gold cursor-pointer transition-colors">{l}</li>)}
-                  </ul>
+                { label: "elevation", value: "850M" },
+                { label: "artisan count", value: "120+" },
+                { label: "grade output", value: "Q-01" }
+              ].map((stat, i) => (
+                <div key={i} className="space-y-2 border-l border-gold/10 pl-6 text-left">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-gold/50">{stat.label}</p>
+                  <p className="text-3xl font-serif text-white">{stat.value}</p>
                 </div>
               ))}
             </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Footer Exhibition Wrapper */}
+      <footer className="relative py-32 bg-[#080A08] border-t border-white/5 overflow-hidden">
+        <div className="container mx-auto px-6 max-w-7xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16">
+            <div className="space-y-8">
+              <div className="text-3xl font-serif tracking-widest text-[#F1F5F1]">LIYONTA</div>
+              <p className="text-sm text-[#F1F5F1]/30 leading-relaxed uppercase tracking-[0.1em]">
+                Liquid Gold Estate<br />
+                Southern Hills Corridor<br />
+                Sri Lanka
+              </p>
+            </div>
+            {/* Navigation Lists */}
+            {[
+              { title: "Legacy", links: ["Our Story", "Environment", "Heritage"] },
+              { title: "Museum", links: ["Visual Harvest", "Liquid 3D", "The Pour"] },
+              { title: "The Circle", links: ["Wholesale", "Inquiries", "Press"] }
+            ].map((col, i) => (
+              <div key={i} className="space-y-8">
+                <h5 className="text-[10px] font-bold text-gold uppercase tracking-[0.5em]">{col.title}</h5>
+                <ul className="space-y-4 text-xs text-[#F1F5F1]/50 uppercase tracking-[0.2em]">
+                  {col.links.map(l => <li key={l} className="hover:text-gold transition-colors cursor-pointer">{l}</li>)}
+                </ul>
+              </div>
+            ))}
           </div>
-          <div className="mt-20 pt-10 border-t border-white/5 text-[8px] uppercase tracking-[0.4em] text-cream/20 italic">
-            &copy; 2026 Liyonta Tea. Visual & Spatial Heritage.
+          
+          <div className="mt-24 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+            <div className="text-[9px] uppercase tracking-[0.6em] text-white/20 italic">
+              Experience Crafted in Sri Lanka // 2026
+            </div>
+            <div className="flex gap-12 text-[9px] uppercase tracking-[0.3em] text-gold/40 font-bold">
+              <a href="#">Instagram</a>
+              <a href="#">LinkedIn</a>
+              <a href="#">Journal</a>
+            </div>
           </div>
         </div>
-      </footer>
-      
+      </section>
+
+      {/* Animation Styles */}
       <style jsx global>{`
-        @keyframes scroll-text {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-scroll-text {
-          animation: scroll-text 40s linear infinite;
-        }
+        body { background: #080A08; }
+        ::selection { background: #D4AF37; color: #080A08; }
       `}</style>
     </div>
   );

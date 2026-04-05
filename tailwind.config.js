@@ -21,6 +21,7 @@ module.exports = {
         gold: "#D4AF37",
         emerald: "#064E3B",
         charcoal: "#121212",
+        obsidian: "#080A08",
       },
     },
   },
