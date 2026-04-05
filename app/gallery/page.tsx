@@ -5,27 +5,7 @@ import Image from 'next/image';
 
 export default function GalleryPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#FDFCF8] text-[#1B3022]">
-      {/* Navigation */}
-      <nav className="sticky top-0 z-50 w-full bg-[#FDFCF8]/90 backdrop-blur-md border-b border-slate-200">
-        <div className="container mx-auto px-6 lg:px-12 h-20 flex justify-between items-center max-w-7xl">
-          <div className="text-2xl font-bold tracking-[0.2em] text-[#1B3022]">
-            <a href="/">LIYONTA</a>
-          </div>
-          <div className="hidden md:flex items-center space-x-12 text-xs font-medium uppercase tracking-widest text-[#4A4A4A]">
-            <a href="/" className="hover:text-green-600 transition-none">Collections</a>
-            <a href="/about" className="hover:text-green-600 transition-none">Our Story</a>
-            <a href="/gallery" className="text-green-600 transition-none">Gallery</a>
-            <a href="/contact" className="hover:text-green-600 transition-none">Inquiries</a>
-          </div>
-          <div className="flex items-center space-x-6 text-[#1B3022]">
-            <button className="p-2 transition-none">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-            </button>
-          </div>
-        </div>
-      </nav>
-
+    <div className="flex flex-col min-h-screen bg-[#FDFCF8] text-[#1B3022] pt-20 lg:pt-24">
       <main className="flex-grow">
         {/* A. The "Lens on Liyonta" Hero */}
         <section className="py-24 lg:py-32 border-b border-slate-100">

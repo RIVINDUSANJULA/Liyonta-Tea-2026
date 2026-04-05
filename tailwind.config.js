@@ -18,6 +18,7 @@ module.exports = {
         cream: "#FDFCF8",
         sage: "#4F7942",
         forest: "#1B3022",
+        gold: "#D4AF37",
       },
     },
   },

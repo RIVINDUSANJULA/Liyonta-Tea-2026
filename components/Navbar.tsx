@@ -1,0 +1,259 @@
+"use client";
+
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { 
+  Home, 
+  BookOpen, 
+  Layers, 
+  Image as ImageIcon, 
+  MessageSquare, 
+  Search, 
+  Globe, 
+  ShoppingBag,
+  X,
+  Menu,
+  ChevronDown
+} from 'lucide-react';
+import Link from 'next/link';
+
+export default function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSearchExpanded, setIsSearchExpanded] = useState(false);
+  const [isLanguageSi, setIsLanguageSi] = useState(false);
+  const [isFactoryOpen, setIsFactoryOpen] = useState(true);
+
+  const { scrollYProgress } = useScroll();
+  const borderDraw = useTransform(scrollYProgress, [0, 0.05], [0, 1]);
+  const navHeight = useTransform(scrollYProgress, [0, 0.05], ["5rem", "4rem"]);
+
+  useEffect(() => {
+    const checkScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', checkScroll);
+    
+    // Simple "Factory Open" check based on SL Time (GMT+5:30)
+    const slTime = new Date(new Date().getTime() + (5.5 * 60 * 60 * 1000));
+    const hours = slTime.getUTCHours();
+    const isWorkingHours = hours >= 8 && hours < 18;
+    setIsFactoryOpen(isWorkingHours);
+
+    return () => window.removeEventListener('scroll', checkScroll);
+  }, []);
+
+  const navLinks = [
+    { name: 'The Estate', href: '/', icon: <Home size={16} /> },
+    { name: 'Our Heritage', href: '/about', icon: <BookOpen size={16} /> },
+    { 
+      name: 'Collections', 
+      href: '#', 
+      icon: <Layers size={16} />,
+      dropdown: ['Black Tea', 'Green Tea', 'White Tea', 'Premium Tea Bags'] 
+    },
+    { name: 'Visual Harvest', href: '/gallery', icon: <ImageIcon size={16} /> },
+    { name: 'Inquiries', href: '/contact', icon: <MessageSquare size={16} /> },
+  ];
+
+  const leafVariants = {
+    initial: { x: -10, opacity: 0, rotate: -20 },
+    hover: { x: 0, opacity: 1, rotate: 0 }
+  };
+
+  const steamVariants = {
+    initial: { opacity: 0, y: -20, scale: 0.95 },
+    animate: { opacity: 1, y: 0, scale: 1 },
+    exit: { opacity: 0, y: -10, scale: 0.98 }
+  };
+
+  return (
+    <motion.nav
+      style={{ height: navHeight }}
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
+        isScrolled ? 'bg-white/90 backdrop-blur-lg shadow-sm' : 'bg-white/70 backdrop-blur-md'
+      }`}
+    >
+      {/* Golden Border Progress */}
+      <motion.div 
+        style={{ scaleX: borderDraw }}
+        className="absolute bottom-0 left-0 right-0 h-[1px] bg-gold origin-left"
+      />
+
+      <div className="container mx-auto px-6 h-full flex items-center justify-between max-w-7xl relative">
+        {/* Logo */}
+        <Link href="/" className="flex items-center space-x-2 group">
+          <motion.div
+            whileHover={{ rotate: 10 }}
+            className="text-gold"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M12 3C7.5 3 4 10 4 10S7.5 17 12 17S20 10 20 10S16.5 3 12 3Z" />
+              <path d="M12 3V17" />
+              <path d="M4 10H20" />
+            </svg>
+          </motion.div>
+          <span className="font-serif text-xl font-bold tracking-[0.1em] text-forest">
+            LIYONTA
+          </span>
+        </Link>
+
+        {/* Desktop Navigation */}
+        <div className="hidden lg:flex items-center space-x-10">
+          {navLinks.map((link) => (
+            <div key={link.name} className="relative group py-2">
+              <Link
+                href={link.href}
+                className="flex items-center space-x-2 text-[10px] font-bold uppercase tracking-[0.2em] text-forest/70 hover:text-forest transition-colors relative"
+              >
+                <div className="flex items-center">
+                   <motion.span
+                    variants={leafVariants}
+                    initial="initial"
+                    whileHover="hover"
+                    className="absolute -left-6 text-sage"
+                  >
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2C7 2 2 7 2 12C2 17 7 22 17 22C17 22 22 17 22 12C22 7 17 2 12 2Z" />
+                    </svg>
+                  </motion.span>
+                  {link.name}
+                </div>
+                {link.dropdown && <ChevronDown size={12} className="ml-1" />}
+              </Link>
+              
+              {/* Dropdown Menu (Steam Effect) */}
+              {link.dropdown && (
+                <div className="absolute top-full left-0 pt-4 hidden group-hover:block w-48">
+                  <motion.div
+                    variants={steamVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    className="bg-white/95 backdrop-blur-md border border-slate-100 p-4 shadow-xl rounded-sm"
+                  >
+                    {link.dropdown.map((item) => (
+                      <a
+                        key={item}
+                        href="#"
+                        className="block py-2 text-[9px] uppercase tracking-widest text-[#555] hover:text-gold transition-colors"
+                      >
+                        {item}
+                      </a>
+                    ))}
+                  </motion.div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Global Tools */}
+        <div className="flex items-center space-x-6">
+          {/* Status Tag */}
+          <div className="hidden sm:flex items-center space-x-2">
+            <motion.div
+              animate={{ opacity: [0.4, 1, 0.4] }}
+              transition={{ repeat: Infinity, duration: 2 }}
+              className={`w-1.5 h-1.5 rounded-full ${isFactoryOpen ? 'bg-green-500' : 'bg-red-400'}`}
+            />
+            <span className="text-[8px] font-bold uppercase tracking-[0.1em] text-slate-400">
+              {isFactoryOpen ? 'Factory Open' : 'Estate Closed'}
+            </span>
+          </div>
+
+          {/* Search */}
+          <div className="relative flex items-center">
+            <AnimatePresence>
+              {isSearchExpanded && (
+                <motion.input
+                  initial={{ width: 0, opacity: 0 }}
+                  animate={{ width: 140, opacity: 1 }}
+                  exit={{ width: 0, opacity: 0 }}
+                  type="text"
+                  placeholder="Search harvest..."
+                  className="bg-slate-50 border-b border-slate-200 px-2 py-1 text-[10px] outline-none"
+                />
+              )}
+            </AnimatePresence>
+            <button
+              onClick={() => setIsSearchExpanded(!isSearchExpanded)}
+              className="p-2 text-forest/70 hover:text-gold transition-colors"
+            >
+              <Search size={18} />
+            </button>
+          </div>
+
+          {/* Language */}
+          <button 
+            onClick={() => setIsLanguageSi(!isLanguageSi)}
+            className="hidden md:flex items-center space-x-1 text-[9px] font-bold text-forest/50 hover:text-gold"
+          >
+            <Globe size={14} />
+            <span>{isLanguageSi ? 'SI' : 'EN'}</span>
+          </button>
+
+          {/* CTA: Shop Now (Liquid Fill) */}
+          <motion.button
+            whileHover={{ y: -2 }}
+            className="hidden md:flex relative group overflow-hidden bg-forest text-white px-6 py-2.5 text-[9px] font-bold uppercase tracking-widest"
+          >
+            <span className="relative z-10 transition-colors duration-300 group-hover:text-forest">Shop Now</span>
+            <motion.div
+              initial={{ y: "100%" }}
+              whileHover={{ y: 0 }}
+              transition={{ type: "tween", ease: "easeInOut", duration: 0.4 }}
+              className="absolute inset-0 bg-gold"
+            />
+          </motion.button>
+
+          {/* Mobile Menu Toggle */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="lg:hidden p-2 text-forest"
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="fixed inset-0 bg-forest z-[90] flex flex-col justify-center items-center space-y-8 p-12 lg:hidden"
+          >
+            {navLinks.map((link, idx) => (
+              <motion.div
+                key={link.name}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.1 * idx }}
+              >
+                <Link
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="font-serif text-3xl text-cream hover:text-gold transition-colors flex items-center space-x-4"
+                >
+                  <span className="opacity-40">{link.icon}</span>
+                  <span>{link.name}</span>
+                </Link>
+              </motion.div>
+            ))}
+            
+            <motion.button
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              className="mt-8 bg-gold text-forest w-full py-4 text-xs font-bold uppercase tracking-[0.2em]"
+            >
+              Shop Collection
+            </motion.button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
+  );
+}

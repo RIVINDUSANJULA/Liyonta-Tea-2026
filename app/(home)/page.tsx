@@ -3,36 +3,7 @@ import Image from 'next/image';
 
 export default function Page() {
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* A. Modern Navigation Bar */}
-      <nav className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-slate-100">
-        <div className="container mx-auto px-6 lg:px-12 h-20 flex justify-between items-center max-w-7xl">
-          {/* Left: Brand Name */}
-          <div className="text-2xl font-bold tracking-[0.2em] text-forest">
-            LIYONTA
-          </div>
-
-          {/* Center: Links */}
-          <div className="hidden md:flex items-center space-x-12 text-xs font-medium uppercase tracking-widest text-[#4A4A4A]">
-            <a href="#" className="hover:text-sage transition-none">Collections</a>
-            <a href="#" className="hover:text-sage transition-none">Our Process</a>
-            <a href="#" className="hover:text-sage transition-none">Wholesale</a>
-            <a href="#" className="hover:text-sage transition-none">Journal</a>
-          </div>
-
-          {/* Right: Icons */}
-          <div className="flex items-center space-x-6 text-forest">
-            <button aria-label="Search" className="p-2 transition-none">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
-            </button>
-            <button aria-label="Cart" className="p-2 transition-none relative">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="8" cy="21" r="1" /><circle cx="19" cy="21" r="1" /><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" /></svg>
-              <span className="absolute top-1 right-1 w-2 h-2 bg-sage rounded-full"></span>
-            </button>
-          </div>
-        </div>
-      </nav>
-
+    <div className="flex flex-col min-h-screen pt-20 lg:pt-24">
       {/* B. The Grand Hero Section */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-6 lg:px-12 max-w-7xl text-center">
