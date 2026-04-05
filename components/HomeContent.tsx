@@ -42,7 +42,7 @@ export default function HomeContent() {
   }, []);
 
   return (
-    <div className="relative w-full bg-gradient-to-b from-[#050805] via-[#0A1A0F] to-[#050805] text-[#F8FAF8] selection:bg-[#A3E635] selection:text-obsidian overflow-x-hidden font-sans">
+    <div className="relative w-full bg-gradient-to-b from-[#FDFCF8] via-[#F2F6F0] to-[#E8EFE8] text-[#1B3022] selection:bg-sage selection:text-cream overflow-x-hidden font-sans">
       {/* 3D Core Layer */}
       <Experience3D />
 
@@ -53,24 +53,24 @@ export default function HomeContent() {
             {"LIYONTA".split("").map((letter, idx) => (
               <span
                 key={idx}
-                className="text-[12vw] md:text-[15rem] font-serif uppercase leading-none text-transparent transform origin-center font-outline-2 drop-shadow-2xl"
-                style={{ WebkitTextStroke: '2px #F8FAF8' }}
+                className="text-[15vw] md:text-[10rem] font-serif uppercase leading-none text-transparent transform origin-center font-outline-2 drop-shadow-xl"
+                style={{ WebkitTextStroke: '2px #1B3022' }}
               >
                 {letter}
               </span>
             ))}
           </div>
           
-          <div className="mt-8 space-y-4 max-w-2xl mx-auto opacity-80 backdrop-blur-md bg-white/5 p-6 rounded-full border border-[#A3E635]/30 transform translate-y-12 shadow-[0_0_30px_rgba(163,230,53,0.15)]">
-            <p className="text-xs md:text-sm font-bold tracking-[0.4em] uppercase text-[#A3E635]">
+          <div className="mt-8 space-y-4 max-w-2xl mx-auto opacity-80 backdrop-blur-3xl bg-white/60 p-6 rounded-full border border-sage/20 transform translate-y-12 shadow-lg">
+            <p className="text-xs md:text-sm font-bold tracking-[0.4em] uppercase text-sage">
               Zero-G Heritage • Southern Province
             </p>
           </div>
         </div>
 
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-50">
-          <span className="text-[10px] tracking-[0.3em] uppercase text-[#A3E635]">Descend</span>
-          <div className="w-[1px] h-16 bg-gradient-to-b from-[#A3E635] via-gold to-transparent" />
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-70">
+          <span className="text-[10px] tracking-[0.3em] uppercase text-forest">Descend</span>
+          <div className="w-[1px] h-16 bg-gradient-to-b from-sage via-forest to-transparent" />
         </div>
       </section>
 
@@ -85,16 +85,16 @@ export default function HomeContent() {
             ].map((prod) => (
               <div 
                 key={prod.id}
-                className="relative group p-10 h-80 flex flex-col justify-between backdrop-blur-xl bg-white/5 border border-[#A3E635]/10 overflow-hidden transform transition-all duration-700 hover:-translate-y-4 hover:bg-white/10 hover:border-[#A3E635]/50 hover:shadow-[0_0_40px_rgba(163,230,53,0.2)]"
+                className="relative group p-10 h-80 flex flex-col justify-between backdrop-blur-2xl bg-[#ffffff]/60 border border-sage/20 overflow-hidden transform transition-all duration-700 hover:-translate-y-4 hover:shadow-2xl hover:bg-[#ffffff]/80"
               >
                 {/* Glassmorphism Inner Shine */}
-                <div className="absolute -inset-1 bg-gradient-to-b from-[#A3E635]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 blur-xl" />
+                <div className="absolute -inset-1 bg-gradient-to-b from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 blur-xl" />
                 
-                <span className="text-[10px] font-bold tracking-[0.5em] text-[#A3E635] group-hover:drop-shadow-[0_0_8px_rgba(163,230,53,0.8)] transition-all">{prod.id} // ALCHEMY</span>
+                <span className="text-[10px] font-bold tracking-[0.5em] text-sage transition-all">{prod.id} // ALCHEMY</span>
                 
                 <div>
-                  <h3 className="text-2xl font-serif text-[#F8FAF8] mb-2">{prod.name}</h3>
-                  <p className="text-xs text-[#F8FAF8]/50 tracking-widest uppercase leading-loose">{prod.desc}</p>
+                  <h3 className="text-2xl font-serif text-forest mb-2">{prod.name}</h3>
+                  <p className="text-xs text-forest/70 tracking-widest uppercase leading-loose">{prod.desc}</p>
                 </div>
               </div>
             ))}
@@ -105,24 +105,24 @@ export default function HomeContent() {
       {/* C. The Dissolve to Gold (Story) */}
       <section className="relative min-h-screen py-48 pointer-events-none flex items-center">
         <div className="relative z-10 container mx-auto px-6 text-center max-w-4xl pointer-events-auto">
-          <h2 className="text-5xl md:text-7xl font-serif leading-tight mb-8 drop-shadow-2xl">
-            Where gravity ends, <span className="italic text-[#4ADE80] drop-shadow-[0_0_15px_rgba(74,222,128,0.4)]">alchemy begins.</span>
+          <h2 className="text-5xl md:text-7xl font-serif leading-tight mb-8">
+            Where gravity ends, <span className="italic text-sage">alchemy begins.</span>
           </h2>
-          <p className="text-lg md:text-xl text-[#F8FAF8]/60 leading-relaxed font-light mx-auto">
+          <p className="text-lg md:text-xl text-forest/80 leading-relaxed font-light mx-auto">
             Experience Liyonta Tea not just as a beverage, but as a physical phenomenon. Our award-winning factory in the Southern Province uses generational technique to distill the essence of the leaf into liquid gold.
           </p>
           
-          <div className="mt-20 inline-block p-[1px] bg-gradient-to-r from-transparent via-[#A3E635] to-transparent">
-             <button className="px-12 py-5 bg-[#020402] text-[10px] uppercase tracking-[0.4em] font-bold text-[#A3E635] hover:bg-[#A3E635] hover:text-obsidian hover:shadow-[0_0_30px_rgba(163,230,53,0.5)] transition-all duration-500">
+          <div className="mt-20 inline-block p-[1px] bg-gradient-to-r from-transparent via-sage to-transparent">
+             <button className="px-12 py-5 bg-[#FDFCF8] text-[10px] uppercase tracking-[0.4em] font-bold text-forest border border-sage/30 hover:bg-sage hover:text-[#FDFCF8] hover:shadow-lg transition-all duration-500">
                Enter The Portal
              </button>
           </div>
         </div>
       </section>
 
-      <footer className="relative z-10 bg-[#020402] border-t border-white/10 py-12">
+      <footer className="relative z-10 bg-[#E8EFE8] border-t border-sage/10 py-12">
         <div className="container mx-auto px-6 text-center">
-           <div className="text-[10px] uppercase tracking-[0.5em] text-[#F8FAF8]/30">Liyonta Phygital Experience • 2026</div>
+           <div className="text-[10px] uppercase tracking-[0.5em] text-forest/50">Liyonta Phygital Experience • 2026</div>
         </div>
       </footer>
     </div>

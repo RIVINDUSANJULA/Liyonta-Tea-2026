@@ -90,7 +90,7 @@ function FloatingLeaves() {
   return (
     <instancedMesh ref={meshRef} args={[undefined, undefined, LEAF_COUNT]}>
       <extrudeGeometry args={[shape, { depth: 0.05, bevelEnabled: true, bevelSegments: 1, steps: 1, bevelSize: 0.02, bevelThickness: 0.02 }]} />
-      <meshPhysicalMaterial color="#4ADE80" metalness={0.1} roughness={0.1} clearcoat={1} emissive="#A3E635" emissiveIntensity={0.8} />
+      <meshPhysicalMaterial color="#4F7942" metalness={0.1} roughness={0.5} clearcoat={0.5} emissive="#8FB08F" emissiveIntensity={0.2} />
     </instancedMesh>
   );
 }
@@ -136,13 +136,13 @@ function TeaTin() {
         {/* Lid */}
         <mesh ref={lidRef} position={[0, 1.6, 0]} castShadow>
           <cylinderGeometry args={[1.05, 1.05, 0.4, 32]} />
-          <meshStandardMaterial color="#020402" metalness={0.9} roughness={0.1} />
+          <meshStandardMaterial color="#EFEFEF" metalness={0.6} roughness={0.2} />
         </mesh>
         
         {/* Body */}
         <mesh ref={bodyRef} position={[0, 0, 0]} castShadow>
           <cylinderGeometry args={[1, 1, 3, 32]} />
-          <meshStandardMaterial color="#020402" metalness={0.8} roughness={0.2} />
+          <meshStandardMaterial color="#FAFAFA" metalness={0.5} roughness={0.3} />
           {/* Gold Accent */}
           <mesh position={[0, 0, 0]}>
             <cylinderGeometry args={[1.01, 1.01, 0.2, 32]} />
@@ -209,17 +209,17 @@ export default function Experience3D() {
     <div className="fixed inset-0 pointer-events-none z-0">
       <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0, 8], fov: 45 }}>
         <Suspense fallback={null}>
-          <ambientLight intensity={0.6} />
-          <spotLight position={[10, 10, 10]} intensity={3} color="#EAB308" />
-          <spotLight position={[-10, -10, 10]} intensity={5} color="#A3E635" />
-          <directionalLight position={[-5, 5, 5]} intensity={1} color="#F8FAF8" />
+          <ambientLight intensity={1.5} />
+          <spotLight position={[10, 10, 10]} intensity={4} color="#FDFCF8" />
+          <spotLight position={[-10, -10, 10]} intensity={2} color="#D4AF37" />
+          <directionalLight position={[-5, 5, 5]} intensity={1.5} color="#FFFFFF" castShadow />
           
           <FloatingLeaves />
           <TeaTin />
           <LiquidOrb />
           
-          <ContactShadows position={[0, -5, 0]} opacity={0.5} scale={20} blur={2.5} far={10} color="#020402" />
-          <Environment preset="night" />
+          <ContactShadows position={[0, -5, 0]} opacity={0.6} scale={20} blur={2.5} far={10} color="#1B3022" />
+          <Environment preset="city" />
           <AdaptiveDpr pixelated />
           <AdaptiveEvents />
           <Preload all />
