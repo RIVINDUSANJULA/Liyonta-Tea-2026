@@ -1,7 +1,240 @@
-import React from 'react'
+import React from 'react';
+import Image from 'next/image';
 
-export default function page() {
+export default function ContactPage() {
   return (
-    <div>Contact</div>
-  )
+    <div className="flex flex-col min-h-screen bg-[#FDFCF8] text-slate-900 font-sans">
+      {/* Navigation */}
+      <nav className="sticky top-0 z-50 w-full bg-[#FDFCF8]/90 backdrop-blur-md border-b border-slate-200">
+        <div className="container mx-auto px-6 lg:px-12 h-20 flex justify-between items-center max-w-7xl">
+          <div className="text-2xl font-bold tracking-[0.2em] text-slate-900">
+            <a href="/">LIYONTA</a>
+          </div>
+          <div className="hidden md:flex items-center space-x-12 text-xs font-medium uppercase tracking-widest text-slate-500">
+            <a href="/" className="hover:text-green-600 transition-none">Collections</a>
+            <a href="/about" className="hover:text-green-600 transition-none">Our Story</a>
+            <a href="/contact" className="text-green-600 transition-none">Inquiries</a>
+            <a href="#" className="hover:text-green-600 transition-none">Journal</a>
+          </div>
+          <div className="flex items-center space-x-6">
+            <button className="p-2 transition-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      <main className="flex-grow">
+        {/* A. The "Tea Garden" Contact Hero */}
+        <section className="py-24 bg-white border-b border-slate-100">
+          <div className="container mx-auto px-6 max-w-screen-xl">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              <div className="space-y-8">
+                <h1 className="font-serif text-5xl md:text-6xl text-slate-900 leading-tight">
+                  Reach Out to Liyonta
+                </h1>
+                <p className="text-lg text-slate-600 leading-relaxed max-w-xl">
+                  Whether you are looking for a morning brew or a wholesale partnership, our doors in the Southern Province are always open. We are here to bring the finest Ceylon tea to your doorstep.
+                </p>
+                <a href="#contact-form" className="inline-block text-xs font-bold uppercase tracking-widest text-green-600 border-b border-green-600 pb-1">
+                  Scroll to Form ↓
+                </a>
+              </div>
+              <div className="relative aspect-[4/3] bg-[#F5F5F5] border border-slate-200 overflow-hidden">
+                <Image
+                  src="/images/contact-hero.png"
+                  alt="Veranda overlooking a Sri Lankan tea garden"
+                  fill
+                  className="object-cover contrast-[0.95]"
+                  priority
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* B. The Dual-Channel Communication Hub */}
+        <section id="contact-form" className="py-24 bg-[#FDFCF8]">
+          <div className="container mx-auto px-6 max-w-screen-xl">
+            <div className="grid grid-cols-12 gap-12 lg:gap-24">
+              {/* Left Column: Information */}
+              <div className="col-span-12 lg:col-span-5 space-y-16">
+                <div>
+                  <h2 className="font-serif text-3xl text-slate-900 mb-8 border-b border-slate-200 pb-4">Our Estate</h2>
+                  <div className="space-y-6">
+                    <div className="space-y-1">
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-green-600">Physical Address</p>
+                      <p className="text-sm text-slate-700 leading-loose">
+                        Liyonta Tea Factory,<br />
+                        Deniyaya High-Elevation Grounds,<br />
+                        Southern Province, Sri Lanka.
+                      </p>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-green-600">Global Support</p>
+                      <p className="text-sm text-slate-700 font-medium">Customer: care@liyontatea.com</p>
+                      <p className="text-sm text-slate-700 font-medium">Export: wholesale@liyontatea.com</p>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-green-600">Operating Hours</p>
+                      <p className="text-sm text-slate-700 italic">Mon — Sat: 08:30 AM - 05:30 PM (GMT+5:30)</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column: The Inquiry Suite */}
+              <div className="col-span-12 lg:col-span-7">
+                <div className="bg-white border border-slate-200 p-8 md:p-12">
+                  <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Full Name</label>
+                        <input required type="text" className="w-full bg-transparent border-b border-slate-200 py-2 outline-none text-sm focus:border-green-600" />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Email Address</label>
+                        <input required type="email" className="w-full bg-transparent border-b border-slate-200 py-2 outline-none text-sm focus:border-green-600" />
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Subject of Inquiry</label>
+                      <select className="w-full bg-transparent border-b border-slate-200 py-2 outline-none text-sm focus:border-green-600 appearance-none">
+                        <option>General Feedback</option>
+                        <option>Wholesale/Partnership</option>
+                        <option>Order Tracking</option>
+                        <option>Press & Media</option>
+                      </select>
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Message</label>
+                      <textarea required rows={4} className="w-full bg-transparent border-b border-slate-200 py-2 outline-none text-sm focus:border-green-600 resize-none"></textarea>
+                    </div>
+                    <button type="submit" className="w-full bg-green-600 text-white font-bold py-4 uppercase tracking-[0.2em] text-xs transition-none hover:bg-slate-900">
+                      Send Global Inquiry
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* C. Wholesale & Export Detail Section */}
+        <aside className="bg-slate-900 py-12 text-white">
+          <div className="container mx-auto px-6 max-w-screen-xl">
+            <div className="flex flex-col lg:flex-row justify-between items-center gap-8">
+              <div className="max-w-2xl text-center lg:text-left">
+                <p className="text-lg font-serif">Interested in sourcing Liyonta Tea for your cafe or retail chain?</p>
+                <p className="text-sm text-slate-400 mt-2">Our award-winning factory handles bulk shipping to over 20 countries with guaranteed peak freshness.</p>
+              </div>
+              <button className="bg-white text-slate-900 border border-white px-8 py-3 text-[10px] font-bold uppercase tracking-widest transition-none hover:bg-transparent hover:text-white">
+                Download Product Catalog
+              </button>
+            </div>
+          </div>
+        </aside>
+
+        {/* D. The "Southern Province" Map/Visual Section */}
+        <section className="py-24 bg-white">
+          <div className="container mx-auto px-6 max-w-screen-xl">
+            <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400 mb-8 block text-center lg:text-left">Our Location: The Heart of Sri Lankan Tea</h2>
+            <div className="relative aspect-[21/9] bg-[#F9F9F9] border border-slate-200 overflow-hidden mb-12">
+              <Image
+                src="/images/estate-map.png"
+                alt="Artistic map of the Southern Province Sri Lanka"
+                fill
+                className="object-contain p-12 opacity-80"
+              />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
+              <div className="space-y-2">
+                <h4 className="text-xs font-bold uppercase tracking-widest text-slate-900">Heritage Access</h4>
+                <p className="text-sm text-slate-600">85km from UNESCO Galle Fort</p>
+              </div>
+              <div className="space-y-2">
+                <h4 className="text-xs font-bold uppercase tracking-widest text-slate-900">Elevation</h4>
+                <p className="text-sm text-slate-600">Proximity to Deniyaya Hills Range</p>
+              </div>
+              <div className="space-y-2">
+                <h4 className="text-xs font-bold uppercase tracking-widest text-slate-900">Global Gateway</h4>
+                <p className="text-sm text-slate-600">Port of Export: Colombo International</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* E. FAQ "Quick Help" Grid */}
+        <section className="py-24 bg-[#FDFCF8] border-t border-slate-200">
+          <div className="container mx-auto px-6 max-w-screen-xl">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
+              <div className="space-y-4">
+                <h4 className="font-serif text-xl text-slate-900">Shipping Times</h4>
+                <p className="text-sm text-slate-600 leading-relaxed">International orders typically arrive within 7-12 business days via air freight from Colombo.</p>
+              </div>
+              <div className="space-y-4">
+                <h4 className="font-serif text-xl text-slate-900">Organic Status</h4>
+                <p className="text-sm text-slate-600 leading-relaxed">We use strictly organic-first practices and traditional techniques passed down through generations.</p>
+              </div>
+              <div className="space-y-4">
+                <h4 className="font-serif text-xl text-slate-900">Tea Storage</h4>
+                <p className="text-sm text-slate-600 leading-relaxed">Store in a cool, dark place within our airtight canisters to preserve the essential oils for up to 18 months.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* F. Social & Community Links */}
+        <section className="py-12 bg-white">
+          <div className="container mx-auto px-6 max-w-screen-xl flex flex-wrap justify-center gap-12 border-t border-slate-100 pt-12">
+            {["Instagram", "LinkedIn", "YouTube", "Twitter / X"].map((social, idx) => (
+              <a key={idx} href="#" className="text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400 hover:text-green-600 transition-none">
+                {social}
+              </a>
+            ))}
+          </div>
+        </section>
+      </main>
+
+      {/* Footer from layout standard */}
+      <footer className="py-24 bg-white border-t border-slate-200">
+        <div className="container mx-auto px-6 lg:px-12 max-w-7xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
+            <div className="space-y-6">
+              <div className="text-xl font-bold tracking-[0.2em] text-slate-900">LIYONTA</div>
+              <p className="text-sm text-slate-500 leading-relaxed">
+                Elevating the art of tea through heritage, craftsmanship, and a commitment to pure Ceylon excellence.
+              </p>
+            </div>
+            <div className="space-y-6">
+              <h5 className="text-xs font-bold uppercase tracking-widest text-slate-900">Visit Us</h5>
+              <p className="text-sm text-slate-500 leading-relaxed">
+                Deniyaya Grounds,<br />
+                Southern Province, Sri Lanka.
+              </p>
+            </div>
+            <div className="space-y-6">
+              <h5 className="text-xs font-bold uppercase tracking-widest text-slate-900">Navigation</h5>
+              <ul className="space-y-4 text-sm text-slate-500">
+                <li><a href="/" className="hover:text-green-600 transition-none">Home</a></li>
+                <li><a href="/about" className="hover:text-green-600 transition-none">Our Story</a></li>
+                <li><a href="/contact" className="hover:text-green-600 transition-none">Contact</a></li>
+              </ul>
+            </div>
+            <div className="space-y-6">
+              <h5 className="text-xs font-bold uppercase tracking-widest text-slate-900">Tea Circle</h5>
+              <form className="flex border-b border-slate-900 py-2">
+                <input type="email" placeholder="Email Address" className="bg-transparent text-sm w-full outline-none" />
+                <button type="submit" className="text-xs font-bold uppercase tracking-widest text-green-600 ml-4 font-bold">Join</button>
+              </form>
+            </div>
+          </div>
+          <div className="text-[10px] uppercase tracking-[0.2em] text-slate-300 text-center border-t border-slate-100 pt-10">
+            &copy; 2026 Liyonta Tea. Pure Origin Excellence.
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
 }
+
