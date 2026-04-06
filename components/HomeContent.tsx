@@ -46,7 +46,7 @@ export default function HomeContent() {
   }, []);
 
   return (
-    <div className="relative w-full bg-gradient-to-br from-[#FDFCF8] via-[#e9f2e4] to-[#c9d9bf] text-[#1B3022] selection:bg-[#4F7942] selection:text-cream overflow-x-hidden font-sans">
+    <div className="relative w-full bg-gradient-to-br from-[#d9e8d1] via-[#b7c9b0] to-[#8fb08f] text-[#1B3022] selection:bg-[#1B3022] selection:text-[#d9e8d1] overflow-x-hidden font-sans">
       {/* 3D Core Layer */}
       <Experience3D />
 
@@ -65,16 +65,16 @@ export default function HomeContent() {
             ))}
           </div>
           
-          <div className="mt-8 space-y-4 max-w-2xl mx-auto opacity-80 backdrop-blur-3xl bg-white/70 p-6 rounded-full border border-[#4F7942]/30 transform translate-y-12 shadow-xl">
-            <p className="text-xs md:text-sm font-bold tracking-[0.4em] uppercase text-[#4F7942]">
+          <div className="mt-8 space-y-4 max-w-2xl mx-auto opacity-80 backdrop-blur-3xl bg-[#b7c9b0]/80 p-6 rounded-full border border-[#1B3022]/20 transform translate-y-12 shadow-xl">
+            <p className="text-xs md:text-sm font-bold tracking-[0.4em] uppercase text-[#1B3022]">
               Zero-G Heritage • Southern Province
             </p>
           </div>
         </div>
 
         <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-80">
-          <span className="text-[10px] tracking-[0.3em] uppercase text-[#4F7942]">Descend</span>
-          <div className="w-[1px] h-16 bg-gradient-to-b from-[#4F7942] via-[#1B3022] to-transparent" />
+          <span className="text-[10px] tracking-[0.3em] uppercase text-[#1B3022]">Descend</span>
+          <div className="w-[1px] h-16 bg-gradient-to-b from-[#1B3022] via-[#1B3022]/50 to-transparent" />
         </div>
       </section>
 
@@ -89,12 +89,12 @@ export default function HomeContent() {
             ].map((prod) => (
               <div 
                 key={prod.id}
-                className="relative group p-10 h-80 flex flex-col justify-between backdrop-blur-2xl bg-white/80 border border-[#4F7942]/20 overflow-hidden transform transition-all duration-700 hover:-translate-y-4 hover:shadow-2xl hover:bg-white"
+                className="relative group p-10 h-80 flex flex-col justify-between backdrop-blur-2xl bg-[#d9e8d1]/80 border border-[#1B3022]/20 overflow-hidden transform transition-all duration-700 hover:-translate-y-4 hover:shadow-2xl hover:bg-[#c9d9bf]/90"
               >
                 {/* Glassmorphism Inner Shine */}
-                <div className="absolute -inset-1 bg-gradient-to-b from-white/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 blur-xl" />
+                <div className="absolute -inset-1 bg-gradient-to-b from-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 blur-xl" />
                 
-                <span className="text-[10px] font-bold tracking-[0.5em] text-[#4F7942] transition-all">{prod.id} // ALCHEMY</span>
+                <span className="text-[10px] font-bold tracking-[0.5em] text-[#1B3022] transition-all">{prod.id} // ALCHEMY</span>
                 
                 <div>
                   <h3 className="text-2xl font-serif text-[#1B3022] mb-2">{prod.name}</h3>
@@ -110,23 +110,23 @@ export default function HomeContent() {
       <section className="relative min-h-screen py-48 pointer-events-none flex items-center">
         <div className="relative z-10 container mx-auto px-6 text-center max-w-4xl pointer-events-auto">
           <h2 className="text-5xl md:text-7xl font-serif leading-tight mb-8">
-            Where gravity ends, <span className="italic text-[#4F7942]">alchemy begins.</span>
+            Where gravity ends, <span className="italic text-[#1B3022]">alchemy begins.</span>
           </h2>
           <p className="text-lg md:text-xl text-forest/80 leading-relaxed font-light mx-auto">
             Experience Liyonta Tea not just as a beverage, but as a physical phenomenon. Our award-winning factory in the Southern Province uses generational technique to distill the essence of the leaf into liquid gold.
           </p>
           
-          <div className="mt-20 inline-block p-[1px] bg-gradient-to-r from-transparent via-[#4F7942] to-transparent">
-             <button className="px-12 py-5 bg-[#FDFCF8] text-[10px] uppercase tracking-[0.4em] font-bold text-[#1B3022] border border-[#4F7942]/30 hover:bg-[#4F7942] hover:text-white hover:shadow-lg transition-all duration-500">
+          <div className="mt-20 inline-block p-[1px] bg-gradient-to-r from-transparent via-[#1B3022] to-transparent">
+             <button className="px-12 py-5 bg-[#8fb08f] text-[10px] uppercase tracking-[0.4em] font-bold text-[#1B3022] border border-[#1B3022]/30 hover:bg-[#1B3022] hover:text-[#d9e8d1] hover:shadow-lg transition-all duration-500">
                Enter The Portal
              </button>
           </div>
         </div>
       </section>
 
-      <footer className="relative z-10 bg-[#E8EFE8] border-t border-sage/10 py-12">
+      <footer className="relative z-10 bg-[#8fb08f] border-t border-[#1B3022]/10 py-12">
         <div className="container mx-auto px-6 text-center">
-           <div className="text-[10px] uppercase tracking-[0.5em] text-forest/50">Liyonta Phygital Experience • 2026</div>
+           <div className="text-[10px] uppercase tracking-[0.5em] text-[#1B3022]/60">Liyonta Phygital Experience • 2026</div>
         </div>
       </footer>
     </div>
