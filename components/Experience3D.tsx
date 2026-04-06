@@ -92,21 +92,23 @@ function FloatingLeaves() {
 
   const shape = useMemo(() => {
     const s = new THREE.Shape();
+    // Beautiful natural leaf silhouette using Bezier Curves
     s.moveTo(0, 0);
-    s.quadraticCurveTo(1, 1, 0, 2);
-    s.quadraticCurveTo(-1, 1, 0, 0);
+    s.bezierCurveTo(0.6, 0.4, 0.6, 1.5, 0, 2.2);
+    s.bezierCurveTo(-0.6, 1.5, -0.6, 0.4, 0, 0);
     return s;
   }, []);
 
   return (
     <instancedMesh ref={meshRef} args={[undefined, undefined, LEAF_COUNT]}>
-      <extrudeGeometry args={[shape, { depth: 0.05, bevelEnabled: true, bevelSegments: 1, steps: 1, bevelSize: 0.02, bevelThickness: 0.02 }]} />
+      {/* Paper-thin extrusion with no boxy bevels */}
+      <extrudeGeometry args={[shape, { depth: 0.005, bevelEnabled: false, curveSegments: 12 }]} />
       <meshPhysicalMaterial
         metalness={0.1}
-        roughness={0.5}
-        clearcoat={0.5}
-        emissive="#ffffff"
-        emissiveIntensity={0.05}
+        roughness={0.6}
+        clearcoat={0.1}
+        emissive="#000000" // Remove white emissive to allow true colors!
+        emissiveIntensity={0}
       />
     </instancedMesh>
   );
@@ -203,27 +205,29 @@ function HeroLeaf() {
 
   const shape = useMemo(() => {
     const s = new THREE.Shape();
+    // Beautiful natural leaf silhouette using Bezier Curves
     s.moveTo(0, 0);
-    s.quadraticCurveTo(1, 1, 0, 2);
-    s.quadraticCurveTo(-1, 1, 0, 0);
+    s.bezierCurveTo(0.6, 0.4, 0.6, 1.5, 0, 2.2);
+    s.bezierCurveTo(-0.6, 1.5, -0.6, 0.4, 0, 0);
     return s;
   }, []);
 
   return (
     <mesh ref={leafRef} position={[-3, 2, -2]}>
-      <extrudeGeometry args={[shape, { depth: 0.1, bevelEnabled: true, bevelSegments: 3, steps: 1, bevelSize: 0.05, bevelThickness: 0.05 }]} />
+      {/* Paper-thin extrusion with no boxy bevels */}
+      <extrudeGeometry args={[shape, { depth: 0.01, bevelEnabled: false, curveSegments: 24 }]} />
       <MeshTransmissionMaterial
         backside
-        samples={4}
-        thickness={0.5}
-        chromaticAberration={0.5}
+        samples={8}
+        thickness={0.02} // Thin glass-like leaf
+        chromaticAberration={0.3}
         anisotropy={0.5}
-        distortion={0.2}
+        distortion={0.1}
         distortionScale={0.5}
-        temporalDistortion={0.1}
-        color="#00b193"
+        temporalDistortion={0.05}
+        color="#00b193" // Deep teal base
         attenuationDistance={2}
-        attenuationColor="#afbd22"
+        attenuationColor="#afbd22" // Lighter green attenuation
       />
     </mesh>
   );
