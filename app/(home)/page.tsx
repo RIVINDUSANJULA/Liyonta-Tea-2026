@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import HeroScene from "@/components/Home/HeroScene";
-import HeroUI    from "@/components/Home/HeroUI";
+import HeroUI from "@/components/Home/HeroUI";
 
 // ── SSR Metadata (benefits SEO — server-rendered, not blocked by JS) ──────────
 export const metadata: Metadata = {
