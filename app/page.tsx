@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <main className="bg-[#d9e8d1] text-forest overflow-x-hidden min-h-screen selection:bg-sage selection:text-cream">
+    <main className="bg-[#8fb08f] text-forest overflow-x-hidden min-h-screen selection:bg-sage selection:text-cream">
       <HomeContent />
     </main>
   );

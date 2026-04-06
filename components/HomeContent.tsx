@@ -46,7 +46,7 @@ export default function HomeContent() {
   }, []);
 
   return (
-    <div className="relative w-full bg-gradient-to-br from-[#d9e8d1] via-[#b7c9b0] to-[#8fb08f] text-[#1B3022] selection:bg-[#1B3022] selection:text-[#d9e8d1] overflow-x-hidden font-sans">
+    <div className="relative w-full bg-gradient-to-br from-[#8fb08f] via-[#7fa27f] to-[#709270] text-[#1B3022] selection:bg-[#1B3022] selection:text-[#8fb08f] overflow-x-hidden font-sans">
       {/* 3D Core Layer */}
       <Experience3D />
 
@@ -65,7 +65,7 @@ export default function HomeContent() {
             ))}
           </div>
           
-          <div className="mt-8 space-y-4 max-w-2xl mx-auto opacity-80 backdrop-blur-3xl bg-[#b7c9b0]/80 p-6 rounded-full border border-[#1B3022]/20 transform translate-y-12 shadow-xl">
+          <div className="mt-8 space-y-4 max-w-2xl mx-auto opacity-80 backdrop-blur-3xl bg-[#8fb08f]/80 p-6 rounded-full border border-[#1B3022]/20 transform translate-y-12 shadow-xl">
             <p className="text-xs md:text-sm font-bold tracking-[0.4em] uppercase text-[#1B3022]">
               Zero-G Heritage • Southern Province
             </p>
@@ -89,7 +89,7 @@ export default function HomeContent() {
             ].map((prod) => (
               <div 
                 key={prod.id}
-                className="relative group p-10 h-80 flex flex-col justify-between backdrop-blur-2xl bg-[#d9e8d1]/80 border border-[#1B3022]/20 overflow-hidden transform transition-all duration-700 hover:-translate-y-4 hover:shadow-2xl hover:bg-[#c9d9bf]/90"
+                className="relative group p-10 h-80 flex flex-col justify-between backdrop-blur-2xl bg-[#8fb08f]/80 border border-[#1B3022]/20 overflow-hidden transform transition-all duration-700 hover:-translate-y-4 hover:shadow-2xl hover:bg-[#9cbd9c]/90"
               >
                 {/* Glassmorphism Inner Shine */}
                 <div className="absolute -inset-1 bg-gradient-to-b from-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 blur-xl" />
@@ -117,7 +117,7 @@ export default function HomeContent() {
           </p>
           
           <div className="mt-20 inline-block p-[1px] bg-gradient-to-r from-transparent via-[#1B3022] to-transparent">
-             <button className="px-12 py-5 bg-[#8fb08f] text-[10px] uppercase tracking-[0.4em] font-bold text-[#1B3022] border border-[#1B3022]/30 hover:bg-[#1B3022] hover:text-[#d9e8d1] hover:shadow-lg transition-all duration-500">
+             <button className="px-12 py-5 bg-[#8fb08f] text-[10px] uppercase tracking-[0.4em] font-bold text-[#1B3022] border border-[#1B3022]/30 hover:bg-[#1B3022] hover:text-[#8fb08f] hover:shadow-lg transition-all duration-500">
                Enter The Portal
              </button>
           </div>

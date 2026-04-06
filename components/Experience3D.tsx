@@ -21,10 +21,10 @@ gsap.registerPlugin(ScrollTrigger);
 // 1. Instanced Leaf System with Nature Variety
 const LEAF_COUNT = 600;
 const GREEN_SHADES = [
-  new THREE.Color("#A3E635"), // Light Green
-  new THREE.Color("#4F7942"), // Medium Green
-  new THREE.Color("#8FB08F"), // Sage Green
-  new THREE.Color("#D9E8D1"), // Pale Lime
+  new THREE.Color("#4F7942"), // Tailwind Sage (Darker Medium Green)
+  new THREE.Color("#8FB08F"), // Medium Green
+  new THREE.Color("#7FA27F"), // Medium Green 2
+  new THREE.Color("#709270"), // Medium Green 3
 ];
 
 function FloatingLeaves() {
