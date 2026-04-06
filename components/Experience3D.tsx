@@ -2,12 +2,12 @@
 
 import React, { useRef, useMemo, Suspense, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { 
-  Float, 
-  MeshDistortMaterial, 
+import {
+  Float,
+  MeshDistortMaterial,
   MeshTransmissionMaterial,
-  Environment, 
-  ContactShadows, 
+  Environment,
+  ContactShadows,
   Preload,
   AdaptiveDpr,
   AdaptiveEvents,
@@ -21,10 +21,10 @@ gsap.registerPlugin(ScrollTrigger);
 // 1. Instanced Leaf System with Nature Variety
 const LEAF_COUNT = 600;
 const GREEN_SHADES = [
-  new THREE.Color("#4F7942"), // Tailwind Sage (Darker Medium Green)
-  new THREE.Color("#8FB08F"), // Medium Green
-  new THREE.Color("#7FA27F"), // Medium Green 2
-  new THREE.Color("#709270"), // Medium Green 3
+  new THREE.Color("#afbd22"),
+  new THREE.Color("#6db33f"),
+  new THREE.Color("#00958f"),
+  new THREE.Color("#00b193"),
 ];
 
 function FloatingLeaves() {
@@ -37,7 +37,7 @@ function FloatingLeaves() {
     for (let i = 0; i < LEAF_COUNT; i++) {
       const t = Math.random() * 100;
       const factor = 20 + Math.random() * 100;
-      const speed = 0.01 + Math.random() / 200;
+      const speed = 0.002 + Math.random() / 500; // Significantly slower speed
       const xFactor = -10 + Math.random() * 20;
       const yFactor = -10 + Math.random() * 20;
       const zFactor = -10 + Math.random() * 20;
@@ -80,7 +80,7 @@ function FloatingLeaves() {
       dummy.scale.setScalar(0.05 + Math.abs(Math.sin(t)) * 0.05);
       dummy.updateMatrix();
       meshRef.current.setMatrixAt(i, dummy.matrix);
-      
+
       // Assign random color once
       if (state.clock.elapsedTime < 0.1) {
         meshRef.current.setColorAt(i, GREEN_SHADES[i % GREEN_SHADES.length]);
@@ -101,12 +101,12 @@ function FloatingLeaves() {
   return (
     <instancedMesh ref={meshRef} args={[undefined, undefined, LEAF_COUNT]}>
       <extrudeGeometry args={[shape, { depth: 0.05, bevelEnabled: true, bevelSegments: 1, steps: 1, bevelSize: 0.02, bevelThickness: 0.02 }]} />
-      <meshPhysicalMaterial 
-        metalness={0.1} 
-        roughness={0.5} 
-        clearcoat={0.5} 
-        emissive="#ffffff" 
-        emissiveIntensity={0.05} 
+      <meshPhysicalMaterial
+        metalness={0.1}
+        roughness={0.5}
+        clearcoat={0.5}
+        emissive="#ffffff"
+        emissiveIntensity={0.05}
       />
     </instancedMesh>
   );
@@ -120,7 +120,7 @@ function TeaTin() {
 
   useEffect(() => {
     if (!groupRef.current) return;
-    
+
     // GSAP ScrollTrigger for blowing up the tin
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
@@ -135,10 +135,10 @@ function TeaTin() {
             lidRef.current.position.y = 1.5 + p * 4;
             lidRef.current.rotation.x = p * 2;
             lidRef.current.rotation.z = p * 1;
-            
+
             bodyRef.current.position.y = -p * 2;
             bodyRef.current.rotation.x = -p * 1;
-            
+
             groupRef.current.rotation.y = p * Math.PI * 2;
           }
         }
@@ -155,7 +155,7 @@ function TeaTin() {
           <cylinderGeometry args={[1.05, 1.05, 0.4, 32]} />
           <meshStandardMaterial color="#EFEFEF" metalness={0.6} roughness={0.2} />
         </mesh>
-        
+
         {/* Body */}
         <mesh ref={bodyRef} position={[0, 0, 0]} castShadow>
           <cylinderGeometry args={[1, 1, 3, 32]} />
@@ -163,7 +163,7 @@ function TeaTin() {
           {/* Gold Accent */}
           <mesh position={[0, 0, 0]}>
             <cylinderGeometry args={[1.01, 1.01, 0.2, 32]} />
-             <meshStandardMaterial color="#EAB308" metalness={0.9} roughness={0.1} />
+            <meshStandardMaterial color="#EAB308" metalness={0.9} roughness={0.1} />
           </mesh>
         </mesh>
       </Float>
@@ -171,15 +171,15 @@ function TeaTin() {
   );
 }
 
-// 3. The Liquid Orb
-function LiquidOrb() {
-  const orbRef = useRef<THREE.Mesh>(null!);
-  
+// 3. The Hero Leaf
+function HeroLeaf() {
+  const leafRef = useRef<THREE.Mesh>(null!);
+
   useFrame((state) => {
-    if (orbRef.current) {
-      orbRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.5;
-      orbRef.current.rotation.x = state.clock.elapsedTime * 0.2;
-      orbRef.current.rotation.y = state.clock.elapsedTime * 0.3;
+    if (leafRef.current) {
+      leafRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.5;
+      leafRef.current.rotation.x = state.clock.elapsedTime * 0.2;
+      leafRef.current.rotation.y = state.clock.elapsedTime * 0.3;
     }
   });
 
@@ -191,31 +191,39 @@ function LiquidOrb() {
         end: "bottom center",
         scrub: 1,
         onUpdate: (self) => {
-            if (orbRef.current) {
-               orbRef.current.scale.setScalar(1 + self.progress * 1.5);
-               orbRef.current.position.x = self.progress * 4;
-            }
+          if (leafRef.current) {
+            leafRef.current.scale.setScalar(1 + self.progress * 1.5);
+            leafRef.current.position.x = self.progress * 4;
+          }
         }
       });
     });
     return () => ctx.revert();
   }, []);
 
+  const shape = useMemo(() => {
+    const s = new THREE.Shape();
+    s.moveTo(0, 0);
+    s.quadraticCurveTo(1, 1, 0, 2);
+    s.quadraticCurveTo(-1, 1, 0, 0);
+    return s;
+  }, []);
+
   return (
-    <mesh ref={orbRef} position={[-3, 2, -2]}>
-      <sphereGeometry args={[1, 64, 64]} />
-      <MeshTransmissionMaterial 
+    <mesh ref={leafRef} position={[-3, 2, -2]}>
+      <extrudeGeometry args={[shape, { depth: 0.1, bevelEnabled: true, bevelSegments: 3, steps: 1, bevelSize: 0.05, bevelThickness: 0.05 }]} />
+      <MeshTransmissionMaterial
         backside
         samples={4}
-        thickness={2}
-        chromaticAberration={0.05}
-        anisotropy={0.1}
-        distortion={0.5}
+        thickness={0.5}
+        chromaticAberration={0.5}
+        anisotropy={0.5}
+        distortion={0.2}
         distortionScale={0.5}
         temporalDistortion={0.1}
-        color="#EAB308"
+        color="#00b193"
         attenuationDistance={2}
-        attenuationColor="#EAB308"
+        attenuationColor="#afbd22"
       />
     </mesh>
   );
@@ -230,11 +238,11 @@ export default function Experience3D() {
           <spotLight position={[10, 10, 10]} intensity={4} color="#FDFCF8" />
           <spotLight position={[-10, -10, 10]} intensity={2} color="#D4AF37" />
           <directionalLight position={[-5, 5, 5]} intensity={1.5} color="#FFFFFF" castShadow />
-          
+
           <FloatingLeaves />
           <TeaTin />
-          <LiquidOrb />
-          
+          <HeroLeaf />
+
           <ContactShadows position={[0, -5, 0]} opacity={0.6} scale={20} blur={2.5} far={10} color="#1B3022" />
           <Environment preset="city" />
           <AdaptiveDpr pixelated />
