@@ -1,9 +1,50 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 
+// Define the shape of our form data for TypeScript
+interface ContactFormData {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
+
 export default function ContactPage() {
+  // --- Form State & Handlers ---
+  const [formData, setFormData] = useState<ContactFormData>({
+    name: "",
+    email: "",
+    subject: "General Feedback",
+    message: "",
+  });
+
+  // Type the 'e' as a ChangeEvent for inputs, selects, and textareas
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  // Type the 'e' as a FormEvent
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const mailTo = "liyonta@gmail.com";
+    const emailSubject = encodeURIComponent(formData.subject);
+
+    const emailBody = encodeURIComponent(
+      `Full Name: ${formData.name}\nMessage:\n${formData.message}`
+    );
+
+    window.location.href = `mailto:${mailTo}?subject=${emailSubject}&body=${emailBody}`;
+  };
+
   return (
     <div className="flex flex-col min-h-screen bg-[#FDFCF8] text-slate-900 font-sans pt-20 lg:pt-24">
       <main className="flex-grow">
@@ -60,42 +101,61 @@ export default function ContactPage() {
                     <div className="space-y-1">
                       <p className="text-[10px] font-bold uppercase tracking-widest text-green-600">Operating Hours</p>
                       <p className="text-sm text-slate-700 italic">
-                        Mon — Sat<br />
-                        06:00 AM - 10:00 PM<br />
-                        (GMT+5:30)</p>
+                        Mon - Sat<br />
+                        06:00 AM - 10:00 PM
+                        (GMT+5:30)
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Right Column: The Inquiry Suite */}
+              {/* Right Column: The Inquiry Suite (Integrated Form) */}
               <div className="col-span-12 lg:col-span-7">
                 <div className="bg-white border border-slate-200 p-8 md:p-12">
-                  <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
+                  <form className="space-y-8" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                       <div className="space-y-2">
                         <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Full Name</label>
-                        <input required type="text" className="w-full bg-transparent border-b border-slate-200 py-2 outline-none text-sm focus:border-green-600" />
-                      </div>
-                      <div className="space-y-2">
-                        <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Email Address</label>
-                        <input required type="email" className="w-full bg-transparent border-b border-slate-200 py-2 outline-none text-sm focus:border-green-600" />
+                        <input
+                          required
+                          type="text"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          className="w-full bg-transparent border-b border-slate-200 py-2 outline-none text-sm focus:border-green-600"
+                        />
                       </div>
                     </div>
+
                     <div className="space-y-2">
                       <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Subject of Inquiry</label>
-                      <select className="w-full bg-transparent border-b border-slate-200 py-2 outline-none text-sm focus:border-green-600 appearance-none">
-                        <option>General Feedback</option>
-                        <option>Wholesale/Partnership</option>
-                        <option>Order Tracking</option>
-                        <option>Press & Media</option>
+                      <select
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleChange}
+                        className="w-full bg-transparent border-b border-slate-200 py-2 outline-none text-sm focus:border-green-600 appearance-none"
+                      >
+                        <option value="General Feedback">General Feedback</option>
+                        <option value="Wholesale/Partnership">Wholesale/Partnership</option>
+                        <option value="Order Tracking">Order Tracking</option>
+                        <option value="Press & Media">Press & Media</option>
                       </select>
                     </div>
+
                     <div className="space-y-2">
                       <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Message</label>
-                      <textarea required rows={4} className="w-full bg-transparent border-b border-slate-200 py-2 outline-none text-sm focus:border-green-600 resize-none"></textarea>
+                      <textarea
+                        required
+                        rows={4}
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        className="w-full bg-transparent border-b border-slate-200 py-2 outline-none text-sm focus:border-green-600 resize-none"
+                      ></textarea>
                     </div>
-                    <button type="submit" className="w-full bg-green-600 text-white font-bold py-4 uppercase tracking-[0.2em] text-xs transition-none hover:bg-slate-900">
+
+                    <button type="submit" className="w-full bg-green-600 text-white font-bold py-4 uppercase tracking-[0.2em] text-xs transition-colors hover:bg-slate-900">
                       Send Global Inquiry
                     </button>
                   </form>
@@ -183,4 +243,3 @@ export default function ContactPage() {
     </div>
   );
 }
-
