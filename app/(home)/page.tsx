@@ -3,9 +3,8 @@ import TeaJourneyCanvas from "@/components/home/TeaJourneyCanvas"; // Adjust imp
 
 export default function Home() {
   return (
-    // Slate-950 provides a deeply dark, rich canvas base 
-    // ensuring high contrast for the HTML overlay font colors.
-    <main className="w-full h-screen relative overflow-hidden bg-slate-950">
+    // Replaced bg-slate-950 with the creamy warm bg-[#FDFCF8]
+    <main className="w-full h-screen relative overflow-hidden bg-[#FDFCF8]">
       <TeaJourneyCanvas />
     </main>
   );
