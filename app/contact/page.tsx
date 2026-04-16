@@ -48,18 +48,21 @@ export default function ContactPage() {
                       <p className="text-[10px] font-bold uppercase tracking-widest text-green-600">Physical Address</p>
                       <p className="text-sm text-slate-700 leading-loose">
                         Liyonta Tea Factory,<br />
-                        Deniyaya High-Elevation Grounds,<br />
+                        Dangala,<br />
+                        Alapaladeniya,<br />
                         Southern Province, Sri Lanka.
                       </p>
                     </div>
                     <div className="space-y-1">
                       <p className="text-[10px] font-bold uppercase tracking-widest text-green-600">Global Support</p>
-                      <p className="text-sm text-slate-700 font-medium">Customer: care@liyontatea.com</p>
-                      <p className="text-sm text-slate-700 font-medium">Export: wholesale@liyontatea.com</p>
+                      <p className="text-sm text-slate-700 font-medium">Customer: liyonta@gmail.com</p>
                     </div>
                     <div className="space-y-1">
                       <p className="text-[10px] font-bold uppercase tracking-widest text-green-600">Operating Hours</p>
-                      <p className="text-sm text-slate-700 italic">Mon — Sat: 08:30 AM - 05:30 PM (GMT+5:30)</p>
+                      <p className="text-sm text-slate-700 italic">
+                        Mon — Sat<br />
+                        06:00 AM - 10:00 PM<br />
+                        (GMT+5:30)</p>
                     </div>
                   </div>
                 </div>
