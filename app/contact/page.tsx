@@ -220,35 +220,15 @@ export default function ContactPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
               <div className="space-y-2">
                 <h4 className="text-xs font-bold uppercase tracking-widest text-slate-900">Heritage Access</h4>
-                <p className="text-sm text-slate-600">85km from UNESCO Galle Fort</p>
+                <p className="text-sm text-slate-600">Located in Alapaladeniya, approx. 78km from the historic Galle Fort.</p>
               </div>
               <div className="space-y-2">
                 <h4 className="text-xs font-bold uppercase tracking-widest text-slate-900">Elevation</h4>
-                <p className="text-sm text-slate-600">Proximity to Deniyaya Hills Range</p>
+                <p className="text-sm text-slate-600">Low-grown excellence near the lush Kalubowitiyana and Deniyaya ranges.</p>
               </div>
               <div className="space-y-2">
                 <h4 className="text-xs font-bold uppercase tracking-widest text-slate-900">Global Gateway</h4>
-                <p className="text-sm text-slate-600">Port of Export: Colombo International</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* E. FAQ "Quick Help" Grid */}
-        <section className="py-24 bg-[#FDFCF8] border-t border-slate-200">
-          <div className="container mx-auto px-6 max-w-screen-xl">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
-              <div className="space-y-4">
-                <h4 className="font-serif text-xl text-slate-900">Shipping Times</h4>
-                <p className="text-sm text-slate-600 leading-relaxed">International orders typically arrive within 7-12 business days via air freight from Colombo.</p>
-              </div>
-              <div className="space-y-4">
-                <h4 className="font-serif text-xl text-slate-900">Organic Status</h4>
-                <p className="text-sm text-slate-600 leading-relaxed">We use strictly organic-first practices and traditional techniques passed down through generations.</p>
-              </div>
-              <div className="space-y-4">
-                <h4 className="font-serif text-xl text-slate-900">Tea Storage</h4>
-                <p className="text-sm text-slate-600 leading-relaxed">Store in a cool, dark place within our airtight canisters to preserve the essential oils for up to 18 months.</p>
+                <p className="text-sm text-slate-600">Exported globally via the Port of Colombo, the primary tea hub of South Asia.</p>
               </div>
             </div>
           </div>
