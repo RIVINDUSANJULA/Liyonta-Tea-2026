@@ -1,6 +1,6 @@
 import React from "react";
 import TeaJourneyCanvas from "@/components/home/TeaJourneyCanvas";
-import Navbar from "@/components/home/Navbar";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
   return (
