@@ -6,20 +6,17 @@ import { Float, ScrollControls, Scroll, useScroll } from "@react-three/drei";
 import * as THREE from "three";
 import ScrollOverlay from "./ScrollOverlay";
 
-// ==========================================
-// 🌿 TWEAK PARAMETERS HERE 🌿
-// ==========================================
 
 const LEAF_COUNT = 150;
-const BRANCH_COUNT = 40;
+const BRANCH_COUNT = 20;
 
 // Organic mix optimized for light backdrops
 const LEAF_COLORS = ["#a8e6cf", "#1b4332"]; // Matcha Green, Deep Emerald
 const BRANCH_COLORS = ["#9c6644", "#b5651d"]; // Warm Amber, Golden Brown
 
-const SCENE_HEIGHT = 40; 
-const SCENE_WIDTH = 25;  
-const SCENE_DEPTH = 50;  
+const SCENE_HEIGHT = 40;
+const SCENE_WIDTH = 25;
+const SCENE_DEPTH = 50;
 
 const dummy = new THREE.Object3D();
 
@@ -30,13 +27,13 @@ function CameraController() {
   useFrame(() => {
     // scroll.offset goes from 0 (top) to 1 (bottom)
     const offset = scroll.offset;
-    
+
     // Smoothly fly through the Z-axis 
     camera.position.z = THREE.MathUtils.lerp(15, -25, offset);
     // Depth shift on Y
     camera.position.y = THREE.MathUtils.lerp(0, -8, offset);
   });
-  
+
   return null;
 }
 
@@ -80,7 +77,7 @@ function Leaves() {
           Math.random() * Math.PI,
           Math.random() * Math.PI
         ),
-        speed: Math.random() * 0.5 + 0.2, 
+        speed: Math.random() * 0.5 + 0.2,
         rotSpeed: new THREE.Vector3(
           (Math.random() - 0.5) * 0.02,
           (Math.random() - 0.5) * 0.02,
@@ -109,15 +106,15 @@ function Leaves() {
     const time = state.clock.getElapsedTime();
 
     particles.forEach((p, i) => {
-      p.position.y += p.speed * 0.02; 
+      p.position.y += p.speed * 0.02;
 
       if (p.position.y > camera.position.y + SCENE_HEIGHT / 2) {
         p.position.y -= SCENE_HEIGHT;
         p.position.x = (Math.random() - 0.5) * SCENE_WIDTH;
       }
-      
+
       if (p.position.z > camera.position.z + 5) {
-        p.position.z -= SCENE_DEPTH; 
+        p.position.z -= SCENE_DEPTH;
       } else if (p.position.z < camera.position.z - SCENE_DEPTH + 5) {
         p.position.z += SCENE_DEPTH;
       }
@@ -133,9 +130,9 @@ function Leaves() {
 
       dummy.position.copy(p.position);
       dummy.rotation.copy(p.rotation);
-      dummy.scale.set(p.scale, p.scale * 2.5, p.scale * 0.1); 
+      dummy.scale.set(p.scale, p.scale * 2.5, p.scale * 0.1);
       dummy.updateMatrix();
-      
+
       meshRef.current!.setMatrixAt(i, dummy.matrix);
     });
 
@@ -170,14 +167,14 @@ function Branches() {
           Math.random() * Math.PI,
           Math.random() * Math.PI
         ),
-        speed: Math.random() * 0.3 + 0.1, 
+        speed: Math.random() * 0.3 + 0.1,
         rotSpeed: new THREE.Vector3(
           (Math.random() - 0.5) * 0.01,
           (Math.random() - 0.5) * 0.01,
           (Math.random() - 0.5) * 0.01
         ),
         driftOffset: Math.random() * Math.PI * 2,
-        driftSpeed: Math.random() * 0.3 + 0.2, 
+        driftSpeed: Math.random() * 0.3 + 0.2,
         scale: Math.random() * 0.4 + 0.2,
       });
     }
@@ -200,14 +197,14 @@ function Branches() {
 
     particles.forEach((p, i) => {
       p.position.y += p.speed * 0.02;
-      
+
       if (p.position.y > camera.position.y + SCENE_HEIGHT / 2) {
         p.position.y -= SCENE_HEIGHT;
         p.position.x = (Math.random() - 0.5) * SCENE_WIDTH;
       }
 
       if (p.position.z > camera.position.z + 5) {
-        p.position.z -= SCENE_DEPTH; 
+        p.position.z -= SCENE_DEPTH;
       } else if (p.position.z < camera.position.z - SCENE_DEPTH + 5) {
         p.position.z += SCENE_DEPTH;
       }
@@ -221,9 +218,9 @@ function Branches() {
 
       dummy.position.copy(p.position);
       dummy.rotation.copy(p.rotation);
-      dummy.scale.set(p.scale * 0.1, p.scale, p.scale * 0.1); 
+      dummy.scale.set(p.scale * 0.1, p.scale, p.scale * 0.1);
       dummy.updateMatrix();
-      
+
       meshRef.current!.setMatrixAt(i, dummy.matrix);
     });
 
@@ -253,14 +250,14 @@ export default function TeaJourneyCanvas() {
   return (
     <Canvas
       camera={{ position: [0, 0, 15], fov: 45 }}
-      dpr={[1, 1.5]} 
-      gl={{ alpha: true, antialias: false }} 
+      dpr={[1, 1.5]}
+      gl={{ alpha: true, antialias: false }}
     >
       <ScrollControls pages={4} damping={0.2}>
         <Lighting />
         <SceneGroup />
         <CameraController />
-        
+
         <Scroll html style={{ width: "100%" }}>
           <ScrollOverlay />
         </Scroll>

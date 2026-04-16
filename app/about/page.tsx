@@ -36,10 +36,16 @@ export default function AboutPage() {
                 </h2>
                 <div className="space-y-6 text-[#333333] leading-relaxed">
                   <p>
-                    Liyonta Tea is processed in our state-of-the-art facility in the Southern Province, a site recognized globally for its adherence to &ldquo;Quality Grade 1&rdquo; standards. Our commitment to excellence has earned us numerous accolades, positioning our factory as a beacon of artisanal tea production.
+                    Since 2005, Liyonta Tea has been a proud steward of Sri Lanka&apos;s rich tea heritage, bringing the finest handpicked teas from the lush highlands of Ceylon to tea lovers around the world.
                   </p>
                   <p>
-                    We combine traditional craftsmanship with precision engineering to ensure that every batch preserves the delicate aromatic profiles unique to our soil. Our facility is not just a place of work, but a sanctuary of tea expertise.
+                    Our unwavering commitment to quality defines who we are. Every step reflects a passion for excellence—from delicate leaf plucking to bold, aromatic blends.
+                  </p>
+                  <p>
+                    Rooted in sustainability and ethics, we prioritize eco-friendly farming and fair grower partnerships to ensure every cup tells a story of care.
+                  </p>
+                  <p>
+                    Whether bold or aromatic, Liyonta Tea invites you to an unforgettable experience—quality, flavor, and tradition in every sip.
                   </p>
                 </div>
               </div>

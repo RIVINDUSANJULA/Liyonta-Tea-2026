@@ -11,22 +11,22 @@ export default function Navbar() {
           Liyonta
         </span>
       </Link>
-      
+
       <div className="flex gap-8 pointer-events-auto">
-        <Link 
-          href="/about" 
+        <Link
+          href="/about"
           className="text-stone-600 hover:text-stone-900 font-medium transition-colors duration-300 text-sm uppercase tracking-widest"
         >
           About
         </Link>
-        <Link 
-          href="/gallery" 
+        <Link
+          href="/gallery"
           className="text-stone-600 hover:text-stone-900 font-medium transition-colors duration-300 text-sm uppercase tracking-widest"
         >
           Gallery
         </Link>
-        <Link 
-          href="/contact" 
+        <Link
+          href="/contact"
           className="text-stone-600 hover:text-stone-900 font-medium transition-colors duration-300 text-sm uppercase tracking-widest"
         >
           Contact

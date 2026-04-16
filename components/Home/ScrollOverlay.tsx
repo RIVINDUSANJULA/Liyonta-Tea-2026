@@ -10,11 +10,13 @@ export default function ScrollOverlay() {
       <section className="h-screen w-full flex flex-col items-center justify-center px-4 relative">
         <div className="text-center z-10">
           <h1 className="text-7xl md:text-[9rem] font-serif font-bold tracking-tighter mb-4 text-stone-900 drop-shadow-sm">
-            Fluid Tea
+            Liyonta Tea
           </h1>
-          <h2 className="text-2xl md:text-4xl font-semibold tracking-[0.3em] text-[#1b4332] uppercase drop-shadow-sm">
-            A Botanical Journey
-          </h2>
+          <p className="text-base md:text-l font-serif tracking-[0.3em] text-[#1b4332] drop-shadow-sm">
+            Each tea purchase comes with organically and ethically grown loose<br />
+            LIYONTA tea, <br />
+            carefully blended to create the perfect cup.
+          </p>
         </div>
         <div className="absolute bottom-12 animate-bounce text-stone-500 text-sm tracking-widest uppercase font-semibold">
           Scroll to explore
@@ -26,14 +28,15 @@ export default function ScrollOverlay() {
         <div className="max-w-xl backdrop-blur-md bg-white/30 p-10 md:p-14 rounded-3xl border border-white/40 shadow-xl">
           <p className="text-[#9c6644] font-bold uppercase tracking-[0.3em] text-sm mb-4">The Story</p>
           <h2 className="text-4xl md:text-6xl font-serif mb-6 text-stone-900 leading-tight">Roots in the Sky</h2>
-          <p className="text-lg md:text-xl font-medium leading-relaxed text-stone-800 mb-8">
-            Nurtured in pristine conditions, our leaves defy gravity. We harvest at the precise moment of dawn to capture a pure, elevated essence that transcends ordinary tea.
+          <p className="text-base md:text-xl font-serif leading-relaxed text-stone-800 mb-8">
+            Each tea purchase comes with organically and ethically grown loose LIYONTA
+            tea, carefully blended to create the perfect cup.
           </p>
-          <Link 
+          <Link
             href="/about"
             className="pointer-events-auto inline-block text-sm font-bold uppercase tracking-widest text-[#1b4332] hover:text-[#9c6644] transition-colors duration-300 underline underline-offset-8"
           >
-            Read Our Full Story
+            Read About US
           </Link>
         </div>
       </section>
@@ -41,12 +44,12 @@ export default function ScrollOverlay() {
       {/* PAGE 3: Gallery (Visuals) */}
       <section className="h-screen w-full flex flex-col items-end justify-center px-8 md:px-24 max-w-7xl mx-auto">
         <div className="max-w-xl backdrop-blur-md bg-white/30 p-10 md:p-14 rounded-3xl border border-white/40 shadow-xl text-right">
-          <p className="text-[#1b4332] font-bold uppercase tracking-[0.3em] text-sm mb-4">The Visuals</p>
+          <p className="text-[#9c6644] font-bold uppercase tracking-[0.3em] text-sm mb-4">The Visuals</p>
           <h2 className="text-4xl md:text-6xl font-serif mb-6 text-stone-900 leading-tight">Art in Every Drop</h2>
           <p className="text-lg md:text-xl font-medium leading-relaxed text-stone-800 mb-8">
             Observe the delicate dance of golden brown stems and vibrant matcha. It is more than an infusion; it is a visual masterpiece painted with natural hues.
           </p>
-          <Link 
+          <Link
             href="/gallery"
             className="pointer-events-auto inline-block text-sm font-bold uppercase tracking-widest text-[#1b4332] hover:text-[#9c6644] transition-colors duration-300 underline underline-offset-8"
           >
@@ -61,12 +64,12 @@ export default function ScrollOverlay() {
           <h2 className="text-5xl md:text-7xl font-serif mb-8 text-stone-900">
             Reach <span className="text-[#b5651d] italic">Out</span>
           </h2>
-          <p className="text-lg md:text-xl font-medium mb-10 text-stone-800">
-            Ready to experience the zero-gravity collection for yourself? 
+          <p className="text-lg md:text-xl font-serif mb-10 text-stone-800">
+            We&apos;re just a message away. Share your thoughts, inquiries, or feedback; we&apos;d love to connect with you.
           </p>
-          <Link 
+          <Link
             href="/contact"
-            className="pointer-events-auto px-12 py-5 bg-[#1b4332] hover:bg-[#a8e6cf] hover:text-[#1b4332] text-[#FDFCF8] rounded-full font-semibold text-lg transition-all duration-500 shadow-xl hover:shadow-[#a8e6cf]/50 hover:scale-105 active:scale-95 inline-block"
+            className="pointer-events-auto px-12 py-5 bg-[#1b4332] hover:bg-[#a8e6cf] hover:text-[#1b4332] text-[#FDFCF8] rounded-full font-serif text-lg transition-all duration-500 shadow-xl hover:shadow-[#a8e6cf]/50 hover:scale-105 active:scale-95 inline-block"
           >
             Get In Touch
           </Link>
