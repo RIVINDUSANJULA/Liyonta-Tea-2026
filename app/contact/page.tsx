@@ -39,7 +39,7 @@ export default function ContactPage() {
     const emailSubject = encodeURIComponent(formData.subject);
 
     const emailBody = encodeURIComponent(
-      `Full Name: ${formData.name}\nMessage:\n${formData.message}`
+      `Full Name: ${formData.name}\nEmail Address: ${formData.email}\n\nMessage:\n${formData.message}`
     );
 
     window.location.href = `mailto:${mailTo}?subject=${emailSubject}&body=${emailBody}`;
@@ -102,7 +102,7 @@ export default function ContactPage() {
                       <p className="text-[10px] font-bold uppercase tracking-widest text-green-600">Operating Hours</p>
                       <p className="text-sm text-slate-700 italic">
                         Mon - Sat<br />
-                        06:00 AM - 10:00 PM
+                        06:00 AM - 10:00 PM<br />
                         (GMT+5:30)
                       </p>
                     </div>
@@ -122,6 +122,18 @@ export default function ContactPage() {
                           type="text"
                           name="name"
                           value={formData.name}
+                          onChange={handleChange}
+                          className="w-full bg-transparent border-b border-slate-200 py-2 outline-none text-sm focus:border-green-600"
+                        />
+                      </div>
+                      {/* BUG FIX: Re-added the missing Email field */}
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Email Address</label>
+                        <input
+                          required
+                          type="email"
+                          name="email"
+                          value={formData.email}
                           onChange={handleChange}
                           className="w-full bg-transparent border-b border-slate-200 py-2 outline-none text-sm focus:border-green-600"
                         />
@@ -183,15 +195,27 @@ export default function ContactPage() {
         {/* D. The "Southern Province" Map/Visual Section */}
         <section className="py-24 bg-white">
           <div className="container mx-auto px-6 max-w-screen-xl">
-            <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400 mb-8 block text-center lg:text-left">Our Location: The Heart of Sri Lankan Tea</h2>
-            <div className="relative aspect-[21/9] bg-[#F9F9F9] border border-slate-200 overflow-hidden mb-12">
-              <Image
-                src="/images/estate-map.png"
-                alt="Artistic map of the Southern Province Sri Lanka"
-                fill
-                className="object-contain p-12 opacity-80"
-              />
+            <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400 mb-8 block text-center lg:text-left">
+              Our Location: The Heart of Sri Lankan Tea
+            </h2>
+
+            {/* Map Container */}
+            <div className="relative aspect-[16/9] md:aspect-[21/9] bg-[#F9F9F9] border border-slate-200 overflow-hidden mb-12">
+              {/* BUG FIX: Replaced placeholder URL with a working Google Maps embed URL */}
+              <iframe
+                src="https://maps.google.com/maps?q=Liyonta%20Tea%20Factory,%20Sri%20Lanka&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Liyonta Tea Factory Location"
+                className="grayscale-[0.2] contrast-[0.9] hover:grayscale-0 transition-all duration-500"
+              ></iframe>
             </div>
+
+            {/* Location Highlights */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
               <div className="space-y-2">
                 <h4 className="text-xs font-bold uppercase tracking-widest text-slate-900">Heritage Access</h4>
