@@ -19,11 +19,6 @@ export default function GalleryPage() {
                   A visual journey through our award-winning factory and the lush landscapes of the Southern Province. Witness the craftsmanship behind every leaf.
                 </p>
               </div>
-              <div>
-                <a href="#gallery-grid" className="text-xs font-bold uppercase tracking-[0.3em] text-[#1B3022] border-b border-[#1B3022] pb-1 hover:text-green-600 hover:border-green-600 transition-none">
-                  View Collections
-                </a>
-              </div>
             </div>
           </div>
         </section>
@@ -130,20 +125,24 @@ export default function GalleryPage() {
             <h2 className="text-3xl font-serif text-[#1B3022] mb-12 border-l-4 border-green-600 pl-6">
               Our Award-Winning Environment
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="flex flex-wrap lg:flex-nowrap justify-center items-center gap-4 md:gap-8">
               {[
-                { src: "/certification/CEYLONTEA.png", alt: "ISO Certified" },
+                { src: "/certification/CEYLONTEA.png", alt: "Ceylon Tea" },
                 { src: "/certification/ISO.png", alt: "ISO Certified" },
                 { src: "/certification/OZONE.png", alt: "OZONE" },
                 { src: "/certification/SGS.png", alt: "SGS" },
                 { src: "/certification/SLS.png", alt: "SLS" }
               ].map((badge, idx) => (
-                <div key={idx} className="p-10 border border-slate-100 bg-[#FBFBFB] flex items-center justify-center text-center">
+                <div
+                  key={idx}
+                  // Added w-full lg:w-1/5 to ensure they share space equally on desktop
+                  className="w-full sm:w-[45%] lg:w-1/5 p-6 md:p-10 border border-slate-100 bg-[#FBFBFB] flex items-center justify-center text-center"
+                >
                   {/* The Image */}
                   <img
                     src={badge.src}
                     alt={badge.alt}
-                    className="h-20 w-auto object-contain"
+                    className="h-16 md:h-20 w-auto object-contain"
                   />
                 </div>
               ))}
@@ -155,7 +154,7 @@ export default function GalleryPage() {
         <section className="py-32 bg-green-900 overflow-hidden relative">
           <div className="container mx-auto px-6 max-w-5xl text-center relative z-10">
             <blockquote className="font-serif text-3xl md:text-5xl text-white leading-tight mb-8 drop-shadow-sm italic">
-              &ldquo;In the Southern Province, tea is not just a product; it is a rhythm of life.&rdquo;
+              We are committed to delivering excellence in every product, with trusted certifications that ensure quality and reliability.
             </blockquote>
           </div>
           {/* Subtle texture overlay placeholder if needed */}
