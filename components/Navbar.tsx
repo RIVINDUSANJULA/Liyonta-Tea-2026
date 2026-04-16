@@ -5,13 +5,11 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import {
   Home,
   BookOpen,
-  Layers,
   Image as ImageIcon,
   MessageSquare,
   Globe,
   X,
-  Menu,
-  ChevronDown
+  Menu
 } from 'lucide-react';
 import Link from 'next/link';
 
