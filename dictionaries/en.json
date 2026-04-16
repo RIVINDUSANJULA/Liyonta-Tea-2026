@@ -1,0 +1,23 @@
+{
+  "nav": {
+    "estate": "The Estate",
+    "heritage": "Our Heritage",
+    "collections": "Collections",
+    "collections_dropdown": {
+      "black": "Black Tea",
+      "green": "Green Tea",
+      "white": "White Tea",
+      "premium": "Premium Tea Bags"
+    },
+    "visual_harvest": "Visual Harvest",
+    "inquiries": "Inquiries",
+    "shop_now": "Shop Now",
+    "shop_collection": "Shop Collection",
+    "factory_open": "Factory Open",
+    "estate_closed": "Estate Closed",
+    "checking": "Checking..."
+  },
+  "home": {
+    "welcome": "Welcome to Liyonta"
+  }
+}
