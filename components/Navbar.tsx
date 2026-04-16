@@ -14,15 +14,12 @@ import {
   ChevronDown
 } from 'lucide-react';
 import Link from 'next/link';
-import { useLanguage } from '@/contexts/LanguageContext';
-
 
 export default function Navbar() {
   // UI States
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  
-  const { language, toggleLanguage, t } = useLanguage();
+  const [isLanguageSi, setIsLanguageSi] = useState(false);
 
   // Factory Status States
   const [isFactoryOpen, setIsFactoryOpen] = useState(true);
@@ -68,16 +65,16 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: t.nav.estate, href: '/', icon: <Home size={16} /> },
-    { name: t.nav.heritage, href: '/about', icon: <BookOpen size={16} /> },
+    { name: 'The Estate', href: '/', icon: <Home size={16} /> },
+    { name: 'Our Heritage', href: '/about', icon: <BookOpen size={16} /> },
     {
-      name: t.nav.collections,
+      name: 'Collections',
       href: '#',
       icon: <Layers size={16} />,
-      dropdown: [t.nav.collections_dropdown.black, t.nav.collections_dropdown.green, t.nav.collections_dropdown.white, t.nav.collections_dropdown.premium]
+      dropdown: ['Black Tea', 'Green Tea', 'White Tea', 'Premium Tea Bags']
     },
-    { name: t.nav.visual_harvest, href: '/gallery', icon: <ImageIcon size={16} /> },
-    { name: t.nav.inquiries, href: '/contact', icon: <MessageSquare size={16} /> },
+    { name: 'Visual Harvest', href: '/gallery', icon: <ImageIcon size={16} /> },
+    { name: 'Inquiries', href: '/contact', icon: <MessageSquare size={16} /> },
   ];
 
   // Animation Variants
@@ -184,18 +181,18 @@ export default function Navbar() {
                 }`}
             />
             <span className="text-[8px] font-bold uppercase tracking-[0.1em] text-slate-400 min-w-[85px]">
-              {isLoadingStatus ? t.nav.checking : (isFactoryOpen ? t.nav.factory_open : t.nav.estate_closed)}
+              {isLoadingStatus ? 'Checking...' : (isFactoryOpen ? 'Factory Open' : 'Estate Closed')}
             </span>
           </div>
 
 
           {/* Language */}
           <button
-            onClick={toggleLanguage}
+            onClick={() => setIsLanguageSi(!isLanguageSi)}
             className="hidden md:flex items-center space-x-1 text-[9px] font-bold text-[#1B3022]/50 hover:text-[#D4AF37]"
           >
             <Globe size={14} />
-            <span>{language === 'si' ? 'SI' : 'EN'}</span>
+            <span>{isLanguageSi ? 'SI' : 'EN'}</span>
           </button>
 
           {/* CTA: Shop Now */}
@@ -203,7 +200,7 @@ export default function Navbar() {
             whileHover={{ y: -2 }}
             className="hidden md:flex relative group overflow-hidden bg-[#1B3022] text-white px-6 py-2.5 text-[9px] font-bold uppercase tracking-widest"
           >
-            <span className="relative z-10 transition-colors duration-300 group-hover:text-[#1B3022]">{t.nav.shop_now}</span>
+            <span className="relative z-10 transition-colors duration-300 group-hover:text-[#1B3022]">Shop Now</span>
             <motion.div
               initial={{ y: "100%" }}
               whileHover={{ y: 0 }}
@@ -256,7 +253,7 @@ export default function Navbar() {
               transition={{ delay: 0.6 }}
               className="mt-8 bg-[#D4AF37] text-[#1B3022] w-full py-4 text-xs font-bold uppercase tracking-[0.2em]"
             >
-              {t.nav.shop_collection}
+              Shop Collection
             </motion.button>
           </motion.div>
         )}
