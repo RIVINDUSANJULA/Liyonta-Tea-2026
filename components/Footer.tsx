@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { Instagram, Facebook } from "lucide-react";
+import { Instagram, Facebook } from "@/components/contact/SocialIcons";
 
 export default function Footer() {
   return (
@@ -84,19 +84,19 @@ export default function Footer() {
             </div>
 
             <div className="pt-4 flex items-center space-x-4 text-slate-400">
-              <a 
-                href="https://instagram.com/LIYONTAOFFICIAL" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://instagram.com/LIYONTAOFFICIAL"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hover:text-green-600 transition-colors"
                 aria-label="Instagram"
               >
                 <Instagram size={20} />
               </a>
-              <a 
-                href="https://facebook.com/LIYONTAOFFICIAL" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://facebook.com/LIYONTAOFFICIAL"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hover:text-green-600 transition-colors"
                 aria-label="Facebook"
               >

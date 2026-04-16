@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { Instagram, Facebook } from 'lucide-react';
+import { Instagram, Facebook } from '@/components/contact/SocialIcons';
 
 // Define the shape of our form data for TypeScript
 interface ContactFormData {
@@ -262,22 +262,22 @@ export default function ContactPage() {
             </h2>
             <div className="flex flex-col md:flex-row justify-center items-center gap-12 md:gap-24">
               {[
-                { 
-                  name: "Instagram", 
-                  user: "@LIYONTAOFFICIAL", 
-                  icon: <Instagram size={32} />, 
-                  href: "https://instagram.com/LIYONTAOFFICIAL" 
+                {
+                  name: "Instagram",
+                  user: "@LIYONTAOFFICIAL",
+                  icon: <Instagram size={32} />,
+                  href: "https://instagram.com/LIYONTAOFFICIAL"
                 },
-                { 
-                  name: "Facebook", 
-                  user: "@LIYONTAOFFICIAL", 
-                  icon: <Facebook size={32} />, 
-                  href: "https://facebook.com/LIYONTAOFFICIAL" 
+                {
+                  name: "Facebook",
+                  user: "@LIYONTAOFFICIAL",
+                  icon: <Facebook size={32} />,
+                  href: "https://facebook.com/LIYONTAOFFICIAL"
                 }
               ].map((social, idx) => (
-                <a 
-                  key={idx} 
-                  href={social.href} 
+                <a
+                  key={idx}
+                  href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group flex flex-col items-center space-y-4 text-slate-400 hover:text-green-600 transition-all duration-300"
