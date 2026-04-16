@@ -67,12 +67,6 @@ export default function Navbar() {
   const navLinks = [
     { name: 'The Estate', href: '/', icon: <Home size={16} /> },
     { name: 'Our Heritage', href: '/about', icon: <BookOpen size={16} /> },
-    {
-      name: 'Collections',
-      href: '#',
-      icon: <Layers size={16} />,
-      dropdown: ['Black Tea', 'Green Tea', 'White Tea', 'Premium Tea Bags']
-    },
     { name: 'Visual Harvest', href: '/gallery', icon: <ImageIcon size={16} /> },
     { name: 'Inquiries', href: '/contact', icon: <MessageSquare size={16} /> },
   ];
