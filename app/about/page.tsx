@@ -16,7 +16,7 @@ export default function AboutPage() {
             </p>
             <div className="mt-20 relative aspect-[21/9] w-full bg-[#E8E6E0] border border-slate-200 overflow-hidden">
               <Image
-                src="/images/about-hero.png"
+                src="about/about-hero.png"
                 alt="Colonial-style tea factory facade in Sri Lanka"
                 fill
                 className="object-cover opacity-90 contrast-75"
@@ -51,7 +51,7 @@ export default function AboutPage() {
               </div>
               <div className="relative aspect-[4/3] bg-[#F5F5F5] border border-slate-200">
                 <Image
-                  src="/images/about-factory.png"
+                  src="/gallery/about-factory.png"
                   alt="Modern tea processing facility interior"
                   fill
                   className="object-cover"

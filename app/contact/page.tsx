@@ -66,7 +66,7 @@ export default function ContactPage() {
               </div>
               <div className="relative aspect-[4/3] bg-[#F5F5F5] border border-slate-200 overflow-hidden">
                 <Image
-                  src="/images/contact-hero.png"
+                  src="/contact/contact-hero.png"
                   alt="Veranda overlooking a Sri Lankan tea garden"
                   fill
                   className="object-cover contrast-[0.95]"

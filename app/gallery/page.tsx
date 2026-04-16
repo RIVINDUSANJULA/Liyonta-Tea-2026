@@ -30,10 +30,10 @@ export default function GalleryPage() {
               {/* Image 1: The Estate (Large Landscape) */}
               <div className="md:col-span-4 md:row-span-2 relative border border-slate-200 overflow-hidden group">
                 <Image
-                  src="/images/gallery-estate.png"
-                  alt="Misty Southern Province hills"
+                  src="/gallery/gallery-estate.png"
+                  alt="Liyonta Tea Estate in Southern Sri Lanka"
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
                 />
                 <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.2em] text-[#1B3022]">
                   01 // THE ESTATE
@@ -43,7 +43,7 @@ export default function GalleryPage() {
               {/* Image 2: The Pluckers (Square) */}
               <div className="md:col-span-2 md:row-span-2 relative border border-slate-200 overflow-hidden group">
                 <Image
-                  src="/images/gallery-plucking.png"
+                  src="/gallery/gallery-plucking.png"
                   alt="Two leaves and a bud technique"
                   fill
                   className="object-cover"
@@ -56,10 +56,10 @@ export default function GalleryPage() {
               {/* Image 3: The Factory (Tall) */}
               <div className="md:col-span-2 md:row-span-2 relative border border-slate-200 overflow-hidden group">
                 <Image
-                  src="/images/about-factory.png"
-                  alt="Award-winning factory interior"
+                  src="/gallery/about-factory.png"
+                  alt="Traditional rolling machines at Liyonta Factory"
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
                 />
                 <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.2em] text-[#1B3022]">
                   03 // THE FACTORY
@@ -69,7 +69,7 @@ export default function GalleryPage() {
               {/* Image 4: The Pour (Wide) */}
               <div className="md:col-span-4 md:row-span-2 relative border border-slate-200 overflow-hidden group">
                 <Image
-                  src="/images/gallery-pouring.png"
+                  src="/gallery/gallery-pouring.png"
                   alt="Golden Ceylon tea pour"
                   fill
                   className="object-cover"
@@ -82,10 +82,10 @@ export default function GalleryPage() {
               {/* Image 5: The Sorting (Small) */}
               <div className="md:col-span-6 md:row-span-1 relative border border-slate-200 overflow-hidden group">
                 <Image
-                  src="/images/gallery-leaves.png"
-                  alt="Texture of dried black tea leaves"
+                  src="/gallery/gallery-plucking.png"
+                  alt="Expert careful plucking of two leaves and a bud"
                   fill
-                  className="object-cover grayscale"
+                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
                 />
                 <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.2em] text-[#1B3022]">
                   05 // THE SORTING
