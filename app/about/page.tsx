@@ -113,7 +113,7 @@ export default function AboutPage() {
             <div className="flex flex-col items-center text-center space-y-12">
               <div className="relative w-48 h-48 rounded-full border border-slate-200 overflow-hidden bg-[#E8E6E0]">
                 <Image
-                  src="/images/about-master.png"
+                  src="/MrRonnieLiyanage.png"
                   alt="Dignified portrait of the Tea Master"
                   fill
                   className="object-cover grayscale hover:grayscale-0 transition-none"
@@ -124,7 +124,7 @@ export default function AboutPage() {
                   &ldquo;We started Liyonta to bring the world a true taste of Sri Lanka—one that isn&apos;t diluted by mass-market blending, but defined by its origin.&rdquo;
                 </h2>
                 <div className="space-y-1">
-                  <p className="text-xs font-bold uppercase tracking-[0.4em] text-green-600">The Tea Master</p>
+                  <p className="text-xs font-bold uppercase tracking-[0.4em] text-green-600">Mr Ronnie Liyanage</p>
                   <p className="text-sm text-[#333333]">Founder, Liyonta Factory</p>
                 </div>
               </div>
@@ -135,11 +135,24 @@ export default function AboutPage() {
         {/* F. Quality Certification Banner */}
         <aside className="py-12 bg-[#F5F4F0] border-y border-slate-100">
           <div className="container mx-auto px-6 max-w-screen-xl">
-            <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-60">
-              {["ISO CERTIFIED", "SINGLE ESTATE", "HAND PICKED", "AWARD-WINNING 2024"].map((badge, idx) => (
-                <span key={idx} className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#1B3022]">
-                  [{badge}]
-                </span>
+            <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-90">
+              {[
+                { src: "/certification/CEYLONTEA.png", alt: "ISO Certified" },
+                { src: "/certification/CIC.webp", alt: "CIC" },
+                { src: "/certification/DIMO.webp", alt: "DIMO" },
+                { src: "/certification/ISO.png", alt: "ISO Certified" },
+                { src: "/certification/OZONE.png", alt: "OZONE" },
+                { src: "/certification/SGS.png", alt: "SGS" },
+                { src: "/certification/SLS.png", alt: "SLS" }
+              ].map((badge, idx) => (
+                <div key={idx} className="flex flex-col items-center gap-2">
+                  {/* The Image */}
+                  <img
+                    src={badge.src}
+                    alt={badge.alt}
+                    className="h-14 w-auto object-contain" /* Adjust height (h-12) as needed */
+                  />
+                </div>
               ))}
             </div>
           </div>
