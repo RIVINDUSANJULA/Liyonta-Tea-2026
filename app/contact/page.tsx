@@ -265,7 +265,7 @@ export default function ContactPage() {
                   </div>
                   <div className="flex flex-col items-center">
                     <span className="text-[10px] font-bold uppercase tracking-[0.3em]">{social.name}</span>
-                    <span className="text-sm font-medium text-slate-900 mt-1">{social.user}</span>
+
                   </div>
                 </a>
               ))}
