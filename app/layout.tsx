@@ -17,6 +17,9 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: "Liyonta Tea | Pure Ceylon Excellence",
   description: "Award-winning premium Ceylon tea from the Southern Province of Sri Lanka.",
+  icons: {
+    icon: "/logo.png",
+  },
 };
 
 export default function RootLayout({

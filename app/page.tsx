@@ -4,11 +4,6 @@ import Home from "@/app/(home)/page";
 export const metadata: Metadata = {
   title: "Liyonta Tea | The Ceylon Journey",
   description: "Experience the finest Ceylon tea journey.",
-  icons: {
-    icon: [
-      { url: "/logo.png", type: "image/webp" },
-    ],
-  },
   openGraph: {
     title: "Liyonta Tea",
     description: "Experience the finest Ceylon tea journey.",
