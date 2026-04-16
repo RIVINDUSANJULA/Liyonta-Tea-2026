@@ -11,16 +11,18 @@ export default function Footer() {
           <div className="space-y-6">
             <div className="text-xl font-bold tracking-[0.2em] text-[#1B3022]">LIYONTA</div>
             <p className="text-sm text-[#555555] leading-relaxed">
-              Elevating the art of tea through heritage, craftsmanship, and a commitment to pure Ceylon excellence.
+              Liyonta Tea brings the finest handpicked Ceylon teas from Sri Lanka&apos;s lush highlands to your cup.
+              With a commitment to quality, sustainability, and community, we offer an exceptional tea experience
+              rooted in tradition and passion.
             </p>
           </div>
-          
+
           <div className="space-y-6">
             <h5 className="text-xs font-bold uppercase tracking-widest text-[#1B3022]">Visit Us</h5>
             <p className="text-sm text-[#555555] leading-relaxed">
-              No. 124, Heritage Factory Road,<br />
-              Southern Province, Sri Lanka<br />
-              <span className="font-bold">By Appointment Only</span>
+              Liyonta Tea Factory,<br />
+              Dangala, Alapaladeniya <br /> <br />
+              <span className="font-bold">By Appointment Only</span> <br />
             </p>
           </div>
 
@@ -35,23 +37,53 @@ export default function Footer() {
           </div>
 
           <div className="space-y-6">
-            <h5 className="text-xs font-bold uppercase tracking-widest text-[#1B3022]">Join the Tea Circle</h5>
-            <form className="flex border-b border-[#1B3022] py-2" onSubmit={(e) => e.preventDefault()}>
-              <input 
-                type="email" 
-                placeholder="Email Address" 
-                className="bg-transparent text-sm w-full outline-none" 
-              />
-              <button 
-                type="submit" 
-                className="text-xs font-bold uppercase tracking-widest text-green-600 ml-4"
+            <h5 className="text-xs font-bold uppercase tracking-widest text-[#1B3022]">
+              Contact Us
+            </h5>
+
+            <div className="text-sm text-[#1B3022]">
+              Email:{" "}
+              <a
+                /* %20 is the URL-encoded safe way to write a space */
+                href="mailto:liyonta@gmail.com?subject=Contact%20Us"
+                className="hover:underline text-green-600 font-bold"
               >
-                Join
-              </button>
-            </form>
+                liyonta@gmail.com
+              </a>
+            </div>
+
+            <div className="text-sm text-[#1B3022] leading-relaxed">
+              Telephone:{" "}
+              <a
+                href="tel:+94413130665"
+                className="hover:underline text-green-600 font-bold"
+              >
+                +94 41 313 0665
+              </a>
+              <br />
+              <span className="invisible">Telephone: </span> {/* Aligns the second number with the first */}
+              <a
+                href="tel:+94412282268"
+                className="hover:underline text-green-600 font-bold"
+              >
+                +94 41 228 2268
+              </a>
+            </div>
+
+            <div className="text-sm text-[#1B3022] leading-relaxed">
+              Location:{" "}
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Liyonta+Tea+Factory,+Dangala,+Alapaladeniya,+Sri+Lanka"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline text-green-600 font-bold"
+              >
+                Liyonta Tea Factory
+              </a>
+            </div>
           </div>
         </div>
-        
+
         <div className="flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-[0.2em] text-slate-400 pt-10 border-t border-slate-100 italic">
           <p>&copy; 2026 Liyonta Tea. Heritage of Sri Lanka.</p>
         </div>
