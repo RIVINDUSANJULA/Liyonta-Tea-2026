@@ -264,13 +264,11 @@ export default function ContactPage() {
               {[
                 {
                   name: "Instagram",
-                  user: "@LIYONTAOFFICIAL",
                   icon: <Instagram size={32} />,
                   href: "https://instagram.com/LIYONTAOFFICIAL"
                 },
                 {
                   name: "Facebook",
-                  user: "@LIYONTAOFFICIAL",
                   icon: <Facebook size={32} />,
                   href: "https://facebook.com/LIYONTAOFFICIAL"
                 }
