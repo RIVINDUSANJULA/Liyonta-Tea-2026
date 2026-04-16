@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { Instagram, Facebook } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -80,6 +81,28 @@ export default function Footer() {
               >
                 Liyonta Tea Factory
               </a>
+            </div>
+
+            <div className="pt-4 flex items-center space-x-4 text-slate-400">
+              <a 
+                href="https://instagram.com/LIYONTAOFFICIAL" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hover:text-green-600 transition-colors"
+                aria-label="Instagram"
+              >
+                <Instagram size={20} />
+              </a>
+              <a 
+                href="https://facebook.com/LIYONTAOFFICIAL" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hover:text-green-600 transition-colors"
+                aria-label="Facebook"
+              >
+                <Facebook size={20} />
+              </a>
+              <span className="text-[10px] font-bold uppercase tracking-widest ml-2">@LIYONTAOFFICIAL</span>
             </div>
           </div>
         </div>

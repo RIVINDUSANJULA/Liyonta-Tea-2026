@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { Instagram, Facebook } from 'lucide-react';
 
 // Define the shape of our form data for TypeScript
 interface ContactFormData {
@@ -254,13 +255,43 @@ export default function ContactPage() {
         </section>
 
         {/* F. Social & Community Links */}
-        <section className="py-12 bg-white">
-          <div className="container mx-auto px-6 max-w-screen-xl flex flex-wrap justify-center gap-12 border-t border-slate-100 pt-12">
-            {["Instagram", "LinkedIn", "YouTube", "Twitter / X"].map((social, idx) => (
-              <a key={idx} href="#" className="text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400 hover:text-green-600 transition-none">
-                {social}
-              </a>
-            ))}
+        <section className="py-24 bg-white border-t border-slate-100">
+          <div className="container mx-auto px-6 max-w-screen-xl">
+            <h2 className="text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400 mb-16 text-center">
+              Connect With Liyonta
+            </h2>
+            <div className="flex flex-col md:flex-row justify-center items-center gap-12 md:gap-24">
+              {[
+                { 
+                  name: "Instagram", 
+                  user: "@LIYONTAOFFICIAL", 
+                  icon: <Instagram size={32} />, 
+                  href: "https://instagram.com/LIYONTAOFFICIAL" 
+                },
+                { 
+                  name: "Facebook", 
+                  user: "@LIYONTAOFFICIAL", 
+                  icon: <Facebook size={32} />, 
+                  href: "https://facebook.com/LIYONTAOFFICIAL" 
+                }
+              ].map((social, idx) => (
+                <a 
+                  key={idx} 
+                  href={social.href} 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex flex-col items-center space-y-4 text-slate-400 hover:text-green-600 transition-all duration-300"
+                >
+                  <div className="p-6 rounded-full border border-slate-100 group-hover:border-green-600/30 group-hover:bg-green-50/50 transition-all">
+                    {social.icon}
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.3em]">{social.name}</span>
+                    <span className="text-sm font-medium text-slate-900 mt-1">{social.user}</span>
+                  </div>
+                </a>
+              ))}
+            </div>
           </div>
         </section>
       </main>
