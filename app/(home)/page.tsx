@@ -1,50 +1,26 @@
-import type { Metadata } from "next";
-import HeroScene from "@/components/Home/HeroScene";
-import HeroUI from "@/components/Home/HeroUI";
+import React from "react";
+import TeaGardenCanvas from "@/components/home/TeaGardenCanvas"; // Ensure @ alias works or change to "../../components/home/TeaGardenCanvas"
 
-// ── SSR Metadata (benefits SEO — server-rendered, not blocked by JS) ──────────
-export const metadata: Metadata = {
-  title: "Liyonta Tea | Award-Winning Ceylon Tea from Southern Sri Lanka",
-  description:
-    "Liyonta Tea produces the finest Orthodox Ceylon tea leaves from the Southern Province of Sri Lanka. Holder of the highest e-auction bid in Sri Lanka Tea Board history.",
-  keywords: ["Ceylon tea", "Sri Lanka tea", "orthodox tea", "Liyonta Tea", "Southern Province"],
-  openGraph: {
-    title: "Liyonta Tea",
-    description: "The finest Orthodox Ceylon tea from Southern Sri Lanka.",
-    type: "website",
-  },
-};
-
-/**
- * Home Page — Server Component (no "use client")
- *
- * Architecture:
- * - This file is an SSR React Server Component.
- *   Next.js renders it on the server, sending semantic HTML instantly.
- *   This gives Google/SEO bots full text content to crawl.
- *
- * - HeroScene is a Client Component ("use client") — it bootstraps the
- *   WebGL canvas in the browser only (no server-side Three.js).
- *
- * - HeroUI is a Client Component ("use client") — needed for Framer Motion's
- *   whileInView and useEffect hooks.
- *
- * This pattern is the canonical Next.js App Router pattern:
- *   Server Component renders the shell + metadata
- *   → Client Components hydrate with interactivity
- */
-export default function HomePage() {
+export default function Home() {
   return (
-    // Dark void background, visible before JS hydrates
-    <main
-      className="relative w-full min-h-screen overflow-x-hidden bg-[#020602] text-white"
-      style={{ fontFamily: "system-ui, sans-serif" }}
-    >
-      {/* 3D WebGL Canvas — fixed background layer */}
-      <HeroScene />
+    <main className="w-full h-screen relative overflow-hidden bg-slate-950 flex flex-col justify-center items-center">
+      {/* 3D Canvas Background (Lower z-index, captures normal pointer events underneath text) */}
+      <div className="absolute inset-0 z-0">
+        <TeaGardenCanvas />
+      </div>
 
-      {/* 2D UI overlay — scrollable on top of the fixed canvas */}
-      <HeroUI />
+      {/* Overlay UI (Higher z-index, pointer-events-none so it doesn't block canvas interactions around text, but auto for buttons) */}
+      <div className="relative z-10 text-center flex flex-col items-center justify-center px-4 pointer-events-none w-full h-full">
+        <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white mb-6 drop-shadow-lg leading-tight">
+          Experience True <span className="text-[#a8e6cf]">Serenity</span>
+        </h1>
+        <p className="text-lg md:text-xl text-slate-300 max-w-2xl mb-10 drop-shadow-md">
+          Welcome to the Antigravity Tea Garden. A space where nature meets innovation in a zero-gravity environment.
+        </p>
+        <button className="pointer-events-auto px-8 py-4 bg-gradient-to-r from-[#1b4332] to-[#40916c] hover:from-[#40916c] hover:to-[#a8e6cf] text-white rounded-full font-semibold transition-all duration-300 shadow-xl hover:shadow-[#a8e6cf]/20 hover:scale-105 active:scale-95">
+          Explore Collection
+        </button>
+      </div>
     </main>
   );
 }
