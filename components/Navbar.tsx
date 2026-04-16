@@ -8,7 +8,6 @@ import {
   Layers,
   Image as ImageIcon,
   MessageSquare,
-  Search,
   Globe,
   X,
   Menu,
@@ -20,7 +19,6 @@ export default function Navbar() {
   // UI States
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const [isLanguageSi, setIsLanguageSi] = useState(false);
 
   // Factory Status States
@@ -187,27 +185,6 @@ export default function Navbar() {
             </span>
           </div>
 
-          {/* Search */}
-          <div className="relative flex items-center">
-            <AnimatePresence>
-              {isSearchExpanded && (
-                <motion.input
-                  initial={{ width: 0, opacity: 0 }}
-                  animate={{ width: 140, opacity: 1 }}
-                  exit={{ width: 0, opacity: 0 }}
-                  type="text"
-                  placeholder="Search harvest..."
-                  className="bg-slate-50 border-b border-slate-200 px-2 py-1 text-[10px] outline-none"
-                />
-              )}
-            </AnimatePresence>
-            <button
-              onClick={() => setIsSearchExpanded(!isSearchExpanded)}
-              className="p-2 text-[#1B3022]/70 hover:text-[#D4AF37] transition-colors"
-            >
-              <Search size={18} />
-            </button>
-          </div>
 
           {/* Language */}
           <button
