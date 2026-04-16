@@ -8,7 +8,6 @@ export default function Home() {
     <main className="w-full h-screen relative overflow-hidden bg-[#FDFCF8]">
       <Navbar />
       <TeaJourneyCanvas />
-
     </main>
   );
 }
