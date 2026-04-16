@@ -134,31 +134,7 @@ export default function Navbar() {
                   </motion.span>
                   {link.name}
                 </div>
-                {link.dropdown && <ChevronDown size={12} className="ml-1" />}
               </Link>
-
-              {/* Dropdown Menu */}
-              {link.dropdown && (
-                <div className="absolute top-full left-0 pt-4 hidden group-hover:block w-48">
-                  <motion.div
-                    variants={steamVariants}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    className="bg-white/95 backdrop-blur-md border border-slate-100 p-4 shadow-xl rounded-sm"
-                  >
-                    {link.dropdown.map((item) => (
-                      <a
-                        key={item}
-                        href="#"
-                        className="block py-2 text-[9px] uppercase tracking-widest text-[#555] hover:text-[#D4AF37] transition-colors"
-                      >
-                        {item}
-                      </a>
-                    ))}
-                  </motion.div>
-                </div>
-              )}
             </div>
           ))}
         </div>
