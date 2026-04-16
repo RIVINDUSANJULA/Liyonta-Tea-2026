@@ -1,10 +1,12 @@
 import React from "react";
-import TeaJourneyCanvas from "@/components/home/TeaJourneyCanvas"; // Adjust import depending on your aliasing
+import TeaJourneyCanvas from "@/components/home/TeaJourneyCanvas";
+import Navbar from "@/components/home/Navbar";
 
 export default function Home() {
   return (
-    // Replaced bg-slate-950 with the creamy warm bg-[#FDFCF8]
+    // Replaced dark background with the creamy warm bg-[#FDFCF8]
     <main className="w-full h-screen relative overflow-hidden bg-[#FDFCF8]">
+      <Navbar />
       <TeaJourneyCanvas />
     </main>
   );
