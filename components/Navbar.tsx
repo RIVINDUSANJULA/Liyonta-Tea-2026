@@ -12,6 +12,7 @@ import {
   Menu
 } from 'lucide-react';
 import Link from 'next/link';
+import Image from "next/image";
 
 export default function Navbar() {
   // UI States
@@ -96,19 +97,16 @@ export default function Navbar() {
       <div className="container mx-auto px-6 h-full flex items-center justify-between max-w-7xl relative">
         {/* Logo */}
         <Link href="/" className="flex items-center space-x-2 group">
-          <motion.div
-            whileHover={{ rotate: 10 }}
-            className="text-[#D4AF37]"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M12 3C7.5 3 4 10 4 10S7.5 17 12 17S20 10 20 10S16.5 3 12 3Z" />
-              <path d="M12 3V17" />
-              <path d="M4 10H20" />
-            </svg>
+          <motion.div whileHover={{ rotate: 5 }}>
+            <Image
+              src="/logo.png"
+              alt="Liyonta Tea Logo"
+              width={48}
+              height={48}
+              className="object-contain"
+              priority
+            />
           </motion.div>
-          <span className="font-serif text-xl font-bold tracking-[0.1em] text-[#1B3022]">
-            LIYONTA
-          </span>
         </Link>
 
         {/* Desktop Navigation */}
