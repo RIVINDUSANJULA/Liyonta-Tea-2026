@@ -132,14 +132,19 @@ export default function GalleryPage() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
-                "Certified Quality Grade 1 Factory",
-                "Ethical Southern Province Sourcing",
-                "Sustainable Energy Production"
-              ].map((accolade, idx) => (
+                { src: "/certification/CEYLONTEA.png", alt: "ISO Certified" },
+                { src: "/certification/ISO.png", alt: "ISO Certified" },
+                { src: "/certification/OZONE.png", alt: "OZONE" },
+                { src: "/certification/SGS.png", alt: "SGS" },
+                { src: "/certification/SLS.png", alt: "SLS" }
+              ].map((badge, idx) => (
                 <div key={idx} className="p-10 border border-slate-100 bg-[#FBFBFB] flex items-center justify-center text-center">
-                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 leading-relaxed italic">
-                    [{accolade}]
-                  </p>
+                  {/* The Image */}
+                  <img
+                    src={badge.src}
+                    alt={badge.alt}
+                    className="h-20 w-auto object-contain"
+                  />
                 </div>
               ))}
             </div>

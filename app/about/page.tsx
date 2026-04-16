@@ -138,8 +138,6 @@ export default function AboutPage() {
             <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-90">
               {[
                 { src: "/certification/CEYLONTEA.png", alt: "ISO Certified" },
-                { src: "/certification/CIC.webp", alt: "CIC" },
-                { src: "/certification/DIMO.webp", alt: "DIMO" },
                 { src: "/certification/ISO.png", alt: "ISO Certified" },
                 { src: "/certification/OZONE.png", alt: "OZONE" },
                 { src: "/certification/SGS.png", alt: "SGS" },
@@ -150,7 +148,7 @@ export default function AboutPage() {
                   <img
                     src={badge.src}
                     alt={badge.alt}
-                    className="h-14 w-auto object-contain" /* Adjust height (h-12) as needed */
+                    className="h-20 w-auto object-contain"
                   />
                 </div>
               ))}
