@@ -32,7 +32,7 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${playfair.variable} scroll-smooth`}
     >
-      <body className="antialiased font-sans bg-[#FDFCF8] text-[#1B3022]">
+      <body className="antialiased font-sans bg-cream text-charcoal">
         <Navbar />
         {children}
         <Footer />
