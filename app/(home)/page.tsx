@@ -1,14 +1,31 @@
+'use client';
+
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Leaf, ShieldCheck, Award, Gem, ArrowRight } from 'lucide-react';
+import { Leaf, ShieldCheck, Award, Gem, ArrowRight, X } from 'lucide-react';
 
 export default function Home() {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  // --- NEW: Lock body scroll when modal is open for a premium feel ---
+  useEffect(() => {
+    if (selectedImage) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedImage]);
+
   // Image paths pulled directly from your public folder structure
   const galleryImages = [
-    '/gallery/gallery-estate.png',
-    '/gallery/gallery-plucking.png',
-    '/gallery/gallery-pouring.png',
-    '/gallery/about-factory.png'
+    '/extra/black-tea.png',
+    '/extra/hero.png',
+    '/extra/origin-story.png',
+    '/gallery/gallery-estate.png'
   ];
 
   const certImages = [
@@ -95,17 +112,26 @@ export default function Home() {
             View Full Gallery
           </Link>
         </div>
+
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {galleryImages.map((src, i) => (
-            <div key={i} className="aspect-square bg-white border border-charcoal/5 relative overflow-hidden group cursor-pointer">
-              <div className="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity z-20 flex items-center justify-center">
-                <span className="text-cream text-xs uppercase tracking-widest font-bold">View</span>
+            <div
+              key={i}
+              onClick={() => setSelectedImage(src)}
+              className="aspect-square bg-charcoal border border-charcoal/10 relative overflow-hidden group cursor-pointer"
+            >
+              <div className="absolute inset-0 bg-[#2C2A22]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20 flex items-center justify-center backdrop-blur-[2px]">
+                {/* Vintage Plaque Style Button */}
+                <div className="border border-gold/50 px-6 py-3 flex flex-col items-center">
+                  <span className="text-gold text-[10px] uppercase tracking-[0.3em] font-bold mb-1">Archive</span>
+                  <span className="text-cream font-serif italic text-lg tracking-wider">View</span>
+                </div>
               </div>
               <Image
                 src={src}
                 alt={`Liyonta Gallery Image ${i + 1}`}
                 fill
-                className="object-cover group-hover:scale-105 transition-transform duration-500 z-10"
+                className="object-cover group-hover:scale-110 transition-transform duration-1000 z-10 sepia-[0.3] grayscale-[0.2]"
               />
             </div>
           ))}
@@ -210,7 +236,7 @@ export default function Home() {
                     </div>
                   )}
 
-                  {/* Product Image (Using pouring gallery image as elegant placeholder) */}
+                  {/* Product Image */}
                   <Image
                     src="/gallery/gallery-pouring.jpg"
                     alt={`Premium Blend ${item}`}
@@ -262,6 +288,55 @@ export default function Home() {
           </Link>
         </div>
       </section>
+
+      {/* --- VINTAGE 1910s LIGHTBOX MODAL --- */}
+      {selectedImage && (
+        <div
+          // --- UPDATED: z-[999] forces the modal to render above your NavBar ---
+          className="fixed inset-0 z-[999] flex items-center justify-center bg-[#1E1C15]/95 backdrop-blur-md p-4 sm:p-8 animate-in fade-in duration-300"
+          onClick={() => setSelectedImage(null)}
+        >
+          {/* Elegant Close Button */}
+          <button
+            onClick={() => setSelectedImage(null)}
+            className="absolute top-6 right-6 md:top-10 md:right-10 text-gold hover:text-cream transition-colors z-50 flex flex-col items-center gap-2 group"
+          >
+            <X size={44} strokeWidth={0.75} />
+            <span className="text-[10px] uppercase tracking-[0.3em] opacity-0 group-hover:opacity-100 transition-opacity">Close</span>
+          </button>
+
+          {/* Vintage Photo Frame */}
+          <div
+            className="relative w-full max-w-6xl max-h-[90vh] flex flex-col bg-[#F5F0E8] p-4 md:p-8 shadow-2xl animate-in zoom-in-95 duration-500"
+            onClick={(e) => e.stopPropagation()} // Prevent modal from closing when clicking inside the frame
+          >
+            {/* Inner frame matting decorations */}
+            <div className="absolute inset-3 border border-olive/20 pointer-events-none"></div>
+            <div className="absolute inset-4 border border-olive/10 pointer-events-none"></div>
+
+            {/* Image Container */}
+            <div className="relative w-full h-[60vh] md:h-[75vh] bg-[#2C2A22]/5">
+              <Image
+                src={selectedImage}
+                alt="Vintage Tea Archive"
+                fill
+                className="object-contain sepia-[0.3] contrast-[1.1] grayscale-[0.1]"
+              />
+            </div>
+
+            {/* Vintage Plaque / Caption */}
+            <div className="mt-6 flex flex-col items-center justify-center text-center">
+              <Leaf className="text-gold/50 mb-3" size={20} strokeWidth={1} />
+              <p className="font-serif italic text-charcoal/80 text-xl md:text-2xl">
+                Historical Archives
+              </p>
+              <p className="text-olive text-xs uppercase tracking-[0.2em] mt-2">
+                Liyonta Estate
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
