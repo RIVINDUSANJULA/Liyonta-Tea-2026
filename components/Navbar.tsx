@@ -1,28 +1,66 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import {
-  Menu,
-  X,
-  ShoppingCart,
   Home,
   BookOpen,
+  Image as ImageIcon,
   MessageSquare,
-  ImageIcon
+  Globe,
+  X,
+  Menu
 } from 'lucide-react';
 import Link from 'next/link';
+import Image from "next/image";
 
 export default function Navbar() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  // UI States
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLanguageSi, setIsLanguageSi] = useState(false);
+
+  // Factory Status States
+  const [isFactoryOpen, setIsFactoryOpen] = useState(true);
+  const [isLoadingStatus, setIsLoadingStatus] = useState(true);
+
+  // Scroll Animations
+  const { scrollYProgress } = useScroll();
+  const borderDraw = useTransform(scrollYProgress, [0, 0.05], [0, 1]);
+  const navHeight = useTransform(scrollYProgress, [0, 0.05], ["5rem", "4rem"]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+    // 1. Scroll Listener
+    const checkScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', checkScroll);
+
+    // 2. Fetch Real-time Factory Status from Google Maps API
+    const fetchPlaceStatus = async () => {
+      try {
+        const response = await fetch('/api/factory-status');
+        const data = await response.json();
+
+        // CORRECTED: Google nests this inside 'opening_hours'
+        if (data.result && data.result.opening_hours && typeof data.result.opening_hours.open_now !== 'undefined') {
+          setIsFactoryOpen(data.result.opening_hours.open_now);
+        } else {
+          throw new Error("API didn't return valid status data.");
+        }
+      } catch (error) {
+        // FALLBACK: Simple "Factory Open" check based on SL Time (GMT+5:30)
+        console.warn("Using local time fallback for factory status.");
+        const slTime = new Date(new Date().getTime() + (5.5 * 60 * 60 * 1000));
+        const hours = slTime.getUTCHours();
+        const isWorkingHours = hours >= 8 && hours < 18;
+        setIsFactoryOpen(isWorkingHours);
+      } finally {
+        setIsLoadingStatus(false);
+      }
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    fetchPlaceStatus();
+
+    return () => window.removeEventListener('scroll', checkScroll);
   }, []);
 
   const navLinks = [
@@ -32,49 +70,111 @@ export default function Navbar() {
     { name: 'Inquiries', href: '/contact', icon: <MessageSquare size={16} /> },
   ];
 
+  // Animation Variants
+  const leafVariants = {
+    initial: { x: -10, opacity: 0, rotate: -20 },
+    hover: { x: 0, opacity: 1, rotate: 0 }
+  };
+
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${isScrolled ? 'bg-charcoal/95 backdrop-blur-md shadow-lg py-4' : 'bg-charcoal py-6'
+    <motion.nav
+      style={{ height: navHeight }}
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${isScrolled
+          ? 'bg-[#2C2A22]/95 backdrop-blur-lg shadow-md'
+          : 'bg-[#2C2A22]/80 backdrop-blur-md'
         }`}
     >
-      <div className="container mx-auto px-6 h-full flex items-center justify-between max-w-7xl">
+      {/* Golden Border Progress */}
+      <motion.div
+        style={{ scaleX: borderDraw }}
+        className="absolute bottom-0 left-0 right-0 h-[1px] bg-[#C8A84B] origin-left"
+      />
 
-        {/* LOGO: Logo Badge (Circle behind letter) */}
-        <Link href="/" className="flex items-center space-x-3 group">
-          <div className="w-10 h-10 rounded-full bg-gold flex items-center justify-center">
-            <span className="text-charcoal font-serif font-bold text-xl italic">L</span>
-          </div>
-          <span className="text-cream font-bold tracking-[0.2em] uppercase text-sm group-hover:text-gold transition-colors">
-            Liyonta
-          </span>
+      <div className="container mx-auto px-6 h-full flex items-center justify-between max-w-7xl relative">
+        {/* Logo */}
+        <Link href="/" className="flex items-center space-x-2 group">
+          <motion.div whileHover={{ rotate: 5 }}>
+            {/* Note: Ensure logo.png is readable against the dark #2C2A22 background */}
+            <Image
+              src="/logo.png"
+              alt="Liyonta Tea Logo"
+              width={48}
+              height={48}
+              className="object-contain"
+              priority
+            />
+          </motion.div>
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-12">
+        <div className="hidden lg:flex items-center space-x-10">
           {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="text-[10px] font-bold uppercase tracking-[0.2em] text-cream/70 hover:text-cream transition-colors"
-            >
-              {link.name}
-            </Link>
+            <div key={link.name} className="relative group py-2">
+              <Link
+                href={link.href}
+                className="flex items-center space-x-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#F5F0E8]/70 hover:text-[#F5F0E8] transition-colors relative"
+              >
+                <div className="flex items-center">
+                  <motion.span
+                    variants={leafVariants}
+                    initial="initial"
+                    whileHover="hover"
+                    className="absolute -left-6 text-[#C8A84B]"
+                  >
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2C7 2 2 7 2 12C2 17 7 22 17 22C17 22 22 17 22 12C22 7 17 2 12 2Z" />
+                    </svg>
+                  </motion.span>
+                  {link.name}
+                </div>
+              </Link>
+            </div>
           ))}
         </div>
 
-        {/* Global Tools: Cart & Mobile Toggle */}
+        {/* Global Tools */}
         <div className="flex items-center space-x-6">
 
-          {/* Cart Icon Border/Details: #F5F0E8 with a #C8A84B notification dot */}
-          <button className="relative group p-2 border border-cream/20 rounded-full hover:border-gold transition-colors">
-            <ShoppingCart size={18} className="text-cream group-hover:text-gold transition-colors" />
-            <span className="absolute top-0 right-0 w-2.5 h-2.5 rounded-full bg-gold border-[2px] border-charcoal translate-x-1/4 -translate-y-1/4" />
+          {/* Status Tag (API/Time Based) */}
+          <div className="hidden sm:flex items-center space-x-2">
+            <motion.div
+              animate={!isLoadingStatus ? { opacity: [0.4, 1, 0.4] } : {}}
+              transition={{ repeat: Infinity, duration: 2 }}
+              className={`w-1.5 h-1.5 rounded-full ${isLoadingStatus ? 'bg-[#F5F0E8]/30' : (isFactoryOpen ? 'bg-green-500' : 'bg-red-400')
+                }`}
+            />
+            <span className="text-[8px] font-bold uppercase tracking-[0.1em] text-[#F5F0E8]/50 min-w-[85px]">
+              {isLoadingStatus ? 'Checking...' : (isFactoryOpen ? 'Factory Open' : 'Estate Closed')}
+            </span>
+          </div>
+
+          {/* Language */}
+          <button
+            onClick={() => setIsLanguageSi(!isLanguageSi)}
+            className="hidden md:flex items-center space-x-1 text-[9px] font-bold text-[#F5F0E8]/50 hover:text-[#C8A84B] transition-colors"
+          >
+            <Globe size={14} />
+            <span>{isLanguageSi ? 'SI' : 'EN'}</span>
           </button>
+
+          {/* CTA: Shop Now */}
+          <motion.button
+            whileHover={{ y: -2 }}
+            className="hidden md:flex relative group overflow-hidden bg-[#C8A84B] text-[#2C2A22] px-6 py-2.5 text-[9px] font-bold uppercase tracking-widest"
+          >
+            <span className="relative z-10 transition-colors duration-300">Shop Now</span>
+            <motion.div
+              initial={{ y: "100%" }}
+              whileHover={{ y: 0 }}
+              transition={{ type: "tween", ease: "easeInOut", duration: 0.4 }}
+              className="absolute inset-0 bg-[#D4B865]" // Lighter Gold hover state
+            />
+          </motion.button>
 
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-cream"
+            className="lg:hidden p-2 text-[#F5F0E8] hover:text-[#C8A84B] transition-colors"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -85,24 +185,41 @@ export default function Navbar() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 right-0 bg-charcoal border-t border-cream/10 z-[90] flex flex-col p-6 md:hidden shadow-xl"
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="fixed inset-0 bg-[#1E1C15] z-[90] flex flex-col justify-center items-center space-y-8 p-12 lg:hidden"
           >
-            {navLinks.map((link) => (
-              <Link
+            {navLinks.map((link, idx) => (
+              <motion.div
                 key={link.name}
-                href={link.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="py-4 text-center font-serif text-2xl text-cream/70 hover:text-gold transition-colors block border-b border-cream/5 last:border-0"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.1 * idx }}
               >
-                {link.name}
-              </Link>
+                <Link
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="font-serif text-3xl text-[#F5F0E8] hover:text-[#C8A84B] transition-colors flex items-center space-x-4"
+                >
+                  <span className="opacity-40">{link.icon}</span>
+                  <span>{link.name}</span>
+                </Link>
+              </motion.div>
             ))}
+
+            <motion.button
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              className="mt-8 bg-[#C8A84B] text-[#2C2A22] hover:bg-[#D4B865] transition-colors w-full py-4 text-xs font-bold uppercase tracking-[0.2em]"
+            >
+              Shop Collection
+            </motion.button>
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </motion.nav>
   );
 }
