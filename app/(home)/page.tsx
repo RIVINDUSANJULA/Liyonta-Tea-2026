@@ -3,6 +3,22 @@ import Image from 'next/image';
 import { Leaf, ShieldCheck, Award, Gem, ArrowRight } from 'lucide-react';
 
 export default function Home() {
+  // Image paths pulled directly from your public folder structure
+  const galleryImages = [
+    '/gallery/gallery-estate.png',
+    '/gallery/gallery-plucking.png',
+    '/gallery/gallery-pouring.png',
+    '/gallery/about-factory.png'
+  ];
+
+  const certImages = [
+    '/certification/CEYLONTEA.png',
+    '/certification/ISO.png',
+    '/certification/OZONE.png',
+    '/certification/SGS.png',
+    '/certification/SLS.png'
+  ];
+
   return (
     <main className="w-full bg-[#F5F0E8] overflow-hidden">
       {/* 1. HERO SECTION */}
@@ -29,7 +45,6 @@ export default function Home() {
 
         {/* Right Side: Image */}
         <div className="w-full md:w-1/2 relative min-h-[50vh] md:min-h-full">
-          {/* Note: Ensure you have next/image configured or replace with a standard img tag if preferred */}
           <div className="absolute inset-0 bg-[#2C2A22]/10 z-10" /> {/* Subtle overlay */}
           <Image
             src="/extra/estate-hero.png"
@@ -41,7 +56,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2. FEATURES SECTION (Provided Code) */}
+      {/* 2. FEATURES SECTION */}
       <section className="bg-paleBeige border-y border-charcoal/10 py-16">
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -81,14 +96,17 @@ export default function Home() {
           </Link>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {[1, 2, 3, 4].map((i) => (
+          {galleryImages.map((src, i) => (
             <div key={i} className="aspect-square bg-white border border-charcoal/5 relative overflow-hidden group cursor-pointer">
-              <div className="absolute inset-0 bg-charcoal/20 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center">
+              <div className="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity z-20 flex items-center justify-center">
                 <span className="text-cream text-xs uppercase tracking-widest font-bold">View</span>
               </div>
-              <div className="w-full h-full flex items-center justify-center text-olive/30 border-2 border-dashed border-olive/20 m-2 rounded">
-                Image {i}
-              </div>
+              <Image
+                src={src}
+                alt={`Liyonta Gallery Image ${i + 1}`}
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500 z-10"
+              />
             </div>
           ))}
         </div>
@@ -100,51 +118,56 @@ export default function Home() {
           <span className="text-olive uppercase tracking-widest text-xs font-bold">Our Certifications</span>
         </div>
 
-        {/* We use inline styles for the keyframes to ensure it works instantly without touching globals.css */}
         <style dangerouslySetInnerHTML={{
           __html: `
           @keyframes marquee-rtl { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
           @keyframes marquee-ltr { 0% { transform: translateX(-50%); } 100% { transform: translateX(0%); } }
-          .animate-marquee-rtl { animation: marquee-rtl 25s linear infinite; }
-          .animate-marquee-ltr { animation: marquee-ltr 25s linear infinite; }
+          .animate-marquee-rtl { animation: marquee-rtl 35s linear infinite; }
+          .animate-marquee-ltr { animation: marquee-ltr 35s linear infinite; }
           .pause-on-hover:hover { animation-play-state: paused; cursor: grab; }
           .pause-on-hover:active { cursor: grabbing; }
         `}} />
 
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-12">
           {/* Row 1: Right to Left */}
           <div className="flex w-[200%] animate-marquee-rtl pause-on-hover">
-            <div className="flex gap-16 px-8 items-center w-1/2 justify-around">
-              {[1, 2, 3, 4, 5, 6].map(i => <div key={i} className="h-16 w-32 bg-paleBeige flex items-center justify-center text-olive/50 text-xs font-bold border border-olive/10">CERT {i}</div>)}
+            <div className="flex gap-20 px-10 items-center w-1/2 justify-around">
+              {certImages.map((src, i) => (
+                <div key={i} className="h-20 w-32 relative flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity grayscale hover:grayscale-0">
+                  <Image src={src} alt="Certification" fill className="object-contain" />
+                </div>
+              ))}
             </div>
-            <div className="flex gap-16 px-8 items-center w-1/2 justify-around">
-              {[1, 2, 3, 4, 5, 6].map(i => <div key={`dup-${i}`} className="h-16 w-32 bg-paleBeige flex items-center justify-center text-olive/50 text-xs font-bold border border-olive/10">CERT {i}</div>)}
+            <div className="flex gap-20 px-10 items-center w-1/2 justify-around">
+              {certImages.map((src, i) => (
+                <div key={`dup-${i}`} className="h-20 w-32 relative flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity grayscale hover:grayscale-0">
+                  <Image src={src} alt="Certification" fill className="object-contain" />
+                </div>
+              ))}
             </div>
           </div>
 
           {/* Row 2: Left to Right */}
           <div className="flex w-[200%] animate-marquee-ltr pause-on-hover">
-            <div className="flex gap-16 px-8 items-center w-1/2 justify-around">
-              {[7, 8, 9, 10, 11, 12].map(i => <div key={i} className="h-16 w-32 bg-paleBeige flex items-center justify-center text-olive/50 text-xs font-bold border border-olive/10">CERT {i}</div>)}
+            <div className="flex gap-20 px-10 items-center w-1/2 justify-around">
+              {certImages.reverse().map((src, i) => (
+                <div key={i} className="h-20 w-32 relative flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity grayscale hover:grayscale-0">
+                  <Image src={src} alt="Certification" fill className="object-contain" />
+                </div>
+              ))}
             </div>
-            <div className="flex gap-16 px-8 items-center w-1/2 justify-around">
-              {[7, 8, 9, 10, 11, 12].map(i => <div key={`dup-${i}`} className="h-16 w-32 bg-paleBeige flex items-center justify-center text-olive/50 text-xs font-bold border border-olive/10">CERT {i}</div>)}
-            </div>
-          </div>
-
-          {/* Row 3: Right to Left */}
-          <div className="flex w-[200%] animate-marquee-rtl pause-on-hover" style={{ animationDuration: '30s' }}>
-            <div className="flex gap-16 px-8 items-center w-1/2 justify-around">
-              {[13, 14, 15, 16, 17, 18].map(i => <div key={i} className="h-16 w-32 bg-paleBeige flex items-center justify-center text-olive/50 text-xs font-bold border border-olive/10">CERT {i}</div>)}
-            </div>
-            <div className="flex gap-16 px-8 items-center w-1/2 justify-around">
-              {[13, 14, 15, 16, 17, 18].map(i => <div key={`dup-${i}`} className="h-16 w-32 bg-paleBeige flex items-center justify-center text-olive/50 text-xs font-bold border border-olive/10">CERT {i}</div>)}
+            <div className="flex gap-20 px-10 items-center w-1/2 justify-around">
+              {certImages.map((src, i) => (
+                <div key={`dup-${i}`} className="h-20 w-32 relative flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity grayscale hover:grayscale-0">
+                  <Image src={src} alt="Certification" fill className="object-contain" />
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* 5. SIGNATURE BLENDS (Provided Code) */}
+      {/* 5. SIGNATURE BLENDS */}
       <section className="py-24 bg-lightBeige relative">
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
@@ -172,28 +195,31 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[1, 2, 3].map((item) => (
-              <div key={item} className="bg-cardBg group relative">
+              <div key={item} className="bg-cardBg group relative bg-white border border-charcoal/5">
                 {/* Image Wrapper */}
-                <div className="bg-lightBeige aspect-[4/5] relative overflow-hidden flex items-center justify-center w-full border border-charcoal/5">
+                <div className="bg-[#F9F7F2] aspect-[4/5] relative overflow-hidden flex items-center justify-center w-full border-b border-charcoal/5">
                   {/* Badge */}
                   {item === 1 && (
-                    <div className="absolute top-4 left-4 bg-gold text-charcoal text-[10px] font-bold uppercase tracking-widest px-3 py-1 z-10">
+                    <div className="absolute top-4 left-4 bg-gold text-charcoal text-[10px] font-bold uppercase tracking-widest px-3 py-1 z-20">
                       New Release
                     </div>
                   )}
                   {item === 2 && (
-                    <div className="absolute top-4 left-4 bg-charcoal text-cream text-[10px] font-bold uppercase tracking-widest px-3 py-1 z-10">
+                    <div className="absolute top-4 left-4 bg-charcoal text-cream text-[10px] font-bold uppercase tracking-widest px-3 py-1 z-20">
                       Bestseller
                     </div>
                   )}
 
-                  {/* Mock Image Placeholder */}
-                  <div className="w-48 h-64 border-2 border-dashed border-olive/30 flex flex-col items-center justify-center text-olive/50">
-                    <span className="text-xs uppercase tracking-widest">Image {item}</span>
-                  </div>
+                  {/* Product Image (Using pouring gallery image as elegant placeholder) */}
+                  <Image
+                    src="/gallery/gallery-pouring.jpg"
+                    alt={`Premium Blend ${item}`}
+                    fill
+                    className="object-cover opacity-90 group-hover:scale-105 transition-transform duration-700 z-10"
+                  />
 
                   {/* Quick Add Overlay */}
-                  <div className="absolute inset-0 bg-charcoal/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
+                  <div className="absolute inset-0 bg-charcoal/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-30">
                     <button className="translate-y-4 group-hover:translate-y-0 transition-all bg-charcoal text-cream px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-gold hover:text-charcoal border border-transparent">
                       Quick Add
                     </button>
