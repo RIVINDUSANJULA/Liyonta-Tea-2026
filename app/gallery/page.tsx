@@ -1,21 +1,24 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
+import { X } from 'lucide-react';
 
 export default function GalleryPage() {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
   return (
-    <div className="flex flex-col min-h-screen bg-[#FDFCF8] text-[#1B3022] pt-20 lg:pt-24">
+    <div className="flex flex-col min-h-screen bg-cream text-charcoal pt-20 lg:pt-24">
       <main className="flex-grow">
         {/* A. The "Lens on Liyonta" Hero */}
-        <section className="py-24 lg:py-32 border-b border-slate-100">
+        <section className="py-24 lg:py-32 border-b border-charcoal/10">
           <div className="container mx-auto px-6 max-w-7xl">
             <div className="max-w-3xl space-y-8">
-              <div className="inline-block border-l-4 border-green-600 pl-6">
-                <h1 className="font-serif text-5xl md:text-7xl text-[#1B3022] leading-tight mb-4">
+              <div className="inline-block border-l-4 border-gold pl-6">
+                <h1 className="font-serif text-5xl md:text-7xl text-charcoal leading-tight mb-4">
                   The Art of the Harvest
                 </h1>
-                <p className="text-lg md:text-xl text-[#333333]/80 leading-relaxed max-w-2xl">
+                <p className="text-lg md:text-xl text-olive leading-relaxed max-w-2xl">
                   A visual journey through our award-winning factory and the lush landscapes of the Southern Province. Witness the craftsmanship behind every leaf.
                 </p>
               </div>
@@ -24,70 +27,100 @@ export default function GalleryPage() {
         </section>
 
         {/* B. The "Bento" Narrative Grid */}
-        <section id="gallery-grid" className="py-24 bg-white">
+        <section id="gallery-grid" className="py-24 bg-cardBg">
           <div className="container mx-auto px-6 max-w-7xl">
             <div className="grid grid-cols-1 md:grid-cols-6 gap-8 auto-rows-[300px] md:auto-rows-[250px]">
               {/* Image 1: The Estate (Large Landscape) */}
-              <div className="md:col-span-4 md:row-span-2 relative border border-slate-200 overflow-hidden group">
+              <div 
+                className="md:col-span-4 md:row-span-2 relative border border-charcoal/10 overflow-hidden group cursor-pointer"
+                onClick={() => setSelectedImage("/gallery/gallery-estate.png")}
+              >
+                <div className="absolute inset-0 bg-[#2C2A22]/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 flex items-center justify-center">
+                  <span className="border border-gold text-gold font-serif italic px-6 py-2">View Full</span>
+                </div>
                 <Image
                   src="/gallery/gallery-estate.png"
                   alt="Liyonta Tea Estate in Southern Sri Lanka"
                   fill
-                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                  className="object-cover transition-transform duration-1000 group-hover:scale-105 z-10 sepia-[0.1]"
                 />
-                <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.2em] text-[#1B3022]">
+                <div className="absolute bottom-4 left-4 bg-cardBg/90 backdrop-blur px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.2em] text-charcoal z-30">
                   01 // THE ESTATE
                 </div>
               </div>
 
               {/* Image 2: The Pluckers (Square) */}
-              <div className="md:col-span-2 md:row-span-2 relative border border-slate-200 overflow-hidden group">
+              <div 
+                className="md:col-span-2 md:row-span-2 relative border border-charcoal/10 overflow-hidden group cursor-pointer"
+                onClick={() => setSelectedImage("/gallery/gallery-plucking.png")}
+              >
+                <div className="absolute inset-0 bg-[#2C2A22]/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 flex items-center justify-center">
+                  <span className="border border-gold text-gold font-serif italic px-6 py-2">View Full</span>
+                </div>
                 <Image
                   src="/gallery/gallery-plucking.png"
                   alt="Two leaves and a bud technique"
                   fill
-                  className="object-cover"
+                  className="object-cover z-10 sepia-[0.1]"
                 />
-                <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.2em] text-[#1B3022]">
+                <div className="absolute bottom-4 left-4 bg-cardBg/90 backdrop-blur px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.2em] text-charcoal z-30">
                   02 // THE PLUCKERS
                 </div>
               </div>
 
               {/* Image 3: The Factory (Tall) */}
-              <div className="md:col-span-2 md:row-span-2 relative border border-slate-200 overflow-hidden group">
+              <div 
+                className="md:col-span-2 md:row-span-2 relative border border-charcoal/10 overflow-hidden group cursor-pointer"
+                onClick={() => setSelectedImage("/gallery/about-factory.png")}
+              >
+                <div className="absolute inset-0 bg-[#2C2A22]/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 flex items-center justify-center">
+                  <span className="border border-gold text-gold font-serif italic px-6 py-2">View Full</span>
+                </div>
                 <Image
                   src="/gallery/about-factory.png"
                   alt="Traditional rolling machines at Liyonta Factory"
                   fill
-                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                  className="object-cover transition-transform duration-1000 group-hover:scale-105 z-10 sepia-[0.1]"
                 />
-                <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.2em] text-[#1B3022]">
+                <div className="absolute bottom-4 left-4 bg-cardBg/90 backdrop-blur px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.2em] text-charcoal z-30">
                   03 // THE FACTORY
                 </div>
               </div>
 
               {/* Image 4: The Pour (Wide) */}
-              <div className="md:col-span-4 md:row-span-2 relative border border-slate-200 overflow-hidden group">
+              <div 
+                className="md:col-span-4 md:row-span-2 relative border border-charcoal/10 overflow-hidden group cursor-pointer"
+                onClick={() => setSelectedImage("/gallery/gallery-pouring.png")}
+              >
+                <div className="absolute inset-0 bg-[#2C2A22]/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 flex items-center justify-center">
+                  <span className="border border-gold text-gold font-serif italic px-6 py-2">View Full</span>
+                </div>
                 <Image
                   src="/gallery/gallery-pouring.png"
                   alt="Golden Ceylon tea pour"
                   fill
-                  className="object-cover"
+                  className="object-cover z-10 sepia-[0.1]"
                 />
-                <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.2em] text-[#1B3022]">
+                <div className="absolute bottom-4 left-4 bg-cardBg/90 backdrop-blur px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.2em] text-charcoal z-30">
                   04 // THE POUR
                 </div>
               </div>
 
               {/* Image 5: The Sorting (Small) */}
-              <div className="md:col-span-6 md:row-span-1 relative border border-slate-200 overflow-hidden group">
+              <div 
+                className="md:col-span-6 md:row-span-1 relative border border-charcoal/10 overflow-hidden group cursor-pointer"
+                onClick={() => setSelectedImage("/gallery/gallery-plucking.png")}
+              >
+                <div className="absolute inset-0 bg-[#2C2A22]/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 flex items-center justify-center">
+                  <span className="border border-gold text-gold font-serif italic px-6 py-2">View Full</span>
+                </div>
                 <Image
                   src="/gallery/gallery-plucking.png"
                   alt="Expert careful plucking of two leaves and a bud"
                   fill
-                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                  className="object-cover transition-transform duration-1000 group-hover:scale-105 z-10 sepia-[0.1]"
                 />
-                <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.2em] text-[#1B3022]">
+                <div className="absolute bottom-4 left-4 bg-cardBg/90 backdrop-blur px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.2em] text-charcoal z-30">
                   05 // THE SORTING
                 </div>
               </div>
@@ -96,9 +129,9 @@ export default function GalleryPage() {
         </section>
 
         {/* C. "The Process" Visual Timeline */}
-        <section className="py-24 bg-[#FDFCF8] border-y border-slate-100">
+        <section className="py-24 bg-cream border-y border-charcoal/10">
           <div className="container mx-auto px-6 max-w-7xl">
-            <h2 className="text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400 mb-12 block border-l-4 border-green-600 pl-6">
+            <h2 className="text-[10px] font-bold uppercase tracking-[0.4em] text-olive mb-12 block border-l-4 border-gold pl-6">
               Visual Transformation
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -108,11 +141,11 @@ export default function GalleryPage() {
                 { title: "Oxidation", icon: "M12 2v20a10 10 0 1 0 0-20z" },
                 { title: "Tasting", icon: "M12 3v18M3 12h18" }
               ].map((step, idx) => (
-                <div key={idx} className="aspect-square border border-slate-200 flex flex-col items-center justify-center space-y-6 bg-white p-8">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-green-600 opacity-60">
+                <div key={idx} className="aspect-square border border-charcoal/10 flex flex-col items-center justify-center space-y-6 bg-cardBg p-8">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-gold opacity-60">
                     <path d={step.icon} />
                   </svg>
-                  <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-[#1B3022]">{step.title}</h3>
+                  <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-charcoal">{step.title}</h3>
                 </div>
               ))}
             </div>
@@ -120,9 +153,9 @@ export default function GalleryPage() {
         </section>
 
         {/* D. The "Factory Accolades" Mosaic */}
-        <section className="py-24 bg-white">
+        <section className="py-24 bg-cardBg">
           <div className="container mx-auto px-6 max-w-7xl text-center md:text-left">
-            <h2 className="text-3xl font-serif text-[#1B3022] mb-12 border-l-4 border-green-600 pl-6">
+            <h2 className="text-3xl font-serif text-charcoal mb-12 border-l-4 border-gold pl-6 text-left">
               Our Award-Winning Environment
             </h2>
             <div className="flex flex-wrap lg:flex-nowrap justify-center items-center gap-4 md:gap-8">
@@ -135,14 +168,12 @@ export default function GalleryPage() {
               ].map((badge, idx) => (
                 <div
                   key={idx}
-                  // Added w-full lg:w-1/5 to ensure they share space equally on desktop
-                  className="w-full sm:w-[45%] lg:w-1/5 p-6 md:p-10 border border-slate-100 bg-[#FBFBFB] flex items-center justify-center text-center"
+                  className="w-full sm:w-[45%] lg:w-1/5 p-6 md:p-10 border border-charcoal/10 bg-lightBeige flex items-center justify-center text-center"
                 >
-                  {/* The Image */}
                   <img
                     src={badge.src}
                     alt={badge.alt}
-                    className="h-16 md:h-20 w-auto object-contain"
+                    className="h-16 md:h-20 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300"
                   />
                 </div>
               ))}
@@ -151,15 +182,53 @@ export default function GalleryPage() {
         </section>
 
         {/* E. "Atmosphere" Full-Width Break */}
-        <section className="py-32 bg-green-900 overflow-hidden relative">
+        <section className="py-32 bg-charcoal overflow-hidden relative border-t border-gold/20">
           <div className="container mx-auto px-6 max-w-5xl text-center relative z-10">
-            <blockquote className="font-serif text-3xl md:text-5xl text-white leading-tight mb-8 drop-shadow-sm italic">
+            <blockquote className="font-serif text-3xl md:text-5xl text-cream leading-tight mb-8 drop-shadow-sm italic">
               We are committed to delivering excellence in every product, with trusted certifications that ensure quality and reliability.
             </blockquote>
           </div>
-          {/* Subtle texture overlay placeholder if needed */}
-          <div className="absolute inset-0 bg-[#000]/10 pointer-events-none"></div>
         </section>
+
+        {/* --- VINTAGE LIGHTBOX MODAL --- */}
+        {selectedImage && (
+          <div
+            className="fixed inset-0 z-[999] flex items-center justify-center bg-[#1E1C15]/95 backdrop-blur-md p-4 sm:p-8 animate-in fade-in duration-300"
+            onClick={() => setSelectedImage(null)}
+          >
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-6 right-6 md:top-10 md:right-10 text-gold hover:text-cream transition-colors z-50 flex flex-col items-center gap-2 group"
+            >
+              <X size={44} strokeWidth={0.75} />
+              <span className="text-[10px] uppercase tracking-[0.3em] opacity-0 group-hover:opacity-100 transition-opacity">Close</span>
+            </button>
+            <div
+              className="relative w-full max-w-6xl max-h-[90vh] flex flex-col bg-[#F5F0E8] p-4 md:p-8 shadow-2xl animate-in zoom-in-95 duration-500"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="absolute inset-3 border border-olive/20 pointer-events-none"></div>
+              <div className="absolute inset-4 border border-olive/10 pointer-events-none"></div>
+              <div className="relative w-full h-[60vh] md:h-[75vh] bg-[#2C2A22]/5">
+                <Image
+                  src={selectedImage}
+                  alt="Vintage Tea Archive"
+                  fill
+                  className="object-contain sepia-[0.3] contrast-[1.1] grayscale-[0.1]"
+                />
+              </div>
+              <div className="mt-6 flex flex-col items-center justify-center text-center">
+                <p className="font-serif italic text-charcoal/80 text-xl md:text-2xl">
+                  Historical Archives
+                </p>
+                <p className="text-olive text-xs uppercase tracking-[0.2em] mt-2">
+                  Liyonta Estate
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
       </main>
     </div>
   );

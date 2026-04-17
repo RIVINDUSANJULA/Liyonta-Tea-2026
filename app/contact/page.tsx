@@ -21,7 +21,6 @@ export default function ContactPage() {
     message: "",
   });
 
-  // Type the 'e' as a ChangeEvent for inputs, selects, and textareas
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
@@ -32,7 +31,6 @@ export default function ContactPage() {
     }));
   };
 
-  // Type the 'e' as a FormEvent
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -47,24 +45,24 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#FDFCF8] text-slate-900 font-sans pt-20 lg:pt-24">
+    <div className="flex flex-col min-h-screen bg-cream text-charcoal font-sans pt-20 lg:pt-24">
       <main className="flex-grow">
         {/* A. The "Tea Garden" Contact Hero */}
-        <section className="py-24 bg-white border-b border-slate-100">
+        <section className="py-24 bg-cardBg border-b border-charcoal/5">
           <div className="container mx-auto px-6 max-w-screen-xl">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div className="space-y-8">
-                <h1 className="font-serif text-5xl md:text-6xl text-slate-900 leading-tight">
+                <h1 className="font-serif text-5xl md:text-6xl text-charcoal leading-tight">
                   Reach Out to Liyonta
                 </h1>
-                <p className="text-lg text-slate-600 leading-relaxed max-w-xl">
+                <p className="text-lg text-olive leading-relaxed max-w-xl">
                   Whether you are looking for a morning brew or a wholesale partnership, our doors in the Southern Province are always open. We are here to bring the finest Ceylon tea to your doorstep.
                 </p>
-                <a href="#contact-form" className="inline-block text-xs font-bold uppercase tracking-widest text-green-600 border-b border-green-600 pb-1">
+                <a href="#contact-form" className="inline-block text-xs font-bold uppercase tracking-widest text-gold border-b border-gold pb-1 hover:text-charcoal hover:border-charcoal transition-colors">
                   Scroll to Form ↓
                 </a>
               </div>
-              <div className="relative aspect-[4/3] bg-[#F5F5F5] border border-slate-200 overflow-hidden">
+              <div className="relative aspect-[4/3] bg-lightBeige border border-charcoal/10 overflow-hidden">
                 <Image
                   src="/contact/contact-hero.png"
                   alt="Veranda overlooking a Sri Lankan tea garden"
@@ -78,17 +76,17 @@ export default function ContactPage() {
         </section>
 
         {/* B. The Dual-Channel Communication Hub */}
-        <section id="contact-form" className="py-24 bg-[#FDFCF8]">
+        <section id="contact-form" className="py-24 bg-cream">
           <div className="container mx-auto px-6 max-w-screen-xl">
             <div className="grid grid-cols-12 gap-12 lg:gap-24">
               {/* Left Column: Information */}
               <div className="col-span-12 lg:col-span-5 space-y-16">
                 <div>
-                  <h2 className="font-serif text-3xl text-slate-900 mb-8 border-b border-slate-200 pb-4">Our Estate</h2>
+                  <h2 className="font-serif text-3xl text-charcoal mb-8 border-b border-charcoal/10 pb-4">Our Estate</h2>
                   <div className="space-y-6">
                     <div className="space-y-1">
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-green-600">Physical Address</p>
-                      <p className="text-sm text-slate-700 leading-loose">
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-gold">Physical Address</p>
+                      <p className="text-sm text-olive leading-loose">
                         Liyonta Tea Factory,<br />
                         Dangala,<br />
                         Alapaladeniya,<br />
@@ -96,12 +94,12 @@ export default function ContactPage() {
                       </p>
                     </div>
                     <div className="space-y-1">
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-green-600">Global Support</p>
-                      <p className="text-sm text-slate-700 font-medium">Customer: liyonta@gmail.com</p>
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-gold">Global Support</p>
+                      <p className="text-sm text-olive font-medium">Customer: liyonta@gmail.com</p>
                     </div>
                     <div className="space-y-1">
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-green-600">Operating Hours</p>
-                      <p className="text-sm text-slate-700 italic">
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-gold">Operating Hours</p>
+                      <p className="text-sm text-olive italic">
                         Mon - Sat<br />
                         06:00 AM - 10:00 PM<br />
                         (GMT+5:30)
@@ -113,41 +111,40 @@ export default function ContactPage() {
 
               {/* Right Column: The Inquiry Suite (Integrated Form) */}
               <div className="col-span-12 lg:col-span-7">
-                <div className="bg-white border border-slate-200 p-8 md:p-12">
+                <div className="bg-cardBg border border-charcoal/10 p-8 md:p-12">
                   <form className="space-y-8" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Full Name</label>
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-charcoal/50">Full Name</label>
                         <input
                           required
                           type="text"
                           name="name"
                           value={formData.name}
                           onChange={handleChange}
-                          className="w-full bg-transparent border-b border-slate-200 py-2 outline-none text-sm focus:border-green-600"
+                          className="w-full bg-transparent border-b border-charcoal/20 py-2 outline-none text-sm focus:border-gold transition-colors text-charcoal"
                         />
                       </div>
-                      {/* BUG FIX: Re-added the missing Email field */}
                       <div className="space-y-2">
-                        <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Email Address</label>
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-charcoal/50">Email Address</label>
                         <input
                           required
                           type="email"
                           name="email"
                           value={formData.email}
                           onChange={handleChange}
-                          className="w-full bg-transparent border-b border-slate-200 py-2 outline-none text-sm focus:border-green-600"
+                          className="w-full bg-transparent border-b border-charcoal/20 py-2 outline-none text-sm focus:border-gold transition-colors text-charcoal"
                         />
                       </div>
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Subject of Inquiry</label>
+                      <label className="text-[10px] font-bold uppercase tracking-widest text-charcoal/50">Subject of Inquiry</label>
                       <select
                         name="subject"
                         value={formData.subject}
                         onChange={handleChange}
-                        className="w-full bg-transparent border-b border-slate-200 py-2 outline-none text-sm focus:border-green-600 appearance-none"
+                        className="w-full bg-transparent border-b border-charcoal/20 py-2 outline-none text-sm focus:border-gold appearance-none transition-colors text-charcoal"
                       >
                         <option value="General Feedback">General Feedback</option>
                         <option value="Wholesale/Partnership">Wholesale/Partnership</option>
@@ -157,18 +154,18 @@ export default function ContactPage() {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Message</label>
+                      <label className="text-[10px] font-bold uppercase tracking-widest text-charcoal/50">Message</label>
                       <textarea
                         required
                         rows={4}
                         name="message"
                         value={formData.message}
                         onChange={handleChange}
-                        className="w-full bg-transparent border-b border-slate-200 py-2 outline-none text-sm focus:border-green-600 resize-none"
+                        className="w-full bg-transparent border-b border-charcoal/20 py-2 outline-none text-sm focus:border-gold resize-none transition-colors text-charcoal"
                       ></textarea>
                     </div>
 
-                    <button type="submit" className="w-full bg-green-600 text-white font-bold py-4 uppercase tracking-[0.2em] text-xs transition-colors hover:bg-slate-900">
+                    <button type="submit" className="w-full bg-gold text-charcoal font-bold py-4 uppercase tracking-[0.2em] text-xs transition-colors hover:bg-goldHover">
                       Send Global Inquiry
                     </button>
                   </form>
@@ -179,14 +176,14 @@ export default function ContactPage() {
         </section>
 
         {/* C. Wholesale & Export Detail Section */}
-        <aside className="bg-slate-900 py-12 text-white">
+        <aside className="bg-charcoal py-12 text-cream">
           <div className="container mx-auto px-6 max-w-screen-xl">
             <div className="flex flex-col lg:flex-row justify-between items-center gap-8">
               <div className="max-w-2xl text-center lg:text-left">
-                <p className="text-lg font-serif">Interested in sourcing Liyonta Tea for your cafe or retail chain?</p>
-                <p className="text-sm text-slate-400 mt-2">Our award-winning factory handles bulk shipping to over 20 countries with guaranteed peak freshness.</p>
+                <p className="text-lg font-serif italic text-gold">Interested in sourcing Liyonta Tea for your cafe or retail chain?</p>
+                <p className="text-sm text-cream/70 mt-2">Our award-winning factory handles bulk shipping to over 20 countries with guaranteed peak freshness.</p>
               </div>
-              <button className="bg-white text-slate-900 border border-white px-8 py-3 text-[10px] font-bold uppercase tracking-widest transition-none hover:bg-transparent hover:text-white">
+              <button className="bg-cream text-charcoal border border-cream px-8 py-3 text-[10px] font-bold uppercase tracking-widest transition-colors hover:bg-transparent hover:text-cream">
                 Download Product Catalog
               </button>
             </div>
@@ -194,15 +191,14 @@ export default function ContactPage() {
         </aside>
 
         {/* D. The "Southern Province" Map/Visual Section */}
-        <section className="py-24 bg-white">
+        <section className="py-24 bg-cardBg">
           <div className="container mx-auto px-6 max-w-screen-xl">
-            <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400 mb-8 block text-center lg:text-left">
+            <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-olive mb-8 block text-center lg:text-left">
               Our Location: The Heart of Sri Lankan Tea
             </h2>
 
             {/* Map Container */}
-            <div className="relative aspect-[16/9] md:aspect-[21/9] bg-[#F9F9F9] border border-slate-200 overflow-hidden mb-12">
-              {/* BUG FIX: Replaced placeholder URL with a working Google Maps embed URL */}
+            <div className="relative aspect-[16/9] md:aspect-[21/9] bg-lightBeige border border-charcoal/10 overflow-hidden mb-12">
               <iframe
                 src="https://maps.google.com/maps?q=Liyonta%20Tea%20Factory,%20Sri%20Lanka&t=&z=14&ie=UTF8&iwloc=&output=embed"
                 width="100%"
@@ -212,32 +208,32 @@ export default function ContactPage() {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Liyonta Tea Factory Location"
-                className="grayscale-[0.2] contrast-[0.9] hover:grayscale-0 transition-all duration-500"
+                className="grayscale-[0.4] contrast-[0.9] hover:grayscale-0 transition-all duration-500"
               ></iframe>
             </div>
 
             {/* Location Highlights */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
               <div className="space-y-2">
-                <h4 className="text-xs font-bold uppercase tracking-widest text-slate-900">Heritage Access</h4>
-                <p className="text-sm text-slate-600">Located in Alapaladeniya, approx. 78km from the historic Galle Fort.</p>
+                <h4 className="text-xs font-bold uppercase tracking-widest text-charcoal">Heritage Access</h4>
+                <p className="text-sm text-olive">Located in Alapaladeniya, approx. 78km from the historic Galle Fort.</p>
               </div>
               <div className="space-y-2">
-                <h4 className="text-xs font-bold uppercase tracking-widest text-slate-900">Elevation</h4>
-                <p className="text-sm text-slate-600">Low-grown excellence near the lush Kalubowitiyana and Deniyaya ranges.</p>
+                <h4 className="text-xs font-bold uppercase tracking-widest text-charcoal">Elevation</h4>
+                <p className="text-sm text-olive">Low-grown excellence near the lush Kalubowitiyana and Deniyaya ranges.</p>
               </div>
               <div className="space-y-2">
-                <h4 className="text-xs font-bold uppercase tracking-widest text-slate-900">Global Gateway</h4>
-                <p className="text-sm text-slate-600">Exported globally via the Port of Colombo, the primary tea hub of South Asia.</p>
+                <h4 className="text-xs font-bold uppercase tracking-widest text-charcoal">Global Gateway</h4>
+                <p className="text-sm text-olive">Exported globally via the Port of Colombo, the primary tea hub of South Asia.</p>
               </div>
             </div>
           </div>
         </section>
 
         {/* F. Social & Community Links */}
-        <section className="py-24 bg-[#FDFCF8] border-t border-slate-200">
+        <section className="py-24 bg-cream border-t border-charcoal/10">
           <div className="container mx-auto px-6 max-w-screen-xl">
-            <h2 className="text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400 mb-16 text-center">
+            <h2 className="text-[10px] font-bold uppercase tracking-[0.4em] text-olive mb-16 text-center">
               Connect With Liyonta
             </h2>
             <div className="flex flex-col md:flex-row justify-center items-center gap-12 md:gap-24">
@@ -258,14 +254,13 @@ export default function ContactPage() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex flex-col items-center space-y-4 text-slate-400 hover:text-green-600 transition-all duration-300"
+                  className="group flex flex-col items-center space-y-4 text-olive hover:text-gold transition-all duration-300"
                 >
-                  <div className="p-6 rounded-full border border-slate-100 group-hover:border-green-600/30 group-hover:bg-green-50/50 transition-all">
+                  <div className="p-6 rounded-full border border-charcoal/10 group-hover:border-gold group-hover:bg-gold/10 transition-all">
                     {social.icon}
                   </div>
                   <div className="flex flex-col items-center">
                     <span className="text-[10px] font-bold uppercase tracking-[0.3em]">{social.name}</span>
-
                   </div>
                 </a>
               ))}
