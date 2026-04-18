@@ -57,8 +57,9 @@ export default function CollectionsPage() {
         <div className="antialiased bg-[#FCF9F0] text-[#1C1C17] min-h-screen pb-32">
 
             {/* 1. INTRO SECTION */}
-            <section className="pt-40 pb-20 px-6 md:px-12 max-w-7xl mx-auto flex flex-col md:flex-row gap-12 items-end border-b border-[#C7C7BC]/30">
-                <div className="w-full md:w-2/3">
+            <section className="pt-40 pb-20 px-6 md:px-12 max-w-7xl mx-auto flex flex-col md:flex-row gap-12 items-center border-b border-[#C7C7BC]/30">
+                {/* Left Side: Text Content */}
+                <div className="w-full md:w-7/12">
                     <h4 className="font-sans text-xs tracking-[0.3em] uppercase text-[#516445] mb-6">
                         The Liyonta Archives
                     </h4>
@@ -69,6 +70,15 @@ export default function CollectionsPage() {
                     <p className="font-sans text-lg text-[#46483F] leading-relaxed max-w-xl">
                         From the delicate, wiry leaves of our Orthodox grades to the robust, deeply colored liquors of our CTC selection. Every grade is a testament to the soil, the climate, and the hands that coaxed it into being.
                     </p>
+                </div>
+                <div className="w-full md:w-5/12 relative aspect-[4/3] lg:aspect-square rounded-[2rem] overflow-hidden border border-[#C7C7BC]/20 shadow-sm">
+                    <Image
+                        src="/extra/origin-story.png"
+                        alt="Liyonta Tea Archives"
+                        fill
+                        className="object-cover"
+                        priority
+                    />
                 </div>
             </section>
 
