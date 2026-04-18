@@ -1,130 +1,146 @@
 import React from 'react';
+import Image from 'next/image';
 
 export default function ZenLeafPage() {
   return (
-    <div className="antialiased overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container bg-surface text-on-surface font-body">
+    <div className="antialiased overflow-x-hidden bg-[#FCF9F0] text-[#1C1C17]">
       <main>
-        {/* Sensory Hero Section */}
-        <section className="relative min-h-[921px] flex items-center justify-center pt-24 px-4 md:px-12 bg-surface">
-          <div className="max-w-7xl mx-auto w-full flex flex-col md:flex-row items-center gap-12 lg:gap-24">
-            <div className="w-full md:w-5/12 z-10 flex flex-col items-start space-y-8 md:-mr-16 mt-12 md:mt-0">
-              <div className="bg-surface/80 backdrop-blur-xl p-8 lg:p-12 rounded-xl ambient-shadow ghost-border">
-                <h1 className="font-headline text-5xl md:text-6xl lg:text-[4rem] leading-tight tracking-tight text-on-surface mb-6">
-                  The Ritual <br /> <span className="italic text-primary">of Breath.</span>
+
+        {/* 1. SENSORY HERO SECTION */}
+        <section className="relative min-h-[90vh] flex items-center justify-center pt-20 pb-16 px-6 md:px-12 bg-[#FCF9F0]">
+          <div className="max-w-7xl mx-auto w-full flex flex-col md:flex-row items-center gap-12 lg:gap-8 relative">
+
+            {/* Left Side: Overlapping Text Card */}
+            <div className="w-full md:w-5/12 z-20 flex flex-col items-start md:-mr-24 lg:-mr-32 mt-12 md:mt-0 relative">
+              <div className="bg-white p-10 lg:p-14 rounded-2xl shadow-[0_20px_40px_rgba(28,28,23,0.06)] border border-[#C7C7BC]/20 w-full max-w-[520px]">
+                <h1 className="font-serif text-5xl md:text-6xl lg:text-[4.5rem] leading-[1.05] tracking-tight text-[#1C1C17] mb-6">
+                  The Ritual <br /> <span className="italic text-[#516445]">of Breath.</span>
                 </h1>
-                <p className="font-body text-on-surface-variant text-lg leading-relaxed mb-8 max-w-md">
+                <p className="font-sans text-[#46483F] text-lg leading-relaxed mb-10 max-w-sm">
                   Discover rare, handcrafted teas sourced from ancient gardens. A moment of pause, steeped in tradition and natural tranquility.
                 </p>
-                <a className="inline-flex items-center justify-center px-8 py-4 rounded-full gradient-primary text-on-primary font-medium tracking-wide hover:opacity-90 transition-opacity" href="#">
+                <a href="#" className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-[#516445] text-white font-medium tracking-wide hover:bg-[#869A77] transition-colors">
                   Explore Collections
                 </a>
               </div>
             </div>
-            <div className="w-full md:w-7/12 relative">
-              <img
-                alt="Close-up of golden tea being poured from a rustic ceramic teapot into a textured bowl"
-                className="w-full h-[614px] md:h-[768px] object-cover rounded-[2rem] rounded-tl-[4rem] rounded-br-[4rem] ambient-shadow"
-                data-alt="Close up photography of golden amber tea poured from rustic handmade ceramic teapot into a small textured bowl on a wooden table, soft natural window light"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjEqQezOm0Pe0hThHAGTwwo1iA4bZRegWacj2O8wd1151aMilPyqxO3hqTA2dRawBoHPjHI_JtnusKeaLRktB_5n-dY2ueDriiGg2FZ9cPzeSiQJfgUqn1S6FyORuTmxEky-DFKTJTrz2plNShNd7a_PKVe2PZ7-rE6FWy5ymG7B_MYBSjQUkO75sbsC2vM7MwH5zc5qugFx9yLaXucq_7v5sVDNl1-jSzRrUmZ1ZlW2cbW7bG02rrdP9SgwtnccGVdcs7qhHeY4M"
-              />
+
+            {/* Right Side: Large Teapot Image */}
+            <div className="w-full md:w-7/12 relative z-10">
+              <div className="relative w-full h-[500px] md:h-[750px]">
+                <Image
+                  alt="Golden tea being poured from a rustic ceramic teapot"
+                  fill
+                  className="object-cover rounded-[2rem] rounded-tl-[4rem] rounded-br-[4rem] shadow-xl"
+                  src="/gallery/gallery-pouring.png"
+                  priority
+                />
+              </div>
             </div>
+
           </div>
         </section>
 
-        {/* Curated Collections (Asymmetric Grid) */}
-        <section className="py-32 px-4 md:px-12 bg-surface-container-low">
+        {/* 2. CURATED OFFERINGS SECTION */}
+        <section className="py-32 px-6 md:px-12 bg-[#F6F3EA]">
           <div className="max-w-7xl mx-auto">
+
+            {/* Section Header */}
             <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
               <div>
-                <h2 className="font-headline text-4xl text-on-surface mb-4">Curated Offerings</h2>
-                <p className="font-body text-on-surface-variant text-lg max-w-xl">
+                <h2 className="font-serif text-4xl text-[#1C1C17] mb-4">Curated Offerings</h2>
+                <p className="font-sans text-[#46483F] text-lg max-w-xl">
                   Each leaf is a testament to the earth and the artisan's hand. Explore our meticulously selected collections.
                 </p>
               </div>
-              <a className="text-on-primary-fixed-variant font-medium link-hover-underline inline-flex items-center gap-2" href="#">
-                View All Teas <span className="material-symbols-outlined text-sm">arrow_forward</span>
+              <a className="text-[#3A4C2F] font-medium inline-flex items-center gap-2 hover:opacity-70 transition-opacity border-b border-[#3A4C2F] pb-1" href="#">
+                View All Teas <span>→</span>
               </a>
             </div>
+
+            {/* Asymmetric Image Grid */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
 
-              {/* Card 1: Large Asymmetric */}
+              {/* Large Left Card */}
               <div className="md:col-span-7 group cursor-pointer">
                 <div className="relative overflow-hidden rounded-[2rem] rounded-tr-none mb-6 h-[400px] lg:h-[500px]">
-                  <img
-                    alt="Macro shot of vibrant green matcha powder and a traditional bamboo whisk"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    data-alt="Macro photography of vibrant emerald green ceremonial matcha powder scattered near a traditional bamboo chasen whisk on rough textured stone, soft diffused light"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHdAKq-5uba5Bq-YtCa5i7S2bBthYL92c16jHUDjlam8_QZaB_qBlJAWQghsKITjE9H7ptgjxh5h4TX0p0lcuE_N_M1e0-d48_C2jCI0b9zQjLK7UA8xV_s4w303WJDXPKCcGiWW6dm3jZc6kGsUzXIBOVCfKRrzwXWDhcaxrfyL_ZfUrJyRdQN6ZnmQHFfcVs_AnkD6Fp_TSCXVaM-vKPH-Wu-I9D0ZrC7mjmvTffzFEoM3-1l0h4rJ2orv9HMoReI0VxLQMFgeE"
+                  <Image
+                    alt="Vibrant green matcha powder"
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    src="/gallery/gallery-plucking.png"
                   />
                 </div>
                 <div className="flex justify-between items-start">
                   <div>
-                    <h3 className="font-headline text-2xl text-on-surface mb-2">Ceremonial Greens</h3>
-                    <p className="font-body text-on-surface-variant text-sm tracking-wide uppercase">Spring Harvest</p>
+                    <h3 className="font-serif text-2xl text-[#1C1C17] mb-2">Ceremonial Greens</h3>
+                    <p className="font-sans text-[#46483F] text-sm tracking-widest uppercase">Spring Harvest</p>
                   </div>
-                  <span className="material-symbols-outlined text-primary-container group-hover:text-primary transition-colors">east</span>
+                  <span className="text-[#869A77] group-hover:text-[#516445] transition-colors">→</span>
                 </div>
               </div>
 
-              {/* Stacked Cards */}
+              {/* Stacked Right Cards */}
               <div className="md:col-span-5 flex flex-col gap-8 lg:gap-12">
-                {/* Card 2 */}
                 <div className="group cursor-pointer">
                   <div className="relative overflow-hidden rounded-[1.5rem] rounded-bl-none mb-6 h-[250px]">
-                    <img
-                      alt="Dark twisted oolong tea leaves"
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      data-alt="High detail macro photography of dark roasted twisted oolong tea leaves on a neutral beige linen background, highlighting organic textures and deep earthy colors"
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjCtjO4Yl7dN1ZTfayPbho7AnjX4F0OXkqeXajipGy5oFGza4MidSrYnl-RJhNvhCClDlRpPcXnA2o_8Vgbv-bjQUV7Lt49ICUPxWIg1BESRzzR6rYmNM0hX_HqIGPcvdGWbjBTJlfKjkjwxh2pi_Ew43ZxAjyjaAIu9lE2PX0vtjM-j8L4RZCA8_BJapRZowZcKgVrUDVqwhHV3e_t44Ql6UHSsuyoNmxKMgym16GJksUb_MKMHnTJqpWTDObXbxw5eUhnZylPYA"
+                    <Image
+                      alt="Dark roasted oolong tea leaves"
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      src="/gallery/gallery-estate.png"
                     />
                   </div>
                   <div>
-                    <h3 className="font-headline text-xl text-on-surface mb-1">Roasted Oolongs</h3>
-                    <p className="font-body text-on-surface-variant text-sm tracking-wide uppercase">Wuyi Mountains</p>
+                    <h3 className="font-serif text-xl text-[#1C1C17] mb-1">Roasted Oolongs</h3>
+                    <p className="font-sans text-[#46483F] text-sm tracking-widest uppercase">Wuyi Mountains</p>
                   </div>
                 </div>
 
-                {/* Card 3 */}
                 <div className="group cursor-pointer">
                   <div className="relative overflow-hidden rounded-[1.5rem] rounded-tl-none mb-6 h-[250px]">
-                    <img
-                      alt="Aged puerh tea cake resting on weathered wood"
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      data-alt="Authentic photography of an aged puerh tea cake resting on weathered rustic wood, soft shadows, wabi-sabi aesthetic, warm natural lighting"
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIW00WC904X27Fex5ity5ZqyKejROZ2Wr6Pm-tXEtgaXHRXU_neRO4ayu8dFliPGz9XxdT15vgnyEV1J7ZcUGhOoVxPq-OyNkAMkp7jOh-CAqw5DSapuCWqkJw62zljFoIsqrVQ6IiDTe4j1GOoqq-UEAz6jvjyBk17EStgZolh4336a0MA37-G8bIkCmOyTvGOEzPRLhFJDbUqJXkyLg0chF8uqaLOXG1Aao2mpcZAAvZpo9tfTniduyUdBxAbktK8faEa8zYrbg"
+                    <Image
+                      alt="Aged puerh tea cake"
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      src="/gallery/about-factory.png"
                     />
                   </div>
                   <div>
-                    <h3 className="font-headline text-xl text-on-surface mb-1">Aged Pu'erh</h3>
-                    <p className="font-body text-on-surface-variant text-sm tracking-wide uppercase">Yunnan Province</p>
+                    <h3 className="font-serif text-xl text-[#1C1C17] mb-1">Aged Pu'erh</h3>
+                    <p className="font-sans text-[#46483F] text-sm tracking-widest uppercase">Yunnan Province</p>
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
         </section>
 
-        {/* The Process (Narrative Section) */}
-        <section className="py-32 px-4 md:px-12 bg-surface">
-          <div className="max-w-screen-2xl mx-auto flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+        {/* 3. THE PROCESS (NARRATIVE SECTION) */}
+        <section className="py-32 px-6 md:px-12 bg-[#FCF9F0]">
+          <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+
             <div className="w-full lg:w-1/2 flex justify-center">
               <div className="relative w-full max-w-lg">
-                {/* Background offset layer */}
-                <div className="absolute inset-0 bg-surface-container-high rounded-full rounded-tr-none transform translate-x-8 translate-y-8"></div>
-                <img
-                  alt="Hands carefully sorting fresh green tea leaves"
-                  className="relative z-10 w-full aspect-[4/5] object-cover rounded-full rounded-tr-none shadow-xl"
-                  data-alt="Close up photography of weathered farmer hands gently sorting freshly plucked bright green tea leaves in a woven bamboo basket, authentic cinematic documentary style"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXgSdUbtcIkzom0pTrqGdy22NyhVMZIOpoxaz9lX1AL5hXrwBM4m-l6i53Jfj8pVAm0mXXZkituXsil5gTFkV0UimAK9irS4FhjpgiHUcrPtxVwWkZw9NQU31cpr7PvEGZ1ujgZDDOv3BebCuU57CUb0du6T2mnaM0WOo4Ja8JzQrZ7OUmwxtCQiSRQ6FXg6xggTY5QYzqCLa-cnZrTbMfs2UQNh97qg_diyptEaJp1Ukgj_oLkWgRvFPsPS9YC9-jsJSOX1DSt10"
-                />
+                <div className="absolute inset-0 bg-[#EBE8DF] rounded-full rounded-tr-none transform translate-x-6 translate-y-6"></div>
+                <div className="relative z-10 w-full aspect-[4/5] rounded-full rounded-tr-none overflow-hidden shadow-xl">
+                  <Image
+                    alt="Hands carefully sorting fresh green tea leaves"
+                    fill
+                    className="object-cover"
+                    src="/gallery/gallery-plucking.png"
+                  />
+                </div>
               </div>
             </div>
+
             <div className="w-full lg:w-1/2 max-w-xl">
-              <span className="font-body text-sm uppercase tracking-widest text-primary mb-6 block">The Origin</span>
-              <h2 className="font-headline text-4xl md:text-5xl text-on-surface leading-tight mb-8">
+              <span className="font-sans text-sm uppercase tracking-widest text-[#516445] mb-6 block">The Origin</span>
+              <h2 className="font-serif text-4xl md:text-5xl text-[#1C1C17] leading-tight mb-8">
                 Honoring the hands that shape the leaf.
               </h2>
-              <div className="space-y-6 text-on-surface-variant font-body text-lg leading-relaxed">
+              <div className="space-y-6 text-[#46483F] font-sans text-lg leading-relaxed">
                 <p>
                   True tea is not manufactured; it is coaxed into being. Our journey begins in remote, high-altitude gardens where generational farmers practice ancient, labor-intensive techniques.
                 </p>
@@ -132,32 +148,34 @@ export default function ZenLeafPage() {
                   From the gentle plucking of the first spring buds to the masterful roasting over charcoal, we preserve the human touch at every step. This dedication ensures that every cup tells a story of terroir and tradition.
                 </p>
               </div>
-              <a className="inline-flex items-center gap-4 mt-10 text-on-primary-fixed-variant font-medium group" href="#">
-                <span className="link-hover-underline pb-1">Discover Our Process</span>
-                <div className="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center group-hover:bg-surface-container-high transition-colors">
-                  <span className="material-symbols-outlined text-sm">east</span>
+              <a className="inline-flex items-center gap-4 mt-10 text-[#3A4C2F] font-medium group" href="#">
+                <span className="border-b border-transparent group-hover:border-[#3A4C2F] transition-colors pb-1">Discover Our Process</span>
+                <div className="w-10 h-10 rounded-full border border-[#C7C7BC] flex items-center justify-center group-hover:bg-[#EBE8DF] transition-colors">
+                  <span>→</span>
                 </div>
               </a>
             </div>
+
           </div>
         </section>
 
-        {/* Lifestyle / Wabi-Sabi Ritual */}
-        <section className="relative py-40 px-4 md:px-12 flex items-center justify-center bg-surface-container-lowest overflow-hidden">
-          {/* Subtle background texture indication */}
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9IiNlN2U1ZTAiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PC9zdmc+')] opacity-50"></div>
+        {/* 4. LIFESTYLE QUOTE */}
+        <section className="relative py-40 px-6 md:px-12 flex items-center justify-center bg-white overflow-hidden">
+          {/* Subtle noise/texture overlay */}
+          <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}></div>
 
-          <div className="relative z-10 text-center max-w-3xl mx-auto">
-            <span className="material-symbols-outlined text-4xl text-primary-fixed-dim mb-8">spa</span>
-            <h2 className="font-headline text-3xl md:text-5xl text-on-surface leading-snug mb-8">
+          <div className="relative z-10 text-center max-w-3xl mx-auto flex flex-col items-center">
+            <svg className="w-8 h-8 text-[#B8CDA8] mb-8" fill="currentColor" viewBox="0 0 24 24"><path d="M17.6 5.8C16.2 4.4 14.1 3.5 12 3.5C7.3 3.5 3.5 7.3 3.5 12C3.5 14.1 4.4 16.2 5.8 17.6L12 23.8L18.2 17.6C19.6 16.2 20.5 14.1 20.5 12C20.5 7.3 16.7 3.5 12 3.5M12 19L7.2 14.2C6.3 13.3 5.8 12.1 5.8 10.8C5.8 7.3 8.6 4.5 12 4.5C15.4 4.5 18.2 7.3 18.2 10.8C18.2 12.1 17.7 13.3 16.8 14.2L12 19Z" /></svg>
+            <h2 className="font-serif text-3xl md:text-5xl text-[#1C1C17] leading-snug mb-8">
               "Drink your tea slowly and reverently, as if it is the axis on which the world earth revolves."
             </h2>
-            <p className="font-body text-on-surface-variant italic mb-12">— Thich Nhat Hanh</p>
-            <a className="inline-block px-10 py-4 bg-surface-container-highest text-on-surface rounded-full font-medium tracking-wide hover:bg-surface-variant transition-colors" href="#">
+            <p className="font-sans text-[#46483F] italic mb-12">— Thich Nhat Hanh</p>
+            <a className="inline-block px-10 py-4 bg-[#E5E2DA] text-[#1C1C17] rounded-full font-medium tracking-wide hover:bg-[#DDDAD1] transition-colors" href="#">
               Begin Your Ritual
             </a>
           </div>
         </section>
+
       </main>
     </div>
   );
