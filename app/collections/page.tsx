@@ -31,7 +31,6 @@ const CTC_TEAS = [
     { name: 'PD', detail: 'Pekoe Dust: Fine granular grade. Yields an intensely dark and strong liquor instantly.' },
 ];
 
-// Using your exact paths from Screenshot
 const ASSET_PATHS = [
     '/extra/black-tea.png',
     '/gallery/gallery-pouring.png',
@@ -43,7 +42,6 @@ const ASSET_PATHS = [
 export default function CollectionsPage() {
     const [selectedTea, setSelectedTea] = useState<{ name: string; detail: string; image: string } | null>(null);
 
-    // Scroll Lock for Modal
     useEffect(() => {
         if (selectedTea) {
             document.body.style.overflow = 'hidden';
@@ -58,7 +56,7 @@ export default function CollectionsPage() {
 
             {/* 1. ARCHIVE INTRO SECTION */}
             <section className="pt-40 pb-20 px-6 md:px-12 max-w-7xl mx-auto flex flex-col md:flex-row gap-16 items-center border-b border-[#C7C7BC]/30">
-                <div className="w-full md:w-7/12">
+                <div className="w-full md:w-7/12 text-left">
                     <h4 className="font-sans text-[10px] tracking-[0.4em] uppercase text-[#516445] mb-6 font-bold">
                         The Liyonta Archives
                     </h4>
@@ -77,7 +75,7 @@ export default function CollectionsPage() {
                         src="/extra/green-tea.png"
                         alt="Vintage Archive"
                         fill
-                        className="object-cover blur-[0.1px]"
+                        className="object-cover"
                         priority
                     />
                 </div>
@@ -90,8 +88,8 @@ export default function CollectionsPage() {
                     <p className="font-body text-[#46483F] text-sm tracking-widest uppercase">Traditional Roll & Twist</p>
                 </div>
 
-                {/* FLEX-WRAP GRID: This centers orphaned items perfectly */}
-                <div className="flex flex-wrap justify-center lg:justify-start -mx-4">
+                {/* UPDATED: Removed lg:justify-start to ensure orphans are centered */}
+                <div className="flex flex-wrap justify-center -mx-4">
                     {ORTHODOX_TEAS.map((tea, idx) => (
                         <div
                             key={tea.name}
@@ -99,7 +97,7 @@ export default function CollectionsPage() {
                             className="p-4 w-full sm:w-1/2 lg:w-1/4 group cursor-pointer"
                         >
                             {/* ASYMMETRIC RADIUS CARD */}
-                            <div className="relative w-full aspect-[4/5] bg-[#F6F3EA] rounded-tl-[1.5rem] rounded-br-[1.5rem] rounded-tr-[0.5rem] rounded-bl-[0.5rem] overflow-hidden mb-5 ghost-border">
+                            <div className="relative w-full aspect-[4/5] bg-[#F6F3EA] rounded-tl-[1.5rem] rounded-br-[1.5rem] rounded-tr-[0.5rem] rounded-bl-[0.5rem] overflow-hidden mb-5 border border-[#C7C7BC]/20">
                                 <Image
                                     src={ASSET_PATHS[idx % ASSET_PATHS.length]}
                                     alt={tea.name}
@@ -126,14 +124,15 @@ export default function CollectionsPage() {
                     <p className="font-body text-[#46483F] text-sm tracking-widest uppercase">Crush, Tear, Curl</p>
                 </div>
 
-                <div className="flex flex-wrap justify-center lg:justify-start -mx-4">
+                {/* UPDATED: Removed lg:justify-start to ensure orphans are centered */}
+                <div className="flex flex-wrap justify-center -mx-4">
                     {CTC_TEAS.map((tea, idx) => (
                         <div
                             key={tea.name}
                             onClick={() => setSelectedTea({ ...tea, image: ASSET_PATHS[(idx + 2) % ASSET_PATHS.length] })}
                             className="p-4 w-full sm:w-1/2 lg:w-1/4 group cursor-pointer"
                         >
-                            <div className="relative w-full aspect-[4/5] bg-[#F6F3EA] rounded-tl-[1.5rem] rounded-br-[1.5rem] rounded-tr-[0.5rem] rounded-bl-[0.5rem] overflow-hidden mb-5 ghost-border">
+                            <div className="relative w-full aspect-[4/5] bg-[#F6F3EA] rounded-tl-[1.5rem] rounded-br-[1.5rem] rounded-tr-[0.5rem] rounded-bl-[0.5rem] overflow-hidden mb-5 border border-[#C7C7BC]/20">
                                 <Image
                                     src={ASSET_PATHS[(idx + 2) % ASSET_PATHS.length]}
                                     alt={tea.name}
@@ -168,7 +167,6 @@ export default function CollectionsPage() {
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.98, opacity: 0 }}
                             onClick={(e) => e.stopPropagation()}
-                            // lg:w-[35vw] matches your ~35% screen request
                             className="relative w-full max-w-md lg:w-[35vw] bg-[#FCF9F0] rounded-[2rem] overflow-hidden shadow-2xl flex flex-col"
                         >
                             <button

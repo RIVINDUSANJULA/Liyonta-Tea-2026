@@ -44,9 +44,6 @@ export default function Home() {
                   Every leaf passes through meticulous hands, carrying generations of wisdom from the hills of Sri Lanka straight to your cup.
                 </p>
               </div>
-              <Link href="/gallery" className="text-[#3A4C2F] font-medium inline-flex items-center gap-2 hover:opacity-70 border-b border-[#3A4C2F] pb-1 transition-opacity">
-                View Full Gallery &rarr;
-              </Link>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8">
