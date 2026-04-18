@@ -20,46 +20,14 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLanguageSi, setIsLanguageSi] = useState(false);
 
-  // Factory Status States
-  const [isFactoryOpen, setIsFactoryOpen] = useState(true);
-  const [isLoadingStatus, setIsLoadingStatus] = useState(true);
-
   // Scroll Animations
   const { scrollYProgress } = useScroll();
   const borderDraw = useTransform(scrollYProgress, [0, 0.05], [0, 1]);
   const navHeight = useTransform(scrollYProgress, [0, 0.05], ["5rem", "4rem"]);
 
   useEffect(() => {
-    // 1. Scroll Listener
     const checkScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', checkScroll);
-
-    // 2. Fetch Real-time Factory Status from Google Maps API
-    const fetchPlaceStatus = async () => {
-      try {
-        const response = await fetch('/api/factory-status');
-        const data = await response.json();
-
-        // CORRECTED: Google nests this inside 'opening_hours'
-        if (data.result && data.result.opening_hours && typeof data.result.opening_hours.open_now !== 'undefined') {
-          setIsFactoryOpen(data.result.opening_hours.open_now);
-        } else {
-          throw new Error("API didn't return valid status data.");
-        }
-      } catch (error) {
-        // FALLBACK: Simple "Factory Open" check based on SL Time (GMT+5:30)
-        console.warn("Using local time fallback for factory status.");
-        const slTime = new Date(new Date().getTime() + (5.5 * 60 * 60 * 1000));
-        const hours = slTime.getUTCHours();
-        const isWorkingHours = hours >= 8 && hours < 18;
-        setIsFactoryOpen(isWorkingHours);
-      } finally {
-        setIsLoadingStatus(false);
-      }
-    };
-
-    fetchPlaceStatus();
-
     return () => window.removeEventListener('scroll', checkScroll);
   }, []);
 
@@ -94,7 +62,6 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center space-x-2 group">
           <motion.div whileHover={{ rotate: 5 }}>
-            {/* Note: Ensure logo.png is readable against the dark #2C2A22 background */}
             <Image
               src="/logo.png"
               alt="Liyonta Tea Logo"
@@ -134,21 +101,7 @@ export default function Navbar() {
 
         {/* Global Tools */}
         <div className="flex items-center space-x-6">
-
-          {/* Status Tag (API/Time Based) */}
-          <div className="hidden sm:flex items-center space-x-2">
-            <motion.div
-              animate={!isLoadingStatus ? { opacity: [0.4, 1, 0.4] } : {}}
-              transition={{ repeat: Infinity, duration: 2 }}
-              className={`w-1.5 h-1.5 rounded-full ${isLoadingStatus ? 'bg-[#F5F0E8]/30' : (isFactoryOpen ? 'bg-green-500' : 'bg-red-400')
-                }`}
-            />
-            <span className="text-[8px] font-bold uppercase tracking-[0.1em] text-[#F5F0E8]/50 min-w-[85px]">
-              {isLoadingStatus ? 'Checking...' : (isFactoryOpen ? 'Factory Open' : 'Estate Closed')}
-            </span>
-          </div>
-
-          {/* Language */}
+          {/* Language Selector */}
           <button
             onClick={() => setIsLanguageSi(!isLanguageSi)}
             className="hidden md:flex items-center space-x-1 text-[9px] font-bold text-[#F5F0E8]/50 hover:text-[#C8A84B] transition-colors"
@@ -167,7 +120,7 @@ export default function Navbar() {
               initial={{ y: "100%" }}
               whileHover={{ y: 0 }}
               transition={{ type: "tween", ease: "easeInOut", duration: 0.4 }}
-              className="absolute inset-0 bg-[#D4B865]" // Lighter Gold hover state
+              className="absolute inset-0 bg-[#D4B865]"
             />
           </motion.button>
 
