@@ -1,181 +1,227 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Home() {
   return (
     <div className="antialiased overflow-x-hidden bg-[#FCF9F0] text-[#1C1C17]">
       <main>
-
-        {/* 1. SENSORY HERO SECTION */}
-        <section className="relative min-h-[90vh] flex items-center justify-center pt-20 pb-16 px-6 md:px-12 bg-[#FCF9F0]">
-          <div className="max-w-7xl mx-auto w-full flex flex-col md:flex-row items-center gap-12 lg:gap-8 relative">
-
-            {/* Left Side: Overlapping Text Card */}
-            <div className="w-full md:w-5/12 z-20 flex flex-col items-start md:-mr-24 lg:-mr-32 mt-12 md:mt-0 relative">
-              <div className="bg-white p-10 lg:p-14 rounded-2xl shadow-[0_20px_40px_rgba(28,28,23,0.06)] border border-[#C7C7BC]/20 w-full max-w-[520px]">
-                <h1 className="font-serif text-5xl md:text-6xl lg:text-[4.5rem] leading-[1.05] tracking-tight text-[#1C1C17] mb-6">
-                  The Ritual <br /> <span className="italic text-[#516445]">of Breath.</span>
-                </h1>
-                <p className="font-sans text-[#46483F] text-lg leading-relaxed mb-10 max-w-sm">
-                  Discover rare, handcrafted teas sourced from ancient gardens. A moment of pause, steeped in tradition and natural tranquility.
-                </p>
-                <a href="#" className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-[#516445] text-white font-medium tracking-wide hover:bg-[#869A77] transition-colors">
-                  Explore Collections
-                </a>
-              </div>
+        {/* HERO SECTION */}
+        <section className="relative w-full min-h-screen flex items-center justify-center px-4 sm:px-8 py-32 lg:py-40">
+          <div className="relative w-full max-w-7xl mx-auto">
+            {/* Image */}
+            <div className="w-full relative aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9] overflow-hidden rounded-[2rem] rounded-tl-[4rem] rounded-br-[4rem]">
+              <Image
+                src="/gallery/gallery-estate.png"
+                alt="Liyonta Tea Gardens"
+                fill
+                className="object-cover"
+                priority
+              />
             </div>
-
-            {/* Right Side: Large Teapot Image */}
-            <div className="w-full md:w-7/12 relative z-10">
-              <div className="relative w-full h-[500px] md:h-[750px]">
-                <Image
-                  alt="Golden tea being poured from a rustic ceramic teapot"
-                  fill
-                  className="object-cover rounded-[2rem] rounded-tl-[4rem] rounded-br-[4rem] shadow-xl"
-                  src="/gallery/gallery-pouring.png"
-                  priority
-                />
-              </div>
+            {/* Floating Card */}
+            <div className="absolute top-1/2 left-4 sm:left-12 lg:left-24 -translate-y-1/2 bg-white/95 backdrop-blur-sm p-8 sm:p-12 rounded-3xl max-w-md shadow-xl border border-[#EBE8DF]">
+              <h1 className="font-serif text-4xl sm:text-5xl mb-6 leading-tight text-[#1C1C17]">
+                The Ritual of Ceylon.
+              </h1>
+              <p className="font-sans text-lg mb-8 leading-relaxed text-[#46483F]">
+                Discover rare, handcrafted teas sourced from ancient gardens.
+              </p>
+              <Link href="/shop" className="inline-flex items-center justify-center px-8 py-4 rounded-full font-sans tracking-wide text-white transition-opacity hover:opacity-90 font-medium bg-[#516445]">
+                Shop Collection
+              </Link>
             </div>
-
           </div>
         </section>
 
-        {/* 2. CURATED OFFERINGS SECTION */}
-        <section className="py-32 px-6 md:px-12 bg-[#F6F3EA]">
+        {/* GALLERY TEASER */}
+        <section className="py-32 px-6 md:px-12 bg-[#FCF9F0]">
           <div className="max-w-7xl mx-auto">
 
             {/* Section Header */}
             <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
               <div>
-                <h2 className="font-serif text-4xl text-[#1C1C17] mb-4">Curated Offerings</h2>
-                <p className="font-sans text-[#46483F] text-lg max-w-xl">
-                  Each leaf is a testament to the earth and the artisan's hand. Explore our meticulously selected collections.
+                <h2 className="font-serif text-4xl sm:text-5xl text-[#1C1C17] mb-4">
+                  Visual Harvest
+                </h2>
+                <p className="font-sans text-[#46483F] text-lg max-w-xl leading-relaxed">
+                  Every leaf passes through meticulous hands, carrying generations of wisdom from the mist-covered hills of Sri Lanka straight to your cup.
                 </p>
               </div>
-              <a className="text-[#3A4C2F] font-medium inline-flex items-center gap-2 hover:opacity-70 transition-opacity border-b border-[#3A4C2F] pb-1" href="#">
-                View All Teas <span>→</span>
-              </a>
             </div>
 
             {/* Asymmetric Image Grid */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
 
               {/* Large Left Card */}
-              <div className="md:col-span-7 group cursor-pointer">
-                <div className="relative overflow-hidden rounded-[2rem] rounded-tr-none mb-6 h-[400px] lg:h-[500px]">
+              <div className="md:col-span-7 group cursor-pointer relative">
+                <div className="relative overflow-hidden rounded-[2rem] mb-6 h-[400px] lg:h-[550px] shadow-sm">
                   <Image
-                    alt="Vibrant green matcha powder"
+                    src="/gallery/gallery-pouring.png"
+                    alt="Pouring fresh Ceylon tea"
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    src="/gallery/gallery-plucking.png"
                   />
                 </div>
-                <div className="flex justify-between items-start">
+                <div className="flex justify-between items-start pr-4">
                   <div>
-                    <h3 className="font-serif text-2xl text-[#1C1C17] mb-2">Ceremonial Greens</h3>
-                    <p className="font-sans text-[#46483F] text-sm tracking-widest uppercase">Spring Harvest</p>
+                    <h3 className="font-serif text-2xl text-[#1C1C17] mb-2">The Perfect Pour</h3>
+                    <p className="font-sans text-[#46483F] text-sm tracking-widest uppercase">Liyonta Estate</p>
                   </div>
-                  <span className="text-[#869A77] group-hover:text-[#516445] transition-colors">→</span>
                 </div>
               </div>
 
               {/* Stacked Right Cards */}
               <div className="md:col-span-5 flex flex-col gap-8 lg:gap-12">
-                <div className="group cursor-pointer">
-                  <div className="relative overflow-hidden rounded-[1.5rem] rounded-bl-none mb-6 h-[250px]">
+
+                {/* Top Right Card */}
+                <div className="group cursor-pointer relative">
+                  <div className="relative overflow-hidden rounded-[1.5rem] mb-6 h-[250px] shadow-sm">
                     <Image
-                      alt="Dark roasted oolong tea leaves"
+                      src="/extra/black-tea.png"
+                      alt="Orthodox Black Tea Leaves"
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
-                      src="/gallery/gallery-estate.png"
                     />
                   </div>
                   <div>
-                    <h3 className="font-serif text-xl text-[#1C1C17] mb-1">Roasted Oolongs</h3>
-                    <p className="font-sans text-[#46483F] text-sm tracking-widest uppercase">Wuyi Mountains</p>
+                    <h3 className="font-serif text-xl text-[#1C1C17] mb-1">Orthodox Black Tea</h3>
+                    <p className="font-sans text-[#46483F] text-sm tracking-widest uppercase">Handpicked</p>
                   </div>
                 </div>
 
-                <div className="group cursor-pointer">
-                  <div className="relative overflow-hidden rounded-[1.5rem] rounded-tl-none mb-6 h-[250px]">
+                {/* Bottom Right Card */}
+                <div className="group cursor-pointer relative">
+                  <div className="relative overflow-hidden rounded-[1.5rem] mb-6 h-[250px] shadow-sm">
                     <Image
-                      alt="Aged puerh tea cake"
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
                       src="/gallery/about-factory.png"
+                      alt="Liyonta Tea Factory"
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                   </div>
                   <div>
-                    <h3 className="font-serif text-xl text-[#1C1C17] mb-1">Aged Pu'erh</h3>
-                    <p className="font-sans text-[#46483F] text-sm tracking-widest uppercase">Yunnan Province</p>
+                    <h3 className="font-serif text-xl text-[#1C1C17] mb-1">Our Heritage</h3>
+                    <p className="font-sans text-[#46483F] text-sm tracking-widest uppercase">Since 1980</p>
                   </div>
                 </div>
-              </div>
 
+              </div>
             </div>
           </div>
         </section>
 
-        {/* 3. THE PROCESS (NARRATIVE SECTION) */}
-        <section className="py-32 px-6 md:px-12 bg-[#FCF9F0]">
-          <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
-
-            <div className="w-full lg:w-1/2 flex justify-center">
-              <div className="relative w-full max-w-lg">
-                <div className="absolute inset-0 bg-[#EBE8DF] rounded-full rounded-tr-none transform translate-x-6 translate-y-6"></div>
-                <div className="relative z-10 w-full aspect-[4/5] rounded-full rounded-tr-none overflow-hidden shadow-xl">
-                  <Image
-                    alt="Hands carefully sorting fresh green tea leaves"
-                    fill
-                    className="object-cover"
-                    src="/gallery/gallery-plucking.png"
-                  />
-                </div>
+        {/* THE ORIGIN */}
+        <section className="px-4 sm:px-8 py-32 lg:py-40">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16 lg:gap-24">
+            {/* Left Image Mask */}
+            <div className="w-full md:w-1/2 relative">
+              <div className="absolute inset-0 translate-x-4 translate-y-4 sm:translate-x-8 sm:translate-y-8 rounded-full bg-[#EBE8DF]"></div>
+              <div className="relative aspect-[4/5] rounded-full overflow-hidden border-8 border-[#FCF9F0]">
+                <Image src="/gallery/gallery-plucking.png" alt="Tea Plucking" fill className="object-cover" />
               </div>
             </div>
-
-            <div className="w-full lg:w-1/2 max-w-xl">
-              <span className="font-sans text-sm uppercase tracking-widest text-[#516445] mb-6 block">The Origin</span>
-              <h2 className="font-serif text-4xl md:text-5xl text-[#1C1C17] leading-tight mb-8">
+            {/* Right Content */}
+            <div className="w-full md:w-1/2 space-y-8">
+              <h2 className="font-serif text-4xl sm:text-5xl leading-tight text-[#1C1C17]">
                 Honoring the hands that shape the leaf.
               </h2>
-              <div className="space-y-6 text-[#46483F] font-sans text-lg leading-relaxed">
-                <p>
-                  True tea is not manufactured; it is coaxed into being. Our journey begins in remote, high-altitude gardens where generational farmers practice ancient, labor-intensive techniques.
-                </p>
-                <p>
-                  From the gentle plucking of the first spring buds to the masterful roasting over charcoal, we preserve the human touch at every step. This dedication ensures that every cup tells a story of terroir and tradition.
-                </p>
-              </div>
-              <a className="inline-flex items-center gap-4 mt-10 text-[#3A4C2F] font-medium group" href="#">
-                <span className="border-b border-transparent group-hover:border-[#3A4C2F] transition-colors pb-1">Discover Our Process</span>
-                <div className="w-10 h-10 rounded-full border border-[#C7C7BC] flex items-center justify-center group-hover:bg-[#EBE8DF] transition-colors">
-                  <span>→</span>
+              <p className="font-sans text-lg leading-relaxed text-[#46483F]">
+                Our artisanal teas are birthed from the traditional wisdom of Sri Lankan tea farmers. Each harvest reflects a labor-intensive, hand-plucked methodology that ensures only the finest, tender most leaves are selected. We preserve centuries-old techniques to bring out the purity and robust character synonymous with real Ceylon tea.
+              </p>
+              <Link href="/about" className="inline-block font-sans text-lg transition-opacity hover:opacity-70 border-b pb-1 text-[#1C1C17] border-[#C7C7BC]">
+                Discover Our Story &rarr;
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* MOST POPULAR PRODUCTS */}
+        <section className="px-4 sm:px-8 py-32 lg:py-40">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="font-serif text-4xl sm:text-5xl text-center mb-16 text-[#1C1C17]">Most Popular</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+              {/* Product 1 */}
+              <Link href="/shop" className="group block cursor-pointer">
+                <div className="relative aspect-[4/5] rounded-2xl overflow-hidden mb-6 flex items-center justify-center p-8 transition-colors bg-[#F6F3EA]">
+                  <div className="relative w-full h-full">
+                    {/* <Image src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&q=80&w=800" alt="Premium Liyonta Pekoe" fill className="object-contain group-hover:scale-105 transition-transform duration-500" /> */}
+                  </div>
+                  <div className="absolute inset-x-0 bottom-0 p-6 flex justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="px-6 py-3 rounded-full text-sm font-medium tracking-wide text-white shadow-lg bg-[#516445]">
+                      Quick Add
+                    </span>
+                  </div>
                 </div>
-              </a>
+                <h3 className="font-serif text-2xl mb-2 text-[#1C1C17]">Premium Liyonta Pekoe</h3>
+                <p className="font-sans mb-3 text-sm text-[#46483F]">Crisp, coppery notes with a bright aroma.</p>
+                <p className="font-sans font-medium text-[#1C1C17]">$24.00</p>
+              </Link>
+
+              {/* Product 2 */}
+              <Link href="/shop" className="group block cursor-pointer">
+                <div className="relative aspect-[4/5] rounded-2xl overflow-hidden mb-6 flex items-center justify-center p-8 transition-colors bg-[#F6F3EA]">
+                  <div className="relative w-full h-full">
+                    {/* <Image src="https://images.unsplash.com/photo-1594891108256-4b95f1345ac5?auto=format&fit=crop&q=80&w=800" alt="Classic Black Tea" fill className="object-contain group-hover:scale-105 transition-transform duration-500" /> */}
+                  </div>
+                  <div className="absolute inset-x-0 bottom-0 p-6 flex justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="px-6 py-3 rounded-full text-sm font-medium tracking-wide text-white shadow-lg bg-[#516445]">
+                      Quick Add
+                    </span>
+                  </div>
+                </div>
+                <h3 className="font-serif text-2xl mb-2 text-[#1C1C17]">Classic Black Tea</h3>
+                <p className="font-sans mb-3 text-sm text-[#46483F]">Bold, robust, and unmistakable Ceylon character.</p>
+                <p className="font-sans font-medium text-[#1C1C17]">$19.00</p>
+              </Link>
+
+              {/* Product 3 */}
+              <Link href="/shop" className="group block cursor-pointer">
+                <div className="relative aspect-[4/5] rounded-2xl overflow-hidden mb-6 flex items-center justify-center p-8 transition-colors bg-[#F6F3EA]">
+                  <div className="relative w-full h-full">
+                    {/* <Image src="https://images.unsplash.com/photo-1588675404561-124b873325c4?auto=format&fit=crop&q=80&w=800" alt="Silver Tips White Tea" fill className="object-contain group-hover:scale-105 transition-transform duration-500" /> */}
+                  </div>
+                  <div className="absolute inset-x-0 bottom-0 p-6 flex justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="px-6 py-3 rounded-full text-sm font-medium tracking-wide text-white shadow-lg bg-[#516445]">
+                      Quick Add
+                    </span>
+                  </div>
+                </div>
+                <h3 className="font-serif text-2xl mb-2 text-[#1C1C17]">Silver Tips White Tea</h3>
+                <p className="font-sans mb-3 text-sm text-[#46483F]">Delicate, floral, and meticulously hand-rolled.</p>
+                <p className="font-sans font-medium text-[#1C1C17]">$42.00</p>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* FOUNDER QUOTE & IMAGE */}
+        <section className="px-4 sm:px-8 py-32 lg:py-40">
+          <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
+            <div className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden mb-12 border-4 border-[#EBE8DF]">
+              <Image src="/MrRonnieLiyanage.png" alt="Ronnie Liyanage" fill className="object-cover" />
+            </div>
+            <blockquote className="font-serif italic text-3xl sm:text-4xl lg:text-5xl leading-tight mb-12 text-[#1C1C17]">
+              &quot;We started Liyonta to bring the world a true taste of Sri Lanka—one that isn&apos;t diluted by mass-market blending, but defined by its origin.&quot;
+            </blockquote>
+            <div className="flex flex-col items-center space-y-2 mb-12">
+              <cite className="font-sans not-italic text-sm tracking-widest font-bold uppercase text-[#1C1C17]">
+                MR RONNIE LIYANAGE
+              </cite>
+              <span className="font-sans text-sm text-[#46483F]">
+                Founder, Liyonta Factory
+              </span>
             </div>
 
+            {/* Contact Page CTA */}
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center px-10 py-3 rounded-full border border-[#C7C7BC] text-[#1C1C17] font-sans text-sm font-medium tracking-wide hover:bg-[#EBE8DF] transition-colors"
+            >
+              Get in Touch
+            </Link>
           </div>
         </section>
-
-        {/* 4. LIFESTYLE QUOTE */}
-        <section className="relative py-40 px-6 md:px-12 flex items-center justify-center bg-white overflow-hidden">
-          {/* Subtle noise/texture overlay */}
-          <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}></div>
-
-          <div className="relative z-10 text-center max-w-3xl mx-auto flex flex-col items-center">
-            <svg className="w-8 h-8 text-[#B8CDA8] mb-8" fill="currentColor" viewBox="0 0 24 24"><path d="M17.6 5.8C16.2 4.4 14.1 3.5 12 3.5C7.3 3.5 3.5 7.3 3.5 12C3.5 14.1 4.4 16.2 5.8 17.6L12 23.8L18.2 17.6C19.6 16.2 20.5 14.1 20.5 12C20.5 7.3 16.7 3.5 12 3.5M12 19L7.2 14.2C6.3 13.3 5.8 12.1 5.8 10.8C5.8 7.3 8.6 4.5 12 4.5C15.4 4.5 18.2 7.3 18.2 10.8C18.2 12.1 17.7 13.3 16.8 14.2L12 19Z" /></svg>
-            <h2 className="font-serif text-3xl md:text-5xl text-[#1C1C17] leading-snug mb-8">
-              "Drink your tea slowly and reverently, as if it is the axis on which the world earth revolves."
-            </h2>
-            <p className="font-sans text-[#46483F] italic mb-12">— Thich Nhat Hanh</p>
-            <a className="inline-block px-10 py-4 bg-[#E5E2DA] text-[#1C1C17] rounded-full font-medium tracking-wide hover:bg-[#DDDAD1] transition-colors" href="#">
-              Begin Your Ritual
-            </a>
-          </div>
-        </section>
-
       </main>
     </div>
   );
