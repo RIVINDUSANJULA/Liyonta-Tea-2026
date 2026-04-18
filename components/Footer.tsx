@@ -6,8 +6,10 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#f6f3ea] w-full rounded-t-[3rem] mt-20">
-      <div className="container mx-auto px-8 lg:px-12 py-16 flex flex-col md:flex-row justify-between items-center gap-8">
+    // Reduced margin-top (mt-12) and kept the rounded top edge
+    <footer className="bg-[#f6f3ea] w-full rounded-t-[3rem] mt-12">
+      {/* Reduced vertical padding (py-8) to make the footer height smaller */}
+      <div className="container mx-auto px-8 lg:px-12 py-8 flex flex-col md:flex-row justify-between items-center gap-6">
 
         {/* Left: Brand Logo */}
         <div className="flex-shrink-0">
@@ -15,15 +17,15 @@ export default function Footer() {
             <Image
               src="/logo.png"
               alt="Liyonta Tea"
-              width={100}
-              height={40}
+              width={80}
+              height={32}
               className="object-contain"
             />
           </Link>
         </div>
 
-        {/* Middle: Navigation Links */}
-        <nav className="flex flex-wrap justify-center gap-x-8 gap-y-4">
+        {/* Middle: Compact Navigation Links */}
+        <nav className="flex items-center gap-x-6">
           {[
             { name: "Sustainability", href: "#" },
             { name: "Wholesale", href: "#" },
@@ -33,17 +35,17 @@ export default function Footer() {
             <Link
               key={link.name}
               href={link.href}
-              className="font-sans text-sm tracking-wide text-[#46483f] hover:text-[#516445] underline-offset-4 hover:underline transition-all duration-300"
+              className="font-sans text-xs tracking-wide text-[#46483f] hover:text-[#516445] transition-all duration-300"
             >
               {link.name}
             </Link>
           ))}
         </nav>
 
-        {/* Right: Copyright & Slogan */}
+        {/* Right: Minimalist Copyright */}
         <div className="text-right">
-          <p className="font-sans text-xs tracking-wide text-[#46483f] opacity-80">
-            © 2026 Liyonta Tea. Cultivating the Ritual of Breath.
+          <p className="font-sans text-[10px] tracking-widest text-[#46483f] opacity-60 uppercase">
+            © 2026 Liyonta Tea.
           </p>
         </div>
 
