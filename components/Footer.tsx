@@ -27,9 +27,9 @@ export default function Footer() {
         {/* Middle: Compact Navigation Links */}
         <nav className="flex items-center gap-x-6">
           {[
-            { name: "Sustainability", href: "#" },
-            { name: "Wholesale", href: "#" },
-            { name: "Privacy", href: "#" },
+            { name: "Home", href: "/" },
+            { name: "About Us", href: "/about" },
+            { name: "Tea", href: "/collections" },
             { name: "Contact", href: "/contact" },
           ].map((link) => (
             <Link
