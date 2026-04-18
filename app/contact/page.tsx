@@ -175,8 +175,7 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* C. Wholesale & Export Detail Section */}
-        <aside className="bg-charcoal py-12 text-cream">
+        {/* <aside className="bg-charcoal py-12 text-cream">
           <div className="container mx-auto px-6 max-w-screen-xl">
             <div className="flex flex-col lg:flex-row justify-between items-center gap-8">
               <div className="max-w-2xl text-center lg:text-left">
@@ -188,9 +187,9 @@ export default function ContactPage() {
               </button>
             </div>
           </div>
-        </aside>
+        </aside> */}
 
-        {/* D. The "Southern Province" Map/Visual Section */}
+        {/* C. The "Southern Province" Map/Visual Section */}
         <section className="py-24 bg-cardBg">
           <div className="container mx-auto px-6 max-w-screen-xl">
             <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-olive mb-8 block text-center lg:text-left">
@@ -230,7 +229,7 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* F. Social & Community Links */}
+        {/* D. Social & Community Links */}
         <section className="py-24 bg-cream border-t border-charcoal/10">
           <div className="container mx-auto px-6 max-w-screen-xl">
             <h2 className="text-[10px] font-bold uppercase tracking-[0.4em] text-olive mb-16 text-center">
