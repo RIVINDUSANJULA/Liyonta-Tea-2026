@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-export default function ZenLeafPage() {
+export default function Home() {
   return (
     <div className="antialiased overflow-x-hidden bg-[#FCF9F0] text-[#1C1C17]">
       <main>
