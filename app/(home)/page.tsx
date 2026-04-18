@@ -206,8 +206,13 @@ export default function Home() {
           <div className="relative z-10 text-center max-w-3xl mx-auto flex flex-col items-center">
 
             {/* Small subtle visual at the top */}
-            <div className="relative w-16 h-16 rounded-full overflow-hidden mb-10 shadow-md border border-[#EBE8DF]">
-              <Image src="/MrRonnieLiyanage.png" alt="Mr. Ronnie Liyanage" fill className="object-cover grayscale contrast-125" />
+            <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden mb-10 shadow-lg border-2 border-[#EBE8DF]">
+              <Image
+                src="/MrRonnieLiyanage.png"
+                alt="Mr. Ronnie Liyanage"
+                fill
+                className="object-cover grayscale contrast-125"
+              />
             </div>
 
             <h2 className="font-serif italic text-3xl md:text-[2.75rem] text-[#1C1C17] leading-snug mb-10">
