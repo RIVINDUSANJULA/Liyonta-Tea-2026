@@ -197,10 +197,6 @@ export default function CollectionsPage() {
                                 <p className="font-sans text-[#46483F] text-sm leading-relaxed mb-8">
                                     {selectedTea.detail}
                                 </p>
-
-                                <button className="w-full py-4 rounded-full bg-[#516445] text-white font-sans text-xs font-bold uppercase tracking-widest hover:bg-[#869A77] transition-colors">
-                                    Inquire About This Grade
-                                </button>
                             </div>
                         </motion.div>
                     </motion.div>
