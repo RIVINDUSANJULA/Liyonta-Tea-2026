@@ -6,8 +6,8 @@ export default function Home() {
   return (
     <div className="antialiased overflow-x-hidden bg-[#FCF9F0] text-[#1C1C17]">
       <main>
-        {/* 1. HERO SECTION */}
-        <section className="relative w-full flex items-center justify-center px-4 sm:px-8 py-16 lg:py-20">
+        {/* 1. HERO SECTION - Adjusted with pt-32/pt-40 to keep space from top */}
+        <section className="relative w-full flex items-center justify-center px-4 sm:px-8 pt-32 pb-16 lg:pt-40 lg:pb-20">
           <div className="relative w-full max-w-7xl mx-auto">
             {/* Image Container */}
             <div className="w-full relative aspect-[16/9] lg:aspect-[21/9] overflow-hidden rounded-[2rem] rounded-tl-[4rem] rounded-br-[4rem]">
@@ -49,7 +49,6 @@ export default function Home() {
               </Link>
             </div>
 
-            {/* Asymmetric Editorial Grid */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8">
               <div className="md:col-span-7 group cursor-pointer relative">
                 <div className="relative overflow-hidden rounded-[2rem] mb-4 h-[350px] lg:h-[450px] shadow-sm">
@@ -91,7 +90,7 @@ export default function Home() {
                 Honoring the hands that shape the leaf.
               </h2>
               <p className="font-sans text-base leading-relaxed text-[#46483F]">
-                Our artisanal teas are birthed from the traditional wisdom of Sri Lankan tea farmers. Each harvest reflects a labor-intensive methodology that ensures only the tender most leaves are selected.
+                Our artisanal teas are birthed from the traditional wisdom of Sri Lankan tea farmers. Each harvest reflects a labor-intensive methodology.
               </p>
               <Link href="/about" className="inline-block font-sans text-base transition-opacity hover:opacity-70 border-b pb-1 text-[#1C1C17] border-[#C7C7BC]">
                 Discover Our Story &rarr;
