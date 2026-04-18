@@ -2,27 +2,51 @@
 
 import React from "react";
 import Link from "next/link";
-import { Instagram, Facebook } from "@/components/contact/SocialIcons";
+import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="py-12 lg:py-16 bg-footerBg border-t border-gold/10 text-cream/35">
-      <div className="container mx-auto px-6 lg:px-12 max-w-7xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 mb-12 lg:mb-16">
-          <div className="space-y-6">
-            <h5 className="text-xs font-bold uppercase tracking-widest text-cream">Navigation</h5>
-            <ul className="space-y-4 text-sm">
-              <li><Link href="/" className="hover:text-gold transition-colors">Home</Link></li>
-              <li><Link href="/about" className="hover:text-gold transition-colors">Our Story</Link></li>
-              <li><Link href="/gallery" className="hover:text-gold transition-colors">Gallery</Link></li>
-              <li><Link href="/contact" className="hover:text-gold transition-colors">Contact</Link></li>
-            </ul>
-          </div>
+    <footer className="bg-[#f6f3ea] w-full rounded-t-[3rem] mt-20">
+      <div className="container mx-auto px-8 lg:px-12 py-16 flex flex-col md:flex-row justify-between items-center gap-8">
+
+        {/* Left: Brand Logo */}
+        <div className="flex-shrink-0">
+          <Link href="/" className="hover:opacity-80 transition-opacity">
+            <Image
+              src="/logo.png"
+              alt="Liyonta Tea"
+              width={100}
+              height={40}
+              className="object-contain"
+            />
+          </Link>
         </div>
 
-        <div className="flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-[0.2em] pt-5 border-t border-gold/10 italic text-cream/20">
-          <p>&copy; 2026 Liyonta Tea. Heritage of Sri Lanka.</p>
+        {/* Middle: Navigation Links */}
+        <nav className="flex flex-wrap justify-center gap-x-8 gap-y-4">
+          {[
+            { name: "Sustainability", href: "#" },
+            { name: "Wholesale", href: "#" },
+            { name: "Privacy", href: "#" },
+            { name: "Contact", href: "/contact" },
+          ].map((link) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              className="font-sans text-sm tracking-wide text-[#46483f] hover:text-[#516445] underline-offset-4 hover:underline transition-all duration-300"
+            >
+              {link.name}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Right: Copyright & Slogan */}
+        <div className="text-right">
+          <p className="font-sans text-xs tracking-wide text-[#46483f] opacity-80">
+            © 2026 Liyonta Tea. Cultivating the Ritual of Breath.
+          </p>
         </div>
+
       </div>
     </footer>
   );
