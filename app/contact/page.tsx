@@ -230,7 +230,7 @@ export default function ContactPage() {
         </section>
 
         {/* D. Social & Community Links */}
-        <section className="py-24 bg-cream border-t border-charcoal/10">
+        <section className="py-14 bg-cream border-t border-charcoal/10">
           <div className="container mx-auto px-6 max-w-screen-xl">
             <h2 className="text-[10px] font-bold uppercase tracking-[0.4em] text-olive mb-16 text-center">
               Connect With Liyonta
