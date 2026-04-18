@@ -22,7 +22,7 @@ export default function Navbar() {
   const navLinks = [
     { name: 'The Estate', href: '/' },
     { name: 'Our Heritage', href: '/about' },
-    { name: 'Visual Harvest', href: '/gallery' },
+    { name: 'Visual Harvest', href: '/collections' },
     { name: 'Inquiries', href: '/contact' },
   ];
 

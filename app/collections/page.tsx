@@ -5,30 +5,30 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 
-// --- TEA DATA ---
+// --- REAL CEYLON TEA GRADING DATA ---
 const ORTHODOX_TEAS = [
-    { name: 'BOP', detail: 'Well-made, neat leaf of medium size. A robust morning cup.' },
-    { name: 'BOPF', detail: 'Smaller than BOP, brews a strong, deeply colored liquor.' },
-    { name: 'OP', detail: 'Long, wiry leaf without tips. Delicate and fragrant.' },
-    { name: 'FBOP', detail: 'Coarser and broken with sweet, silvery tips.' },
-    { name: 'Pekoe', detail: 'Curled leaf that brews a light, delicate, and floral cup.' },
-    { name: 'Pekoe1', detail: 'Similar to standard Pekoe but with a slightly smaller curl.' },
-    { name: 'OPA', detail: 'Bold, long leaf, slightly twisted with a mellow flavor.' },
-    { name: 'OP1', detail: 'Delicate, long, wiry leaf producing a highly aromatic liquor.' },
-    { name: 'BOP1', detail: 'Wiry and twisted, longer than normal BOP. Crisp finish.' },
-    { name: 'FBOP1', detail: 'Long, twisted, wiry leaf with a mild, sweet character.' },
-    { name: 'FBOPF', detail: 'Flowery Broken Orange Pekoe Fannings. Rich and full-bodied.' },
-    { name: 'FBOPF1', detail: 'Slightly larger fannings, delivering a bright, brisk taste.' },
-    { name: 'FBOPFSP', detail: 'Special flowery pekoe with prominent, beautiful tips.' },
-    { name: 'FBOPFEXSP', detail: 'Extra special flowery pekoe with abundant silver tips.' },
+    { name: 'BOP', detail: 'Well-made, neat leaf of medium size without tips. The most common broken grade, offering a robust, rich flavor and deep color.' },
+    { name: 'BOPF', detail: 'Smaller than BOP, neatly made. Brews a quick, strong, and deeply colored liquor ideal for robust morning blends.' },
+    { name: 'OP', detail: 'Long, wiry, slightly twisted leaves without tips. Produces a light to medium liquor with a delicate, fragrant character.' },
+    { name: 'FBOP', detail: 'Coarser broken leaf with a generous presence of silvery or golden tips. Yields a rich, highly aromatic, and mellow liquor.' },
+    { name: 'Pekoe', detail: 'Short, curly, semi-twisted leaves without tips. Brews a light, delicate, and subtly sweet cup with a golden hue.' },
+    { name: 'Pekoe1', detail: 'Similar in style to standard Pekoe but with a tighter, smaller curl. Offers a smooth, mellow, and slightly brisk cup.' },
+    { name: 'OPA', detail: 'Bold, long leaf ranging from tightly rolled to almost open. Produces a very light, mild, and delicate liquor.' },
+    { name: 'OP1', detail: 'Delicate, long, wiry, and tightly rolled leaf. Known for a highly aromatic, light, and refined liquor with a malty finish.' },
+    { name: 'BOP1', detail: 'Wiry and twisted leaf, longer than standard BOP. Brews a golden-red liquor with a brisk, crisp, and malty flavor.' },
+    { name: 'FBOP1', detail: 'Long, twisted, wiry leaves containing tips. Delivers a mild, sweet, and highly aromatic cup.' },
+    { name: 'FBOPF', detail: 'Smaller than FBOP, containing a high proportion of tips. Exceptionally rich, full-bodied, and sweet.' },
+    { name: 'FBOPF1', detail: 'Typical low-country leafy grade with a few tips. Yields a brisk, strong, and highly colored liquor.' },
+    { name: 'FBOPFSP', detail: 'Premium short leaf with a heavy abundance of silver or golden tips. Exceptionally sweet and aromatic.' },
+    { name: 'FBOPFEXSP', detail: 'The highest grade of broken leaf, bursting with pristine silver/golden tips. Exquisite, sweet caramel notes.' },
 ];
 
 const CTC_TEAS = [
-    { name: 'BPS', detail: 'Broken Pekoe Souchong. Even, curly, and exceptionally bold.' },
-    { name: 'BP1', detail: 'Granular and brownish, creating a strong, thick liquor.' },
-    { name: 'PF1', detail: 'Black, grainy leaves that brew a powerfully brisk cup.' },
-    { name: 'PF', detail: 'Similar to PF1 but slightly larger, perfect for strong blends.' },
-    { name: 'PD', detail: 'Pekoe Dust. Fine grade, extremely strong and quick brewing.' },
+    { name: 'BPS', detail: 'Broken Pekoe Souchong. Even, curly, and bold granular leaf. Produces a relatively lighter CTC cup with a smooth finish.' },
+    { name: 'BP1', detail: 'Broken Pekoe 1. Evenly sized, brownish granular leaf. Brews a strong, thick, and brisk liquor with deep color.' },
+    { name: 'PF1', detail: 'Pekoe Fannings 1. Black, grainy, and uniform leaves. Delivers a powerfully brisk and robust cup.' },
+    { name: 'PF', detail: 'Pekoe Fannings. Similar to PF1 but slightly larger grains. Ideal for blending, producing a strong, deeply colored brew.' },
+    { name: 'PD', detail: 'Pekoe Dust. Very fine, granular dust grade. Brews exceedingly fast, yielding a thick, dark, and intensely strong liquor.' },
 ];
 
 // Fallback image array to give the grid visual variety
