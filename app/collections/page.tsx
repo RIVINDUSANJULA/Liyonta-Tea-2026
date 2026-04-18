@@ -71,14 +71,24 @@ export default function CollectionsPage() {
                         From the delicate, wiry leaves of our Orthodox grades to the robust, deeply colored liquors of our CTC selection. Every grade is a testament to the soil, the climate, and the hands that coaxed it into being.
                     </p>
                 </div>
-                <div className="w-full md:w-5/12 relative aspect-[4/3] lg:aspect-square rounded-[2rem] overflow-hidden border border-[#C7C7BC]/20 shadow-sm">
+
+                {/* Right Side: Beautiful Aged/Blurry Blue Image */}
+                <div className="w-full md:w-5/12 relative aspect-[4/3] lg:aspect-square rounded-[2rem] overflow-hidden border border-[#C7C7BC]/20 shadow-sm group">
+
+                    {/* Base Image Layer: Blurry, Grayscale, and Sepia aged */}
                     <Image
                         src="/extra/origin-story.png"
-                        alt="Liyonta Tea Archives"
+                        alt="Liyonta Tea Archives - An archival Cyanotype photograph"
                         fill
-                        className="object-cover"
+                        className="object-cover grayscale blur-[3px] sepia-[20%] transition-all duration-1000 group-hover:blur-0 group-hover:grayscale-0 group-hover:sepia-0"
                         priority
                     />
+
+                    {/* Vintage Blue Tint Overlay Layer: Using mix-blend-color for authenticity */}
+                    <div className="absolute inset-0 bg-[#2b3e5c]/70 mix-blend-color pointer-events-none transition-opacity duration-1000 group-hover:opacity-0"></div>
+
+                    {/* Sensory Texture Overlay: (Optional subtle noise for "old" feel) */}
+                    <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}></div>
                 </div>
             </section>
 
